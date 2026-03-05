@@ -1,5 +1,3 @@
-import { motion } from 'motion/react';
-
 export function FarmerHomeDesign() {
   return (
     <div className="relative mx-auto" style={{ width: '320px', height: '640px' }}>
@@ -11,21 +9,21 @@ export function FarmerHomeDesign() {
           boxShadow: '0 0 0 1px #333, 0 24px 64px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1)'
         }}
       >
-        <div className="w-full h-full rounded-[28px] overflow-hidden relative flex flex-col" style={{ background: 'var(--cream)' }}>
+        <div className="w-full h-full rounded-[28px] overflow-hidden relative flex flex-col" style={{ background: '#F8F5F0' }}>
           {/* Status Bar */}
-          <div className="absolute top-0 left-0 right-0 z-20 flex justify-between items-center px-[18px] py-[10px]" style={{ color: 'white' }}>
+          <div className="flex justify-between items-center px-[18px] py-[10px] relative z-10">
             <span className="font-bold text-[11px]">9:44</span>
             <div className="flex gap-1 items-center text-[11px]">📶 🔋</div>
           </div>
 
-          {/* Green Header */}
+          {/* Saffron Header - Fixed */}
           <div 
-            className="px-[18px] pt-[46px] pb-[60px] rounded-b-[36px] relative overflow-hidden flex-shrink-0"
-            style={{ background: 'linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%)' }}
+            className="px-5 pt-4 pb-[60px] rounded-b-[36px]"
+            style={{ background: 'linear-gradient(135deg, var(--saffron) 0%, #FF8C38 100%)' }}
           >
             <div className="absolute text-[80px] right-[-10px] bottom-[-10px] opacity-20">🌾</div>
             
-            <div className="flex justify-between items-center mb-3 relative z-10">
+            <div className="flex justify-between items-center mb-4 relative z-10">
               <div>
                 <div className="text-[12px]" style={{ color: 'rgba(255,255,255,0.75)' }}>
                   🌤️ Good Morning · सुप्रभात
@@ -48,131 +46,111 @@ export function FarmerHomeDesign() {
               </div>
             </div>
 
-            <div
-              className="rounded-[14px] px-[14px] py-[10px] flex items-center gap-2 relative z-10"
-              style={{
-                background: 'rgba(255,255,255,0.2)',
-                backdropFilter: 'blur(8px)',
-                border: '1px solid rgba(255,255,255,0.3)'
-              }}
-            >
-              <span className="text-sm">🔍</span>
-              <span className="flex-1 text-[13px]" style={{ color: 'rgba(255,255,255,0.7)' }}>
-                ट्रैक्टर खोजें... Find equipment
-              </span>
-              <div
-                className="w-[30px] h-[30px] bg-white rounded-[10px] flex items-center justify-center text-sm font-bold"
-                style={{ 
-                  color: 'var(--saffron)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
-                }}
+            {/* Quick Stats */}
+            <div className="flex gap-2 relative z-10">
+              <div 
+                className="flex-1 rounded-[16px] p-3"
+                style={{ background: 'rgba(255,255,255,0.2)' }}
               >
-                🎙️
+                <div className="text-white text-[20px] font-bold">5</div>
+                <div className="text-white text-[11px]" style={{ opacity: 0.85 }}>
+                  Active · सक्रिय
+                </div>
+              </div>
+              <div 
+                className="flex-1 rounded-[16px] p-3"
+                style={{ background: 'rgba(255,255,255,0.2)' }}
+              >
+                <div className="text-white text-[20px] font-bold">₹18K</div>
+                <div className="text-white text-[11px]" style={{ opacity: 0.85 }}>
+                  This Month · इस महीने
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Body */}
-          <div className="flex-1 overflow-y-auto px-4 pb-4 -mt-[30px]">
+          {/* Content Area with proper scroll behavior */}
+          <div className="flex-1 overflow-y-auto px-5 pb-5 -mt-8">
             {/* Quick Actions */}
-            <div className="grid grid-cols-2 gap-3 mb-5">
-              <div
-                className="bg-white rounded-[18px] p-4 text-left"
-                style={{ 
-                  boxShadow: 'var(--card-shadow)',
-                  borderTop: '3px solid var(--saffron)'
-                }}
-              >
-                <div className="text-[28px] mb-2">🔍</div>
-                <div 
-                  className="text-[14px] font-bold"
-                  style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
-                >
-                  Find Tractor
-                </div>
-                <div className="text-[11px]" style={{ color: 'var(--text-soft)' }}>
-                  ट्रैक्टर खोजें
-                </div>
+            <div className="bg-white rounded-[20px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow)' }}>
+              <div className="text-[13px] font-bold mb-3" style={{ color: 'var(--text-dark)' }}>
+                Quick Actions · त्वरित कार्य
               </div>
-
-              <div
-                className="bg-white rounded-[18px] p-4 text-left"
-                style={{ 
-                  boxShadow: 'var(--card-shadow)',
-                  borderTop: '3px solid var(--green)'
-                }}
-              >
-                <div className="text-[28px] mb-2">📋</div>
-                <div 
-                  className="text-[14px] font-bold"
-                  style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
-                >
-                  My Bookings
-                </div>
-                <div className="text-[11px]" style={{ color: 'var(--text-soft)' }}>
-                  मेरी बुकिंग
-                </div>
-              </div>
-            </div>
-
-            {/* Near You */}
-            <div 
-              className="text-[16px] font-bold mb-3"
-              style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
-            >
-              📍 Near You · आपके पास
-            </div>
-
-            {[
-              { icon: '🚜', name: 'Mahindra 475 DI', owner: 'Harpreet Singh', distance: '2.4 km away', price: '₹2,400/day', rating: '4.8', bg: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)' },
-              { icon: '🌾', name: 'Harvester Combine', owner: 'Suresh Kumar', distance: '5.1 km away', price: '₹4,800/day', rating: '4.2', bg: 'linear-gradient(135deg, #C8EFD4, #A4E0B5)' }
-            ].map((item) => (
-              <div
-                key={item.name}
-                className="bg-white rounded-[18px] overflow-hidden flex h-[90px] mb-3 w-full"
-                style={{ boxShadow: 'var(--card-shadow)' }}
-              >
-                <div 
-                  className="w-[90px] flex items-center justify-center text-[36px] flex-shrink-0"
-                  style={{ background: item.bg }}
-                >
-                  {item.icon}
-                </div>
-                <div className="px-[14px] py-3 flex-1 text-left">
-                  <div 
-                    className="text-[14px] font-bold"
-                    style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { emoji: '🔍', label: 'Search · खोजें', badge: null },
+                  { emoji: '🎤', label: 'Voice · आवाज़', badge: null },
+                  { emoji: '📋', label: 'Bookings · बुकिंग', badge: 2 }
+                ].map((action) => (
+                  <div
+                    key={action.label}
+                    className="relative rounded-[14px] py-4 flex flex-col items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity"
+                    style={{ background: 'var(--cream)' }}
                   >
-                    {item.name}
-                  </div>
-                  <div className="text-[11px] mt-0.5" style={{ color: 'var(--text-soft)' }}>
-                    {item.owner} · {item.distance}
-                  </div>
-                  <div className="flex items-center justify-between mt-2">
-                    <div className="text-[14px] font-bold" style={{ color: 'var(--saffron)' }}>
-                      {item.price}
+                    <div className="text-2xl">{action.emoji}</div>
+                    <div className="text-[11px] font-semibold" style={{ color: 'var(--text-dark)' }}>
+                      {action.label}
                     </div>
-                    <div className="text-right">
-                      <div className="text-[10px]" style={{ color: '#F5A623' }}>★★★★★</div>
-                      <div className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
-                        {item.rating} · 23 reviews
+                    {action.badge && (
+                      <div
+                        className="absolute -top-1 -right-1 w-[18px] h-[18px] rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+                        style={{ 
+                          background: '#E74C3C',
+                          boxShadow: '0 2px 6px rgba(231, 76, 60, 0.4)'
+                        }}
+                      >
+                        {action.badge}
                       </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* My Equipment */}
+            <div className="bg-white rounded-[20px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow)' }}>
+              <div className="text-[13px] font-bold mb-3" style={{ color: 'var(--text-dark)' }}>
+                My Equipment · मेरा उपकरण
+              </div>
+              <div className="space-y-3">
+                {[
+                  { name: 'Mahindra 475 DI', status: 'Available · उपलब्ध', price: '₹2,400/day', emoji: '🚜', color: 'var(--green)' },
+                  { name: 'Harvester Combine', status: 'On Rent · किराए पर', price: '₹4,800/day', emoji: '🌾', color: 'var(--saffron)' }
+                ].map((equipment) => (
+                  <div key={equipment.name} className="flex items-center gap-3 p-3 rounded-[12px]" style={{ background: 'var(--cream)' }}>
+                    <div className="text-2xl">{equipment.emoji}</div>
+                    <div className="flex-1">
+                      <div className="text-[11px] font-bold" style={{ color: 'var(--text-dark)' }}>{equipment.name}</div>
+                      <div className="text-[9px]" style={{ color: equipment.color }}>{equipment.status}</div>
+                    </div>
+                    <div className="text-[11px] font-bold" style={{ color: 'var(--saffron)' }}>{equipment.price}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Recent Activity */}
+            <div className="bg-white rounded-[20px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow)' }}>
+              <div className="text-[13px] font-bold mb-3" style={{ color: 'var(--text-dark)' }}>
+                Recent Activity · हाल की गतिविधि
+              </div>
+              <div className="space-y-2">
+                {[
+                  { icon: '📅', text: 'New booking request from Ramesh', time: '2 hours ago', color: 'var(--green)' },
+                  { icon: '✅', text: 'Equipment returned - John Doe', time: '1 day ago', color: 'var(--text-mid)' },
+                  { icon: '💰', text: 'Payment received - ₹4,800', time: '2 days ago', color: 'var(--saffron)' }
+                ].map((activity) => (
+                  <div key={activity.text} className="flex items-center gap-3 p-2">
+                    <div className="text-lg">{activity.icon}</div>
+                    <div className="flex-1">
+                      <div className="text-[10px]" style={{ color: 'var(--text-dark)' }}>{activity.text}</div>
+                      <div className="text-[8px]" style={{ color: 'var(--text-soft)' }}>{activity.time}</div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-
-          {/* FAB Mic */}
-          <motion.div
-            animate={{ boxShadow: ['0 4px 20px rgba(255,107,0,0.5), 0 0 0 8px rgba(255,107,0,0.15)', '0 4px 20px rgba(255,107,0,0.5), 0 0 0 16px rgba(255,107,0,0.08)', '0 4px 20px rgba(255,107,0,0.5), 0 0 0 8px rgba(255,107,0,0.15)'] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-[74px] left-1/2 -translate-x-1/2 w-16 h-16 rounded-full flex items-center justify-center text-[26px] z-30"
-            style={{ background: 'linear-gradient(135deg, var(--saffron), #FF8C38)' }}
-          >
-            🎙️
-          </motion.div>
 
           {/* Bottom Nav */}
           <div 
@@ -181,17 +159,16 @@ export function FarmerHomeDesign() {
           >
             <div className="flex flex-col items-center gap-0.5 text-[9px] w-[50px]" style={{ color: 'var(--green)' }}>
               <div className="text-xl">🏠</div>
-              <span>Home</span>
+              <span>घर · Home</span>
               <div className="w-1 h-1 rounded-full" style={{ background: 'var(--green)' }} />
             </div>
-            <div className="w-16" />
             <div className="flex flex-col items-center gap-0.5 text-[9px] w-[50px]" style={{ color: 'var(--text-soft)' }}>
               <div className="text-xl">📋</div>
-              <span>Bookings</span>
+              <span>बुकिंग · Bookings</span>
             </div>
             <div className="flex flex-col items-center gap-0.5 text-[9px] w-[50px]" style={{ color: 'var(--text-soft)' }}>
               <div className="text-xl">👤</div>
-              <span>Profile</span>
+              <span>प्रोफाइल · Profile</span>
             </div>
           </div>
 

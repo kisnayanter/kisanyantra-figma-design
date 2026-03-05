@@ -24,16 +24,26 @@ import { RatingScreenDesign } from './screens/RatingScreenDesign';
 import { ToastNotificationsDesign } from './screens/ToastNotificationsDesign';
 import { NotificationCenterDesign } from './screens/NotificationCenterDesign';
 import { HomeWithNotificationBadgeDesign } from './screens/HomeWithNotificationBadgeDesign';
-
+// Add these imports
+import { MyBookingsDesign } from './screens/MyBookingsDesign';
+import { BookingDetailDesign } from './screens/BookingDetailDesign';
+import { CancelBookingDesign } from './screens/CancelBookingDesign';
+import { RescheduleBookingDesign } from './screens/RescheduleBookingDesign';
+import { BookingStatusTrackingDesign } from './screens/BookingStatusTrackingDesign';
+import { ShareBookingDetailsDesign } from './screens/ShareBookingDetailsDesign';
+import { ContactOwnerDesign } from './screens/ContactOwnerDesign';
+import { ViewOnMapDesign } from './screens/ViewOnMapDesign';
+import { CompleteBookingDesign } from './screens/CompleteBookingDesign';
+import { RateBookingDesign } from './screens/RateBookingDesign';
 export default function App() {
   return (
     <div className="min-h-screen" style={{ background: '#F5EDD8', backgroundImage: 'radial-gradient(ellipse at 20% 20%, #ffe8c8 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, #d4edda 0%, transparent 50%)' }}>
       {/* Page Header */}
       <div className="text-center px-10 pt-[60px] pb-10 relative">
         <div className="relative inline-block">
-          <div 
+          <div
             className="text-[52px] font-extrabold bg-clip-text text-transparent"
-            style={{ 
+            style={{
               fontFamily: "'Baloo 2', cursive",
               background: 'linear-gradient(135deg, var(--saffron) 30%, var(--gold))',
               WebkitBackgroundClip: 'text',
@@ -43,9 +53,9 @@ export default function App() {
           >
             KisanYantra
           </div>
-          <div 
+          <div
             className="text-[22px] font-semibold mt-[-4px]"
-            style={{ 
+            style={{
               fontFamily: "'Noto Sans Devanagari', sans-serif",
               color: 'var(--green)'
             }}
@@ -55,7 +65,7 @@ export default function App() {
           <div className="text-base mt-2.5" style={{ color: 'var(--text-mid)', fontWeight: 400, letterSpacing: '0.3px' }}>
             Voice-First Tractor Rental Platform · App Design Showcase
           </div>
-          <div 
+          <div
             className="mx-auto mt-5 h-1 w-20 rounded-sm"
             style={{ background: 'linear-gradient(90deg, var(--saffron), var(--green))' }}
           />
@@ -64,13 +74,13 @@ export default function App() {
 
       {/* Section 1: Onboarding Flow */}
       <div className="text-center mx-auto mb-8">
-        <span 
+        <span
           className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
           style={{ background: 'var(--saffron)', letterSpacing: '1.5px' }}
         >
           ONBOARDING
         </span>
-        <h2 
+        <h2
           className="text-[28px] font-bold"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
@@ -101,13 +111,13 @@ export default function App() {
 
       {/* Section 2: Voice AI + Search */}
       <div className="text-center mx-auto mb-8 mt-[60px]">
-        <span 
+        <span
           className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
           style={{ background: 'var(--saffron)', letterSpacing: '1.5px' }}
         >
           VOICE AI
         </span>
-        <h2 
+        <h2
           className="text-[28px] font-bold"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
@@ -132,13 +142,13 @@ export default function App() {
 
       {/* Section 3: Search & Profile */}
       <div className="text-center mx-auto mb-8 mt-[60px]">
-        <span 
+        <span
           className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
           style={{ background: 'var(--saffron)', letterSpacing: '1.5px' }}
         >
           SEARCH & PROFILE
         </span>
-        <h2 
+        <h2
           className="text-[28px] font-bold"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
@@ -160,13 +170,13 @@ export default function App() {
 
       {/* Section 4: Owner + Payments */}
       <div className="text-center mx-auto mb-8 mt-[60px]">
-        <span 
+        <span
           className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
           style={{ background: 'var(--saffron)', letterSpacing: '1.5px' }}
         >
           OWNER + PAYMENTS
         </span>
-        <h2 
+        <h2
           className="text-[28px] font-bold"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
@@ -197,13 +207,13 @@ export default function App() {
 
       {/* Section 4.5: Notifications & Feedback */}
       <div className="text-center mx-auto mb-8 mt-[60px]">
-        <span 
+        <span
           className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
           style={{ background: 'var(--saffron)', letterSpacing: '1.5px' }}
         >
           NOTIFICATIONS & FEEDBACK
         </span>
-        <h2 
+        <h2
           className="text-[28px] font-bold"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
@@ -228,13 +238,13 @@ export default function App() {
 
       {/* Section 5: User Flows */}
       <div className="text-center mx-auto mb-8 mt-[60px]">
-        <span 
+        <span
           className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
           style={{ background: 'var(--saffron)', letterSpacing: '1.5px' }}
         >
           USER FLOWS
         </span>
-        <h2 
+        <h2
           className="text-[28px] font-bold"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
@@ -247,14 +257,14 @@ export default function App() {
 
       {/* Farmer Flow */}
       <div className="max-w-[1400px] mx-auto px-10 pb-10">
-        <div 
+        <div
           className="rounded-[24px] p-6 mb-8"
           style={{ background: 'var(--saffron-pale)', border: '2px solid var(--saffron)' }}
         >
           <div className="flex items-center gap-3 mb-5">
             <div className="text-[36px]">👨‍🌾</div>
             <div>
-              <div 
+              <div
                 className="text-[22px] font-bold"
                 style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--saffron)' }}
               >
@@ -265,7 +275,7 @@ export default function App() {
               </div>
             </div>
           </div>
-          
+
           <div className="flex flex-wrap gap-6 justify-center">
             <ScreenCard label="F1 · Select Role (Farmer)">
               <RoleSelectFarmerDesign />
@@ -295,14 +305,14 @@ export default function App() {
         </div>
 
         {/* Owner Flow */}
-        <div 
+        <div
           className="rounded-[24px] p-6"
           style={{ background: 'var(--green-pale)', border: '2px solid var(--green)' }}
         >
           <div className="flex items-center gap-3 mb-5">
             <div className="text-[36px]">🚜</div>
             <div>
-              <div 
+              <div
                 className="text-[22px] font-bold"
                 style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--green)' }}
               >
@@ -313,7 +323,7 @@ export default function App() {
               </div>
             </div>
           </div>
-          
+
           <div className="flex flex-wrap gap-6 justify-center">
             <ScreenCard label="O1 · Select Role (Owner)">
               <RoleSelectOwnerDesign />
@@ -339,13 +349,13 @@ export default function App() {
 
       {/* Section 6: Multi-Language Support */}
       <div className="text-center mx-auto mb-8 mt-[60px]">
-        <span 
+        <span
           className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
           style={{ background: 'var(--saffron)', letterSpacing: '1.5px' }}
         >
           MULTI-LANGUAGE
         </span>
-        <h2 
+        <h2
           className="text-[28px] font-bold"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
@@ -356,6 +366,7 @@ export default function App() {
         </p>
       </div>
 
+
       <div className="flex flex-wrap gap-8 justify-center px-10 pb-[60px]">
         <ScreenCard label="16 · Profile Setup — Tamil">
           <ProfileSetupTamilDesign />
@@ -365,15 +376,67 @@ export default function App() {
         </ScreenCard>
       </div>
 
+      {/* Section 7: Booking Management */}
+      <div className="text-center mx-auto mb-8 mt-[60px]">
+        <span
+          className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
+          style={{ background: 'var(--green)', letterSpacing: '1.5px' }}
+        >
+          BOOKING MANAGEMENT
+        </span>
+        <h2
+          className="text-[28px] font-bold"
+          style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
+        >
+          Complete Booking Lifecycle
+        </h2>
+        <p className="text-sm mt-1" style={{ color: 'var(--text-soft)' }}>
+          My Bookings · Details · Cancellation · Rescheduling · Status Tracking
+        </p>
+      </div>
+
+      <div className="flex flex-wrap gap-8 justify-center px-10 pb-[60px]">
+        <ScreenCard label="19 · My Bookings">
+          <MyBookingsDesign />
+        </ScreenCard>
+        <ScreenCard label="20 · Booking Details">
+          <BookingDetailDesign />
+        </ScreenCard>
+        <ScreenCard label="21 · Cancel Booking">
+          <CancelBookingDesign />
+        </ScreenCard>
+        <ScreenCard label="22 · Reschedule">
+          <RescheduleBookingDesign />
+        </ScreenCard>
+        <ScreenCard label="23 · Status Tracking">
+          <BookingStatusTrackingDesign />
+        </ScreenCard>
+        <ScreenCard label="24 · Share Booking">
+          <ShareBookingDetailsDesign />
+        </ScreenCard>
+        <ScreenCard label="25 · Contact Owner">
+          <ContactOwnerDesign />
+        </ScreenCard>
+        <ScreenCard label="26 · View on Map">
+          <ViewOnMapDesign />
+        </ScreenCard>
+        <ScreenCard label="27 · Complete Booking">
+          <CompleteBookingDesign />
+        </ScreenCard>
+        <ScreenCard label="28 · Rate Booking">
+          <RateBookingDesign />
+        </ScreenCard>
+      </div>
+
       {/* Design System Section */}
       <div className="text-center mx-auto mb-8 mt-[60px]">
-        <span 
+        <span
           className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
           style={{ background: 'var(--saffron)', letterSpacing: '1.5px' }}
         >
           FORM STATES
         </span>
-        <h2 
+        <h2
           className="text-[28px] font-bold"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
@@ -386,14 +449,14 @@ export default function App() {
 
       <div className="max-w-[1400px] mx-auto px-10 pb-[60px]">
         {/* Profile Forms Comparison */}
-        <div 
+        <div
           className="rounded-[24px] p-6 mb-8"
           style={{ background: 'var(--saffron-pale)', border: '2px solid var(--saffron)' }}
         >
           <div className="flex items-center gap-3 mb-5">
             <div className="text-[36px]">📝</div>
             <div>
-              <div 
+              <div
                 className="text-[22px] font-bold"
                 style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--saffron)' }}
               >
@@ -404,7 +467,7 @@ export default function App() {
               </div>
             </div>
           </div>
-          
+
           <div className="flex flex-wrap gap-6 justify-center">
             <ScreenCard label="Empty Form · Initial State">
               <ProfileSetupEmptyDesign />
@@ -416,14 +479,14 @@ export default function App() {
         </div>
 
         {/* Add Equipment Forms Comparison */}
-        <div 
+        <div
           className="rounded-[24px] p-6"
           style={{ background: 'var(--green-pale)', border: '2px solid var(--green)' }}
         >
           <div className="flex items-center gap-3 mb-5">
             <div className="text-[36px]">➕</div>
             <div>
-              <div 
+              <div
                 className="text-[22px] font-bold"
                 style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--green)' }}
               >
@@ -434,7 +497,7 @@ export default function App() {
               </div>
             </div>
           </div>
-          
+
           <div className="flex flex-wrap gap-6 justify-center">
             <ScreenCard label="Empty Form · Click 'Add New'">
               <AddEquipmentEmptyDesign />
@@ -448,13 +511,13 @@ export default function App() {
 
       {/* Design System Section */}
       <div className="text-center mx-auto mb-8 mt-[60px]">
-        <span 
+        <span
           className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
           style={{ background: 'var(--saffron)', letterSpacing: '1.5px' }}
         >
           DESIGN SYSTEM
         </span>
-        <h2 
+        <h2
           className="text-[28px] font-bold"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
@@ -463,7 +526,7 @@ export default function App() {
       </div>
 
       <div className="max-w-[1100px] mx-auto px-10 pb-10">
-        <div 
+        <div
           className="text-[22px] font-bold mb-5"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
@@ -482,7 +545,7 @@ export default function App() {
             { color: '#FDFAF5', name: 'Cream BG', hex: '#FDFAF5' },
           ].map((swatch) => (
             <div key={swatch.hex} className="flex flex-col items-center gap-2">
-              <div 
+              <div
                 className="w-16 h-16 rounded-2xl"
                 style={{ background: swatch.color, boxShadow: '0 4px 12px rgba(0,0,0,0.12)' }}
               />
@@ -496,7 +559,7 @@ export default function App() {
           ))}
         </div>
 
-        <div 
+        <div
           className="text-[22px] font-bold mb-5"
           style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
         >
