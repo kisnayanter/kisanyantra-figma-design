@@ -23,33 +23,89 @@ export function SearchResultsDesign() {
           </div>
           
           {/* Header */}
-          <div className="bg-white px-4 pt-4 pb-3" style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.06)' }}>
-            <div className="flex items-center gap-[10px] mb-3">
-              <div className="w-8 h-8 rounded-[10px] flex items-center justify-center text-base" style={{ background: 'var(--cream)' }}>
+          <div 
+            className="px-5 pt-4 pb-8 rounded-b-[32px]"
+            style={{ background: 'linear-gradient(135deg, var(--saffron) 0%, #FF8C38 100%)' }}
+          >
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                aria-label="Back"
+                className="w-8 h-8 rounded-[10px] flex items-center justify-center text-white text-base"
+                style={{
+                  background: 'rgba(255,255,255,0.2)',
+                  border: '1.5px solid rgba(255,255,255,0.4)',
+                  boxShadow: '0 6px 14px rgba(0,0,0,0.18)'
+                }}
+              >
                 ←
+              </button>
+              <div>
+                <div className="text-[11px] uppercase tracking-[1px]" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                  Results for tractor
+                </div>
+                <div className="text-white text-[20px] font-bold" style={{ fontFamily: "'Baloo 2', cursive" }}>
+                  Near Hinganghat, Wardha
+                </div>
               </div>
-              <div className="flex-1 text-[17px] font-bold" style={{ fontFamily: "'Baloo 2', cursive" }}>
-                Tractors · Wardha
-              </div>
-              <div className="text-[11px]" style={{ color: 'var(--text-soft)' }}>8 found</div>
             </div>
 
-            {/* Chips */}
-            <div className="flex gap-2 overflow-x-auto pb-0.5">
+            <div className="mt-6 flex items-center gap-3">
+              <div className="flex-1 min-w-0">
+                <div 
+                  className="bg-white rounded-[16px] px-4 py-3 flex items-center gap-3"
+                  style={{ boxShadow: '0 8px 20px rgba(0,0,0,0.12)' }}
+                >
+                  <span className="text-base">🔍</span>
+                  <input
+                    type="text"
+                    placeholder="tractor in Wardha"
+                    className="flex-1 text-[14px] outline-none bg-transparent"
+                    style={{ color: 'var(--text-dark)' }}
+                  />
+                  <span className="text-[11px] font-semibold" style={{ color: 'var(--text-soft)' }}>8 results</span>
+                </div>
+              </div>
+              <button
+                className="h-12 px-4 rounded-[14px] flex flex-col items-center justify-center text-[11px] font-semibold flex-shrink-0"
+                style={{
+                  background: 'rgba(255,255,255,0.16)',
+                  color: 'white',
+                  border: '1px solid rgba(255,255,255,0.45)',
+                  boxShadow: '0 8px 18px rgba(0,0,0,0.18)'
+                }}
+              >
+                <span>Filters</span>
+                <span className="text-[10px] font-bold px-2 rounded-full" style={{ background: 'rgba(0,0,0,0.25)' }}>3</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Quick filters */}
+          <div className="px-5 pt-4 pb-3" style={{ background: '#F8F5F0' }}>
+            <div className="text-[11px] font-semibold mb-2" style={{ color: 'var(--text-mid)' }}>
+              Refine quickly
+            </div>
+            <div className="flex flex-wrap gap-2">
               {chips.map((chip, i) => (
-                <div
+                <button
                   key={chip}
-                  className="rounded-[20px] px-3 py-1 text-[11px] font-semibold whitespace-nowrap flex-shrink-0"
+                  className="rounded-[18px] px-3 py-1 text-[11px] font-semibold"
                   style={{
-                    background: i === 0 ? 'var(--saffron)' : 'var(--cream)',
-                    border: i === 0 ? '1.5px solid var(--saffron)' : '1.5px solid #E8E3DA',
-                    color: i === 0 ? 'white' : 'var(--text-mid)'
+                    border: i === 0 ? '1.5px solid var(--saffron)' : '1.5px solid rgba(0,0,0,0.08)',
+                    background: i === 0 ? 'rgba(255,139,56,0.12)' : 'transparent',
+                    color: i === 0 ? 'var(--saffron)' : 'var(--text-mid)'
                   }}
                 >
                   {chip}
-                </div>
+                </button>
               ))}
             </div>
+          </div>
+
+          {/* Summary */}
+          <div className="px-5 pb-2 text-[12px] font-semibold flex items-center gap-2" style={{ color: 'var(--text-mid)' }}>
+            Showing 8 options · Updated 2 mins ago
           </div>
 
           {/* Tab Bar */}

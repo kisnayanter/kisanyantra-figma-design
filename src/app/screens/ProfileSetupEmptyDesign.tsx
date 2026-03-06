@@ -1,4 +1,55 @@
+import { useLanguage } from '../contexts/language';
+
 export function ProfileSetupEmptyDesign() {
+  const { selectText } = useLanguage();
+  const t = (options: Parameters<typeof selectText>[0]) => selectText(options);
+
+  const strings = {
+    step: t({
+      english: 'Step 3 of 3 · Let’s get your profile ready',
+      hindi: 'चरण 3 / 3 · प्रोफ़ाइल तैयार करें',
+      tamil: 'படி 3 / 3 · உங்கள் சுயவிவரத்தை அமைக்கலாம்',
+      marathi: 'तिसरा टप्पा (३ मधून) · प्रोफाइल तयार करूया'
+    }),
+    heading: t({
+      english: 'Complete Your Profile',
+      hindi: 'अपना प्रोफ़ाइल पूरा करें',
+      tamil: 'உங்கள் சுயவிவரத்தை முடிக்கவும்',
+      marathi: 'आपले प्रोफाइल पूर्ण करा'
+    }),
+    chooseAvatar: t({
+      english: 'Choose Avatar',
+      hindi: 'अवतार चुनें',
+      tamil: 'அவதாரத்தைத் தேர்வுசெய்க',
+      marathi: 'अवतार निवडा'
+    }),
+    placeholders: {
+      fullName: t({ english: 'Enter your name', hindi: 'अपना नाम लिखें', tamil: 'உங்கள் பெயரை உள்ளிடவும்', marathi: 'आपले नाव भरा' }),
+      village: t({ english: 'Your village', hindi: 'आपका गाँव', tamil: 'உங்கள் கிராமம்', marathi: 'आपले गाव' }),
+      district: t({ english: 'Select district', hindi: 'जिला चुनें', tamil: 'மாவட்டத்தைத் தேர்க', marathi: 'जिल्हा निवडा' }),
+      state: t({ english: 'Select state', hindi: 'राज्य चुनें', tamil: 'மாநிலத்தைத் தேர்க', marathi: 'राज्य निवडा' })
+    },
+    farmSize: t({ english: 'Farm Size (optional)', hindi: 'खेत का आकार (वैकल्पिक)', tamil: 'பண்ணை அளவு (விருப்பம்)', marathi: 'शेतीचे क्षेत्रफळ (ऐच्छिक)' }),
+    equipmentNeed: t({ english: 'Equipment You Need', hindi: 'ज़रूरत का उपकरण', tamil: 'தேவையான உபகரணம்', marathi: 'आवश्यक उपकरणे' }),
+    languagePreference: t({ english: 'Preferred Language', hindi: 'पसंदीदा भाषा', tamil: 'விருப்ப மொழி', marathi: 'आवडती भाषा' }),
+    change: t({ english: 'Change', hindi: 'बदलें', tamil: 'மாற்றவும்', marathi: 'बदला' }),
+    languageLabel: t({ english: 'Hindi', hindi: 'हिंदी', tamil: 'இந்தி', marathi: 'हिंदी' }),
+    terms: t({
+      english: 'I agree to the Terms & Conditions and Privacy Policy',
+      hindi: 'मैं नियम व शर्तें और गोपनीयता नीति से सहमत हूँ',
+      tamil: 'நிபந்தனைகள், விதிமுறைகள் மற்றும் தனியுரிமை கொள்கையை ஒப்புக்கொள்கிறேன்',
+      marathi: 'मी नियम व अटी आणि गोपनीयता धोरणांना सहमत आहे'
+    }),
+    cta: t({ english: 'Complete required fields', hindi: 'आवश्यक फ़ील्ड भरें', tamil: 'தேவையான புலங்களை நிரப்பவும்', marathi: 'आवश्यक माहिती भरा' })
+  };
+
+  const formFields = [
+    { key: 'fullName', label: t({ english: 'Full Name', hindi: 'पूरा नाम', tamil: 'முழுபெயர்', marathi: 'पूर्ण नाव' }), placeholder: strings.placeholders.fullName, icon: '👤' },
+    { key: 'village', label: t({ english: 'Village', hindi: 'गाँव', tamil: 'கிராமம்', marathi: 'गाव' }), placeholder: strings.placeholders.village, icon: '🏘️' },
+    { key: 'district', label: t({ english: 'District', hindi: 'जिला', tamil: 'மாவட்டம்', marathi: 'जिल्हा' }), placeholder: strings.placeholders.district, icon: '📍' },
+    { key: 'state', label: t({ english: 'State', hindi: 'राज्य', tamil: 'மாநிலம்', marathi: 'राज्य' }), placeholder: strings.placeholders.state, icon: '🗺️' }
+  ];
+
   return (
     <div className="relative mx-auto" style={{ width: '320px', height: '640px' }}>
       <div 
@@ -30,13 +81,13 @@ export function ProfileSetupEmptyDesign() {
               </div>
               <div>
                 <div className="text-[12px]" style={{ color: 'rgba(255,255,255,0.75)' }}>
-                  Step 3 of 3
+                  {strings.step}
                 </div>
                 <div 
                   className="text-white text-[20px] font-bold"
                   style={{ fontFamily: "'Baloo 2', cursive" }}
                 >
-                  Complete Your Profile
+                  {strings.heading}
                 </div>
               </div>
             </div>
@@ -55,7 +106,7 @@ export function ProfileSetupEmptyDesign() {
             {/* Avatar Selection */}
             <div className="bg-white rounded-[20px] p-4 mb-[14px]" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="text-[13px] font-semibold mb-3" style={{ color: 'var(--text-mid)' }}>
-                Choose Avatar · अवतार चुनें
+                {strings.chooseAvatar}
               </div>
               <div className="flex gap-2 justify-center">
                 {['👨‍🌾', '👩‍🌾', '🧑‍🌾', '👴', '👵'].map((emoji) => (
@@ -75,14 +126,9 @@ export function ProfileSetupEmptyDesign() {
 
             {/* Form Fields */}
             <div className="space-y-[10px]">
-              {[
-                { label: 'Full Name · पूरा नाम', placeholder: 'Enter your name', icon: '👤' },
-                { label: 'Village · गाँव', placeholder: 'Your village', icon: '🏘️' },
-                { label: 'District · जिला', placeholder: 'Select district', icon: '📍' },
-                { label: 'State · राज्य', placeholder: 'Select state', icon: '🗺️' }
-              ].map((field) => (
+              {formFields.map((field) => (
                 <div
-                  key={field.label}
+                  key={field.key}
                   className="bg-white rounded-[18px] p-4"
                   style={{ boxShadow: 'var(--card-shadow)' }}
                 >
@@ -105,7 +151,7 @@ export function ProfileSetupEmptyDesign() {
             {/* Farm Details */}
             <div className="bg-white rounded-[18px] p-4 mt-[10px]" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="text-[11px] font-semibold mb-3" style={{ color: 'var(--text-soft)' }}>
-                Farm Size (Optional) · खेत का आकार
+                {strings.farmSize}
               </div>
               <div className="flex items-center gap-2">
                 {['1-5', '5-10', '10+'].map((size) => (
@@ -127,14 +173,14 @@ export function ProfileSetupEmptyDesign() {
             {/* Equipment Preferences */}
             <div className="bg-white rounded-[18px] p-4 mt-[10px]" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="text-[11px] font-semibold mb-3" style={{ color: 'var(--text-soft)' }}>
-                Equipment You Need · जरूरत का उपकरण
+                {strings.equipmentNeed}
               </div>
               <div className="flex flex-wrap gap-2">
                 {[
-                  { emoji: '🚜', label: 'Tractors' },
-                  { emoji: '🌾', label: 'Harvesters' },
-                  { emoji: '🌱', label: 'Cultivators' },
-                  { emoji: '🚰', label: 'Pumps' }
+                  { emoji: '🚜', label: t({ english: 'Tractors', hindi: 'ट्रैक्टर', tamil: 'டிராக்டர்கள்', marathi: 'ट्रॅक्टर' }) },
+                  { emoji: '🌾', label: t({ english: 'Harvesters', hindi: 'हार्वेस्टर', tamil: 'அறுவடையாளர்கள்', marathi: 'हार्वेस्टर' }) },
+                  { emoji: '🌱', label: t({ english: 'Cultivators', hindi: 'कल्टीवेटर', tamil: 'மண்ணெடுப்பான்', marathi: 'कुल्टिव्हेटर' }) },
+                  { emoji: '🚰', label: t({ english: 'Pumps', hindi: 'पंप', tamil: 'பம்புகள்', marathi: 'पंप' }) }
                 ].map((eq) => (
                   <div
                     key={eq.label}
@@ -155,14 +201,14 @@ export function ProfileSetupEmptyDesign() {
             {/* Language Preference */}
             <div className="bg-white rounded-[18px] p-4 mt-[10px]" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="text-[11px] font-semibold mb-3" style={{ color: 'var(--text-soft)' }}>
-                Preferred Language · पसंदीदा भाषा
+                {strings.languagePreference}
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-xl">🇮🇳</span>
                   <div>
                     <div className="text-[14px] font-bold" style={{ color: 'var(--text-dark)' }}>
-                      Hindi
+                      {strings.languageLabel}
                     </div>
                     <div 
                       className="text-[11px]"
@@ -173,7 +219,7 @@ export function ProfileSetupEmptyDesign() {
                   </div>
                 </div>
                 <button className="text-xs font-semibold" style={{ color: 'var(--saffron)' }}>
-                  Change
+                  {strings.change}
                 </button>
               </div>
             </div>
@@ -185,8 +231,7 @@ export function ProfileSetupEmptyDesign() {
                 style={{ background: 'white', border: '2px solid #E8E3DA' }}
               />
               <div className="text-[11px] leading-relaxed" style={{ color: 'var(--text-mid)' }}>
-                I agree to the <span className="font-semibold" style={{ color: 'var(--saffron)' }}>Terms & Conditions</span> and{' '}
-                <span className="font-semibold" style={{ color: 'var(--saffron)' }}>Privacy Policy</span>
+                {strings.terms}
               </div>
             </div>
           </div>
@@ -200,7 +245,7 @@ export function ProfileSetupEmptyDesign() {
                 boxShadow: 'none'
               }}
             >
-              Complete required fields
+              {strings.cta}
             </button>
           </div>
 

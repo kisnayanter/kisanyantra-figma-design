@@ -20,8 +20,8 @@ export function OwnerDashboardDesign() {
               <div className="text-[11px]">📶</div>
             </div>
 
-            <div className="flex justify-between items-center mb-4 pt-6">
-              <div>
+            <div className="flex justify-between items-center mb-4 pt-6 gap-3">
+              <div className="flex-1">
                 <div 
                   className="text-white text-[17px] font-bold"
                   style={{ fontFamily: "'Baloo 2', cursive" }}
@@ -32,6 +32,17 @@ export function OwnerDashboardDesign() {
                   Equipment Owner · Ludhiana, Punjab
                 </div>
               </div>
+              <button
+                type="button"
+                className="text-[10px] font-semibold px-3 py-1 rounded-full"
+                style={{
+                  background: 'rgba(255,255,255,0.15)',
+                  border: '1.5px solid rgba(255,255,255,0.35)',
+                  color: 'white'
+                }}
+              >
+                ↺ Switch to Farmer Mode
+              </button>
               <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg relative" style={{ background: 'rgba(255,255,255,0.1)' }}>
                 🔔
                 <div 
@@ -94,6 +105,27 @@ export function OwnerDashboardDesign() {
                 🔔 Incoming Requests
               </div>
               <button className="text-[11px] font-semibold" style={{ color: 'var(--saffron)' }}>See all</button>
+            </div>
+
+            <div className="bg-white rounded-2xl p-[14px] mb-[12px]" style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.07)' }}>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-2xl" style={{ background: 'var(--cream)' }}>👨‍🌾</div>
+                <div className="flex-1">
+                  <div className="text-[12px] font-bold" style={{ color: 'var(--text-dark)' }}>
+                    Need to book equipment instead?
+                  </div>
+                  <div className="text-[10px] mt-0.5" style={{ color: 'var(--text-soft)' }}>
+                    Tap below to hop back into the Farmer experience.
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="text-[10px] font-semibold px-3 py-1 rounded-full"
+                  style={{ background: 'var(--saffron)', color: 'white' }}
+                >
+                  Switch Role
+                </button>
+              </div>
             </div>
 
             <div

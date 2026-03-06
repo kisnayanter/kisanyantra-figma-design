@@ -1,4 +1,89 @@
+import { useLanguage } from '../contexts/language';
+
 export function ProfileSetupDesign() {
+  const { selectText } = useLanguage();
+  const t = (options: Parameters<typeof selectText>[0]) => selectText(options);
+
+  const strings = {
+    step: t({
+      english: 'Step 3 of 3 · Almost there!',
+      hindi: 'चरण 3 / 3 · लगभग तैयार!',
+      tamil: 'படி 3 / 3 · கிட்டத்தட்ட முடிந்தது!',
+      marathi: 'तिसरा टप्पा (३ मधून) · जवळपास पूर्ण!'
+    }),
+    heading: t({
+      english: 'Complete Your Profile',
+      hindi: 'अपना प्रोफ़ाइल पूरा करें',
+      tamil: 'உங்கள் சுயவிவரத்தை முடிக்கவும்',
+      marathi: 'आपले प्रोफाइल पूर्ण करा'
+    }),
+    chooseAvatar: t({
+      english: 'Choose Avatar',
+      hindi: 'अवतार चुनें',
+      tamil: 'அவதாரத்தைத் தேர்வுசெய்க',
+      marathi: 'अवतार निवडा'
+    }),
+    fullName: t({ english: 'Full Name', hindi: 'पूरा नाम', tamil: 'முழுபெயர்', marathi: 'पूर्ण नाव' }),
+    village: t({ english: 'Village', hindi: 'गाँव', tamil: 'கிராமம்', marathi: 'गाव' }),
+    district: t({ english: 'District', hindi: 'जिला', tamil: 'மாவட்டம்', marathi: 'जिल्हा' }),
+    state: t({ english: 'State', hindi: 'राज्य', tamil: 'மாநிலம்', marathi: 'राज्य' }),
+    farmSize: t({
+      english: 'Farm Size (optional)',
+      hindi: 'खेत का आकार (वैकल्पिक)',
+      tamil: 'பண்ணை அளவு (விருப்பம்)',
+      marathi: 'शेतीचे क्षेत्रफळ (ऐच्छिक)'
+    }),
+    equipmentNeed: t({
+      english: 'Equipment You Need',
+      hindi: 'ज़रूरत का उपकरण',
+      tamil: 'தேவையான உபகரணம்',
+      marathi: 'आवश्यक उपकरणे'
+    }),
+    languagePreference: t({
+      english: 'Preferred Language',
+      hindi: 'पसंदीदा भाषा',
+      tamil: 'விருப்ப மொழி',
+      marathi: 'आवडती भाषा'
+    }),
+    languageName: t({
+      english: 'Hindi',
+      hindi: 'हिंदी',
+      tamil: 'இந்தி',
+      marathi: 'हिंदी'
+    }),
+    change: t({
+      english: 'Change',
+      hindi: 'बदलें',
+      tamil: 'மாற்றவும்',
+      marathi: 'बदला'
+    }),
+    terms: t({
+      english: 'I agree to the Terms & Conditions and Privacy Policy',
+      hindi: 'मैं नियम व शर्तें और गोपनीयता नीति से सहमत हूँ',
+      tamil: 'நிபந்தனைகள், விதிமுறைகள் மற்றும் தனியுரிமை கொள்கையை ஒப்புக்கொள்கிறேன்',
+      marathi: 'मी नियम व अटी आणि गोपनीयता धोरणांना सहमत आहे'
+    }),
+    button: t({
+      english: '🎉 Complete Setup',
+      hindi: '🎉 सेटअप पूरा करें',
+      tamil: '🎉 அமைப்பை முடிக்கவும்',
+      marathi: '🎉 सेटअप पूर्ण करा'
+    })
+  };
+
+  const formFields = [
+    { key: 'fullName', label: strings.fullName, value: 'Ramu Kisan', icon: '👤' },
+    { key: 'village', label: strings.village, value: 'Hinganghat', icon: '🏘️' },
+    { key: 'district', label: strings.district, value: 'Wardha', icon: '📍' },
+    { key: 'state', label: strings.state, value: 'Maharashtra', icon: '🗺️' }
+  ];
+
+  const equipmentOptions = [
+    { emoji: '🚜', label: t({ english: 'Tractors', hindi: 'ट्रैक्टर', tamil: 'டிராக்டர்கள்', marathi: 'ट्रॅक्टर' }) },
+    { emoji: '🌾', label: t({ english: 'Harvesters', hindi: 'हार्वेस्टर', tamil: 'அறுவடையாளர்கள்', marathi: 'हार्वेस्टर' }) },
+    { emoji: '🌱', label: t({ english: 'Cultivators', hindi: 'कल्टीवेटर', tamil: 'மண்ணெடுப்பான்', marathi: 'कुल्टिव्हेटर' }) },
+    { emoji: '🚰', label: t({ english: 'Pumps', hindi: 'पंप', tamil: 'பம்புகள்', marathi: 'पंप' }) }
+  ];
   return (
     <div className="relative mx-auto" style={{ width: '320px', height: '640px' }}>
       <div 
@@ -30,13 +115,13 @@ export function ProfileSetupDesign() {
               </div>
               <div>
                 <div className="text-[12px]" style={{ color: 'rgba(255,255,255,0.75)' }}>
-                  Step 3 of 3 · लगभग तैयार!
+                  {strings.step}
                 </div>
                 <div 
                   className="text-white text-[20px] font-bold"
                   style={{ fontFamily: "'Baloo 2', cursive" }}
                 >
-                  Complete Your Profile
+                  {strings.heading}
                 </div>
               </div>
             </div>
@@ -55,7 +140,7 @@ export function ProfileSetupDesign() {
             {/* Avatar Selection */}
             <div className="bg-white rounded-[20px] p-4 mb-[14px]" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="text-[13px] font-semibold mb-3" style={{ color: 'var(--text-mid)' }}>
-                Choose Avatar · अवतार चुनें
+                {strings.chooseAvatar}
               </div>
               <div className="flex gap-2 justify-center">
                 {['👨🌾', '👩‍🌾', '🧑‍🌾', '👴', '👵'].map((emoji, i) => (
@@ -76,18 +161,13 @@ export function ProfileSetupDesign() {
 
             {/* Form Fields */}
             <div className="space-y-[10px]">
-              {[
-                { label: 'Full Name · पूरा नाम', value: 'Ramu Kisan', icon: '👤' },
-                { label: 'Village · गाँव', value: 'Hinganghat', icon: '🏘️' },
-                { label: 'District · जिला', value: 'Wardha', icon: '📍' },
-                { label: 'State · राज्य', value: 'Maharashtra', icon: '🗺️' }
-              ].map((field) => (
+              {formFields.map((field) => (
                 <div
-                  key={field.label}
+                  key={field.key}
                   className="bg-white rounded-[18px] p-4"
                   style={{ boxShadow: 'var(--card-shadow)' }}
                 >
-                  <div className="text-[11px] font-semibold mb-2" style={{ color: 'var(--text-soft)' }}>
+                  <div className="text-[11px] font-semibold mb-3" style={{ color: 'var(--text-soft)' }}>
                     {field.label}
                   </div>
                   <div className="flex items-center gap-[10px]">
@@ -107,7 +187,7 @@ export function ProfileSetupDesign() {
             {/* Additional Info */}
             <div className="bg-white rounded-[18px] p-4 mt-[10px]" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="text-[11px] font-semibold mb-3" style={{ color: 'var(--text-soft)' }}>
-                Farm Size (optional) · खेत का आकार
+                {strings.farmSize}
               </div>
               <div className="flex items-center gap-2">
                 {['1-5', '5-10', '10+'].map((size, i) => (
@@ -129,25 +209,19 @@ export function ProfileSetupDesign() {
             {/* Language Preference */}
             <div className="bg-white rounded-[18px] p-4 mt-[10px]" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="text-[11px] font-semibold mb-3" style={{ color: 'var(--text-soft)' }}>
-                Preferred Language · पसंदीदा भाषा
+                {strings.languagePreference}
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-xl">🇮🇳</span>
                   <div>
                     <div className="text-[14px] font-bold" style={{ color: 'var(--text-dark)' }}>
-                      Hindi
-                    </div>
-                    <div 
-                      className="text-[11px]"
-                      style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'var(--text-soft)' }}
-                    >
-                      हिंदी
+                      {strings.languageName}
                     </div>
                   </div>
                 </div>
                 <button className="text-xs font-semibold" style={{ color: 'var(--saffron)' }}>
-                  Change
+                  {strings.change}
                 </button>
               </div>
             </div>
@@ -161,8 +235,7 @@ export function ProfileSetupDesign() {
                 <span className="text-white text-[10px]">✓</span>
               </div>
               <div className="text-[11px] leading-relaxed" style={{ color: 'var(--text-mid)' }}>
-                I agree to the <span className="font-semibold" style={{ color: 'var(--saffron)' }}>Terms & Conditions</span> and{' '}
-                <span className="font-semibold" style={{ color: 'var(--saffron)' }}>Privacy Policy</span>
+                {strings.terms}
               </div>
             </div>
           </div>
@@ -176,7 +249,7 @@ export function ProfileSetupDesign() {
                 boxShadow: '0 4px 20px rgba(26,122,59,0.35)'
               }}
             >
-              🎉 Complete Setup
+              {strings.button}
             </button>
           </div>
 

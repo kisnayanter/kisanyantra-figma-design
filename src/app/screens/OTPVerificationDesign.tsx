@@ -1,4 +1,66 @@
+import { useLanguage } from '../contexts/language';
+
 export function OTPVerificationDesign() {
+  const { selectText } = useLanguage();
+  const t = (options: Parameters<typeof selectText>[0]) => selectText(options);
+
+  const strings = {
+    step: t({
+      english: 'Step 2 of 3 · OTP Verification',
+      hindi: 'चरण 2 / 3 · ओटीपी सत्यापन',
+      tamil: 'படி 2 / 3 · ஓடிபி சரிபார்ப்பு',
+      marathi: 'दुसरा टप्पा (३ मधून) · ओटीपी पडताळणी'
+    }),
+    heading: t({
+      english: 'Verify OTP Code',
+      hindi: 'ओटीपी कोड सत्यापित करें',
+      tamil: 'OTP குறியீட்டை சரிபார்க்கவும்',
+      marathi: 'ओटीपी कोड पडताळा'
+    }),
+    sentInfo: t({
+      english: '📱 We sent a 6-digit code to',
+      hindi: '📱 हमने 6-अंकों का कोड भेजा है',
+      tamil: '📱 6 இலக்க குறியீட்டை அனுப்பியுள்ளோம்',
+      marathi: '📱 आम्ही 6 अंकी कोड पाठवला आहे'
+    }),
+    editHint: t({
+      english: 'Tap boxes to edit with your keyboard',
+      hindi: 'कीबोर्ड से भरने के लिए बॉक्स पर टैप करें',
+      tamil: 'விசைப்பலகையில் உள்ளிட பெட்டியைத் தொடுக',
+      marathi: 'कीबोर्डने संपादित करण्यासाठी चौकटींवर टॅप करा'
+    }),
+    editHintShort: t({
+      english: 'Tap boxes',
+      hindi: 'बॉक्स टैप करें',
+      tamil: 'பெட்டியைத் தொடுக',
+      marathi: 'चौकटी टॅप करा'
+    }),
+    noCode: t({
+      english: "Didn't receive code?",
+      hindi: 'कोड नहीं मिला?',
+      tamil: 'குறியீடு கிடைக்கவில்லையா?',
+      marathi: 'कोड मिळाला नाही?'
+    }),
+    resend: t({
+      english: 'Resend OTP (0:28)',
+      hindi: 'ओटीपी दोबारा भेजें (0:28)',
+      tamil: 'OTP மீண்டும் அனுப்பவும் (0:28)',
+      marathi: 'ओटीपी परत पाठवा (0:28)'
+    }),
+    keyboardHelper: t({
+      english: 'Your phone keyboard will appear automatically when you tap any box',
+      hindi: 'किसी बॉक्स पर टैप करते ही फोन का कीबोर्ड खुल जाएगा',
+      tamil: 'பெட்டியைத் தொட்டவுடன் உங்கள் போன் விசைப்பலகை தானாக திறக்கும்',
+      marathi: 'कोणत्याही चौकटीवर टॅप करताच फोनचे कीबोर्ड उघडेल'
+    }),
+    button: t({
+      english: '✓ Verify & Continue',
+      hindi: '✓ सत्यापित करें और आगे बढ़ें',
+      tamil: '✓ சரிபார்த்து தொடரவும்',
+      marathi: '✓ पडताळा आणि पुढे जा'
+    })
+  };
+
   return (
     <div className="relative mx-auto" style={{ width: '320px', height: '640px' }}>
       <div 
@@ -30,13 +92,13 @@ export function OTPVerificationDesign() {
               </div>
               <div>
                 <div className="text-[12px]" style={{ color: 'rgba(255,255,255,0.75)' }}>
-                  Step 2 of 3 · ओटीपी सत्यापन
+                  {strings.step}
                 </div>
                 <div 
                   className="text-white text-[20px] font-bold"
                   style={{ fontFamily: "'Baloo 2', cursive" }}
                 >
-                  Verify OTP Code
+                  {strings.heading}
                 </div>
               </div>
             </div>
@@ -55,7 +117,7 @@ export function OTPVerificationDesign() {
             <div className="bg-white rounded-[20px] p-5 mb-4" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="text-center mb-4">
                 <div className="text-[12px] mb-1" style={{ color: 'var(--text-soft)' }}>
-                  📱 We sent a 6-digit code to
+                  {strings.sentInfo}
                 </div>
                 <div className="text-[14px] font-bold" style={{ color: 'var(--text-dark)' }}>
                   +91 98765 43210
@@ -83,17 +145,17 @@ export function OTPVerificationDesign() {
               {/* Info Text */}
               <div className="text-center">
                 <div className="text-[11px] mb-2" style={{ color: 'var(--text-soft)' }}>
-                  Tap boxes to edit with your keyboard<br />
-                  बक्सों पर टैप करें
+                  {strings.editHint}<br />
+                  {strings.editHintShort}
                 </div>
                 <div className="text-[11px]" style={{ color: 'var(--text-soft)' }}>
-                  Didn't receive code? · कोड नहीं मिला?
+                  {strings.noCode}
                 </div>
                 <button 
                   className="text-[12px] font-bold mt-1"
                   style={{ color: 'var(--saffron)' }}
                 >
-                  Resend OTP (0:28)
+                  {strings.resend}
                 </button>
               </div>
             </div>
@@ -106,7 +168,7 @@ export function OTPVerificationDesign() {
               <div className="flex items-center gap-3">
                 <div className="text-2xl">⌨️</div>
                 <div className="text-[11px] leading-relaxed" style={{ color: 'var(--text-mid)' }}>
-                  Your phone keyboard will appear automatically when you tap any box
+                  {strings.keyboardHelper}
                 </div>
               </div>
             </div>
@@ -121,7 +183,7 @@ export function OTPVerificationDesign() {
                 boxShadow: '0 4px 20px rgba(26,122,59,0.35)'
               }}
             >
-              ✓ Verify & Continue
+              {strings.button}
             </button>
           </div>
 

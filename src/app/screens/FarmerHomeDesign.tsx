@@ -1,4 +1,26 @@
+import { useLanguage } from '../contexts/language';
+
 export function FarmerHomeDesign() {
+  const { selectText } = useLanguage();
+  const t = (options: Parameters<typeof selectText>[0]) => selectText(options);
+
+  const strings = {
+    greeting: t({ english: 'Good Morning', hindi: 'सुप्रभात', tamil: 'காலை வணக்கம்', marathi: 'शुभ प्रभात' }),
+    active: t({ english: 'Active', hindi: 'सक्रिय', tamil: 'செயலில்', marathi: 'सक्रिय' }),
+    thisMonth: t({ english: 'This Month', hindi: 'इस महीने', tamil: 'இந்த மாதம்', marathi: 'या महिन्यात' }),
+    quickActions: t({ english: 'Quick Actions', hindi: 'त्वरित कार्य', tamil: 'உத்வேக செயல்கள்', marathi: 'जलद कृती' }),
+    search: t({ english: 'Search', hindi: 'खोजें', tamil: 'தேடு', marathi: 'शोधा' }),
+    voice: t({ english: 'Voice', hindi: 'आवाज़', tamil: 'குரல்', marathi: 'आवाज' }),
+    bookings: t({ english: 'Bookings', hindi: 'बुकिंग', tamil: 'முன்பதிவு', marathi: 'बुकिंग' }),
+    emptyTitle: t({ english: 'No bookings yet', hindi: 'अभी कोई बुकिंग नहीं', tamil: 'இப்போது முன்பதிவு இல்லை', marathi: 'अजून बुकिंग नाही' }),
+    emptySubtitle: t({ english: 'Start by exploring equipment near your farm', hindi: 'अपने खेत के पास उपकरण देखें', tamil: 'உங்கள் பண்ணைக்கு அருகில் உள்ள உபகரணங்களை பார்க்கவும்', marathi: 'तुमच्या शेजारील उपकरणे पाहा' }),
+    suggested: t({ english: 'Suggested for you (5 km)', hindi: 'आपके लिए सुझाव (5 किमी)', tamil: 'உங்களுக்கு பரிந்துரை (5 கி.மீ)', marathi: 'तुमच्यासाठी सुचवलेले (5 किमी)' }),
+    switchToOwner: t({ english: 'Switch to Owner Mode', hindi: 'ओनर मोड पर जाएं', tamil: 'உரிமையாளர் நிலைக்கு மாறவும்', marathi: 'मालक मोडवर जा' }),
+    ownerPromoTitle: t({ english: 'Have equipment to rent?', hindi: 'क्या किराए पर उपकरण है?', tamil: 'வாடகைக்கு உபகரணம் உள்ளதா?', marathi: 'भाड्याने देण्यासाठी उपकरणे आहेत?' }),
+    ownerPromoSubtitle: t({ english: 'List it and earn directly from your phone.', hindi: 'इसे सूचीबद्ध करें और सीधे कमाएँ।', tamil: 'அதை பட்டியலிட்டு நேரடியாக சம்பாதிக்கவும்.', marathi: 'यादी करा आणि थेट कमवा.' }),
+    switchBack: t({ english: 'Back to Farmer', hindi: 'किसान मोड पर लौटें', tamil: 'உழவர் நிலைக்கு திரும்பவும்', marathi: 'किसान मोडला परत जा' })
+  };
+
   return (
     <div className="relative mx-auto" style={{ width: '320px', height: '640px' }}>
       <div 
@@ -26,7 +48,7 @@ export function FarmerHomeDesign() {
             <div className="flex justify-between items-center mb-4 relative z-10">
               <div>
                 <div className="text-[12px]" style={{ color: 'rgba(255,255,255,0.75)' }}>
-                  🌤️ Good Morning · सुप्रभात
+                  🌤️ {strings.greeting}
                 </div>
                 <div 
                   className="text-white text-[18px] font-bold mt-0.5"
@@ -35,15 +57,18 @@ export function FarmerHomeDesign() {
                   Ramu Kisan 👋
                 </div>
               </div>
-              <div 
-                className="w-10 h-10 rounded-full flex items-center justify-center text-xl"
-                style={{ 
-                  background: 'rgba(255,255,255,0.25)',
-                  border: '2px solid rgba(255,255,255,0.4)'
+              <button
+                type="button"
+                aria-label={strings.switchToOwner}
+                className="w-10 h-10 rounded-full flex items-center justify-center text-lg"
+                style={{
+                  background: 'rgba(255,255,255,0.2)',
+                  border: '1.5px solid rgba(255,255,255,0.4)',
+                  color: 'white'
                 }}
               >
-                👨‍🌾
-              </div>
+                🔁
+              </button>
             </div>
 
             {/* Quick Stats */}
@@ -52,18 +77,18 @@ export function FarmerHomeDesign() {
                 className="flex-1 rounded-[16px] p-3"
                 style={{ background: 'rgba(255,255,255,0.2)' }}
               >
-                <div className="text-white text-[20px] font-bold">5</div>
+                <div className="text-white text-[20px] font-bold">0</div>
                 <div className="text-white text-[11px]" style={{ opacity: 0.85 }}>
-                  Active · सक्रिय
+                  {strings.active}
                 </div>
               </div>
               <div 
                 className="flex-1 rounded-[16px] p-3"
                 style={{ background: 'rgba(255,255,255,0.2)' }}
               >
-                <div className="text-white text-[20px] font-bold">₹18K</div>
+                <div className="text-white text-[20px] font-bold">₹0</div>
                 <div className="text-white text-[11px]" style={{ opacity: 0.85 }}>
-                  This Month · इस महीने
+                  {strings.thisMonth}
                 </div>
               </div>
             </div>
@@ -71,16 +96,41 @@ export function FarmerHomeDesign() {
 
           {/* Content Area with proper scroll behavior */}
           <div className="flex-1 overflow-y-auto px-5 pb-5 -mt-8">
+            <div className="bg-white rounded-[20px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow)' }}>
+              <div className="text-[13px] font-bold" style={{ color: 'var(--text-dark)' }}>
+                {strings.emptyTitle}
+              </div>
+              <p className="text-[11px] mt-1" style={{ color: 'var(--text-soft)' }}>
+                {strings.emptySubtitle}
+              </p>
+              <div className="bg-[var(--cream)] rounded-[16px] p-3 mt-3">
+                <div className="text-[11px] font-semibold" style={{ color: 'var(--text-mid)' }}>
+                  {strings.suggested}
+                </div>
+                <div className="flex gap-2 mt-2">
+                  {['Mahindra 475', 'New Holland 5630'].map((item, idx) => (
+                    <div key={item} className="flex-1 bg-white rounded-[12px] p-3" style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[11px] font-bold" style={{ color: 'var(--text-dark)' }}>{item}</span>
+                        <span>{idx === 0 ? '🚜' : '🌾'}</span>
+                      </div>
+                      <div className="text-[10px]" style={{ color: 'var(--text-soft)' }}>2.3 km · ₹2,400/day</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {/* Quick Actions */}
             <div className="bg-white rounded-[20px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="text-[13px] font-bold mb-3" style={{ color: 'var(--text-dark)' }}>
-                Quick Actions · त्वरित कार्य
+                {strings.quickActions}
               </div>
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { emoji: '🔍', label: 'Search · खोजें', badge: null },
-                  { emoji: '🎤', label: 'Voice · आवाज़', badge: null },
-                  { emoji: '📋', label: 'Bookings · बुकिंग', badge: 2 }
+                  { emoji: '🔍', label: strings.search, badge: null },
+                  { emoji: '🎤', label: strings.voice, badge: null },
+                  { emoji: '📋', label: strings.bookings, badge: 2 }
                 ].map((action) => (
                   <div
                     key={action.label}
@@ -107,25 +157,19 @@ export function FarmerHomeDesign() {
               </div>
             </div>
 
-            {/* My Equipment */}
+            {/* Owner Promo */}
             <div className="bg-white rounded-[20px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow)' }}>
-              <div className="text-[13px] font-bold mb-3" style={{ color: 'var(--text-dark)' }}>
-                My Equipment · मेरा उपकरण
+              <div className="text-[13px] font-bold" style={{ color: 'var(--text-dark)' }}>
+                {strings.ownerPromoTitle}
               </div>
-              <div className="space-y-3">
-                {[
-                  { name: 'Mahindra 475 DI', status: 'Available · उपलब्ध', price: '₹2,400/day', emoji: '🚜', color: 'var(--green)' },
-                  { name: 'Harvester Combine', status: 'On Rent · किराए पर', price: '₹4,800/day', emoji: '🌾', color: 'var(--saffron)' }
-                ].map((equipment) => (
-                  <div key={equipment.name} className="flex items-center gap-3 p-3 rounded-[12px]" style={{ background: 'var(--cream)' }}>
-                    <div className="text-2xl">{equipment.emoji}</div>
-                    <div className="flex-1">
-                      <div className="text-[11px] font-bold" style={{ color: 'var(--text-dark)' }}>{equipment.name}</div>
-                      <div className="text-[9px]" style={{ color: equipment.color }}>{equipment.status}</div>
-                    </div>
-                    <div className="text-[11px] font-bold" style={{ color: 'var(--saffron)' }}>{equipment.price}</div>
-                  </div>
-                ))}
+              <p className="text-[11px] mt-1" style={{ color: 'var(--text-soft)' }}>
+                {strings.ownerPromoSubtitle}
+              </p>
+              <div className="flex items-center justify-between mt-3 p-3 rounded-[16px]" style={{ background: 'var(--cream)' }}>
+                <div className="text-[11px] font-semibold" style={{ color: 'var(--text-mid)' }}>
+                  {strings.switchToOwner}
+                </div>
+                <div className="text-xl">🚜</div>
               </div>
             </div>
 
@@ -159,16 +203,16 @@ export function FarmerHomeDesign() {
           >
             <div className="flex flex-col items-center gap-0.5 text-[9px] w-[50px]" style={{ color: 'var(--green)' }}>
               <div className="text-xl">🏠</div>
-              <span>घर · Home</span>
+              <span>Home</span>
               <div className="w-1 h-1 rounded-full" style={{ background: 'var(--green)' }} />
             </div>
             <div className="flex flex-col items-center gap-0.5 text-[9px] w-[50px]" style={{ color: 'var(--text-soft)' }}>
               <div className="text-xl">📋</div>
-              <span>बुकिंग · Bookings</span>
+              <span>Bookings</span>
             </div>
             <div className="flex flex-col items-center gap-0.5 text-[9px] w-[50px]" style={{ color: 'var(--text-soft)' }}>
-              <div className="text-xl">👤</div>
-              <span>प्रोफाइल · Profile</span>
+              <div className="text-xl">�</div>
+              <span>{strings.switchToOwner}</span>
             </div>
           </div>
 

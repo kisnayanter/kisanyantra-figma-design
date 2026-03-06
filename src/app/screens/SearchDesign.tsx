@@ -1,4 +1,13 @@
 export function SearchDesign() {
+  const categories = [
+    { label: '🚜 Tractor', active: true },
+    { label: '🌾 Harvester', active: false },
+    { label: '💧 Pump', active: false },
+    { label: '🌱 Cultivator', active: false }
+  ];
+
+  const recents = ['Tractor near Hinganghat', 'Harvester with driver'];
+
   return (
     <div className="relative mx-auto" style={{ width: '320px', height: '640px' }}>
       <div 
@@ -18,164 +27,103 @@ export function SearchDesign() {
 
           {/* Header */}
           <div 
-            className="px-5 pt-4 pb-5 rounded-b-[36px]"
+            className="px-5 pt-4 pb-6 rounded-b-[28px]"
             style={{ background: 'linear-gradient(135deg, var(--saffron) 0%, #FF8C38 100%)' }}
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div 
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                aria-label="Back"
                 className="w-8 h-8 rounded-[10px] flex items-center justify-center text-white text-base"
-                style={{ background: 'rgba(255,255,255,0.2)' }}
+                style={{
+                  background: 'rgba(255,255,255,0.2)',
+                  border: '1.5px solid rgba(255,255,255,0.4)',
+                  boxShadow: '0 6px 14px rgba(0,0,0,0.18)'
+                }}
               >
                 ←
-              </div>
-              <div className="flex-1">
-                <div 
-                  className="bg-white rounded-2xl px-4 py-3 flex items-center gap-[10px]"
-                  style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.12)' }}
-                >
-                  <span className="text-base">🔍</span>
-                  <input
-                    type="text"
-                    placeholder="Search equipment..."
-                    className="flex-1 text-[14px] outline-none bg-transparent"
-                    style={{ color: 'var(--text-dark)' }}
-                  />
-                  <button className="text-xs font-semibold" style={{ color: 'var(--saffron)' }}>
-                    Filter
-                  </button>
-                </div>
+              </button>
+              <div className="text-white text-[20px] font-bold" style={{ fontFamily: "'Baloo 2', cursive" }}>
+                Find equipment nearby
               </div>
             </div>
 
-            {/* Quick Filters */}
-            <div className="flex gap-2 overflow-x-auto pb-1">
-              {[
-                { label: '🚜 Tractors', active: true },
-                { label: '🌾 Harvesters', active: false },
-                { label: '🚰 Pumps', active: false },
-                { label: '🌱 Cultivators', active: false }
-              ].map((filter) => (
-                <div
-                  key={filter.label}
-                  className="px-3 py-1.5 rounded-xl text-[11px] font-semibold whitespace-nowrap"
-                  style={{
-                    background: filter.active ? 'white' : 'rgba(255,255,255,0.2)',
-                    color: filter.active ? 'var(--saffron)' : 'white',
-                    border: filter.active ? '1px solid white' : '1px solid rgba(255,255,255,0.3)'
-                  }}
-                >
-                  {filter.label}
-                </div>
-              ))}
+            <div className="mt-5">
+              <div 
+                className="bg-white rounded-[16px] px-4 h-14 flex items-center gap-3"
+                style={{ boxShadow: '0 8px 20px rgba(0,0,0,0.12)' }}
+              >
+                <span className="text-base">🔍</span>
+                <input
+                  type="text"
+                  placeholder="Search equipment near you"
+                  className="flex-1 text-[14px] outline-none bg-transparent"
+                  style={{ color: 'var(--text-dark)' }}
+                />
+              </div>
             </div>
           </div>
 
-          {/* Results */}
-          <div className="flex-1 overflow-y-auto px-5 pb-5 -mt-4">
-            <div className="mb-3 text-[12px] font-semibold" style={{ color: 'var(--text-mid)' }}>
-              📍 Near Hinganghat, Wardha · 12 results
-            </div>
-
-            <div className="space-y-3">
-              {[
-                {
-                  name: 'John Deere 5310',
-                  owner: 'Suresh Patil',
-                  distance: '2.3 km',
-                  price: '₹1,200/hr',
-                  rating: '4.8',
-                  image: '🚜',
-                  available: true
-                },
-                {
-                  name: 'Mahindra 575 DI',
-                  owner: 'Ramesh Kumar',
-                  distance: '3.7 km',
-                  price: '₹900/hr',
-                  rating: '4.6',
-                  image: '🚜',
-                  available: true
-                },
-                {
-                  name: 'Sonalika DI 745 III',
-                  owner: 'Vijay Sharma',
-                  distance: '5.1 km',
-                  price: '₹1,000/hr',
-                  rating: '4.9',
-                  image: '🚜',
-                  available: false
-                },
-                {
-                  name: 'Swaraj 855 FE',
-                  owner: 'Prakash Deshmukh',
-                  distance: '6.8 km',
-                  price: '₹850/hr',
-                  rating: '4.7',
-                  image: '🚜',
-                  available: true
-                }
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="bg-white rounded-[20px] p-4"
-                  style={{
-                    boxShadow: 'var(--card-shadow)',
-                    border: item.available ? '1px solid transparent' : '1px solid #E8E3DA',
-                    opacity: item.available ? 1 : 0.6
-                  }}
-                >
-                  <div className="flex gap-3">
-                    <div 
-                      className="w-20 h-20 rounded-2xl flex items-center justify-center text-[36px] flex-shrink-0"
-                      style={{ background: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)' }}
-                    >
-                      {item.image}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between mb-1">
-                        <div className="font-bold text-[14px]" style={{ color: 'var(--text-dark)' }}>
-                          {item.name}
-                        </div>
-                        {item.available ? (
-                          <div className="px-2 py-0.5 rounded-md text-[9px] font-bold" style={{ background: 'var(--green-pale)', color: 'var(--green)' }}>
-                            AVAILABLE
-                          </div>
-                        ) : (
-                          <div className="px-2 py-0.5 rounded-md text-[9px] font-bold" style={{ background: '#FFE8E8', color: '#D32F2F' }}>
-                            BUSY
-                          </div>
-                        )}
-                      </div>
-                      <div className="text-[11px] mb-2" style={{ color: 'var(--text-soft)' }}>
-                        👤 {item.owner}
-                      </div>
-                      <div className="flex items-center gap-3 text-[11px]">
-                        <span style={{ color: 'var(--text-mid)' }}>📍 {item.distance}</span>
-                        <span style={{ color: 'var(--text-mid)' }}>⭐ {item.rating}</span>
-                        <span className="font-bold" style={{ color: 'var(--green)' }}>{item.price}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {item.available && (
-                    <div className="flex gap-2 mt-3">
-                      <button
-                        className="flex-1 rounded-xl py-2 text-[12px] font-semibold"
-                        style={{ background: 'var(--cream)', color: 'var(--text-dark)' }}
-                      >
-                        📞 Call
-                      </button>
-                      <button
-                        className="flex-1 rounded-xl py-2 text-[12px] font-semibold text-white"
-                        style={{ background: 'linear-gradient(135deg, var(--green), var(--green-light))' }}
-                      >
-                        🎤 Voice Book
-                      </button>
-                    </div>
-                  )}
+          <div className="flex-1 relative">
+            <div className="h-full overflow-y-auto px-5 pt-6 pb-10">
+              {/* Location */}
+              <div className="mb-7 flex items-center justify-between">
+                <div className="text-[13px] font-medium" style={{ color: 'var(--text-mid)' }}>
+                  📍 Near <span style={{ fontWeight: 700 }}>Hinganghat</span>, Wardha
                 </div>
-              ))}
+                <button className="text-[12px] font-semibold" style={{ color: 'var(--saffron)' }}>
+                  Change
+                </button>
+              </div>
+
+              {/* Categories */}
+              <div className="mb-7">
+                <div className="text-[16px] font-semibold mb-3" style={{ color: 'var(--text-dark)' }}>
+                  Popular equipment
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {categories.map((category) => (
+                    <button
+                      key={category.label}
+                      className="h-11 rounded-[16px] text-[12px] font-semibold flex items-center justify-center"
+                      style={{
+                        border: category.active ? '1.5px solid var(--saffron)' : '1.5px solid #E6E1D8',
+                        background: category.active ? 'rgba(255,139,56,0.12)' : '#FFF',
+                        color: category.active ? 'var(--saffron)' : 'var(--text-mid)'
+                      }}
+                    >
+                      {category.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Recent searches */}
+              <div className="mb-7">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-[16px] font-semibold" style={{ color: 'var(--text-dark)' }}>
+                    Recent searches
+                  </div>
+                  <button className="text-[12px] font-semibold" style={{ color: 'var(--saffron)' }}>
+                    Clear
+                  </button>
+                </div>
+                <div className="space-y-2">
+                  {recents.map((item) => (
+                    <div
+                      key={item}
+                      className="rounded-[14px] px-3 py-2.5 flex items-center gap-2 text-[12px]"
+                      style={{ background: '#FFF', border: '1px solid #EFEAE1', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}
+                    >
+                      <span style={{ color: 'var(--text-soft)' }}>🕘</span>
+                      <span style={{ color: 'var(--text-dark)' }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
+
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-2 w-10 h-1.5 rounded-full" style={{ background: '#D4CEC5' }} />
           </div>
 
           {/* Notch */}

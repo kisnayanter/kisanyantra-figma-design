@@ -1,3 +1,6 @@
+import { useEffect, useRef } from 'react';
+import { LanguageProvider, useLanguage } from './contexts/language';
+import type { LanguageOption } from './contexts/language';
 import { LanguageSelectDesign } from './screens/LanguageSelectDesign';
 import { RoleSelectDesign } from './screens/RoleSelectDesign';
 import { RoleSelectFarmerDesign } from './screens/RoleSelectFarmerDesign';
@@ -13,6 +16,7 @@ import { FarmerHomeDesign } from './screens/FarmerHomeDesign';
 import { SearchDesign } from './screens/SearchDesign';
 import { VoiceAgentDesign } from './screens/VoiceAgentDesign';
 import { SearchResultsDesign } from './screens/SearchResultsDesign';
+import { SearchFilterTrayDesign } from './screens/SearchFilterTrayDesign';
 import { EquipmentDetailDesign } from './screens/EquipmentDetailDesign';
 import { UpdateProfileDesign } from './screens/UpdateProfileDesign';
 import { OwnerDashboardDesign } from './screens/OwnerDashboardDesign';
@@ -37,7 +41,8 @@ import { CompleteBookingDesign } from './screens/CompleteBookingDesign';
 import { RateBookingDesign } from './screens/RateBookingDesign';
 export default function App() {
   return (
-    <div className="min-h-screen" style={{ background: '#F5EDD8', backgroundImage: 'radial-gradient(ellipse at 20% 20%, #ffe8c8 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, #d4edda 0%, transparent 50%)' }}>
+    <LanguageProvider>
+      <div className="min-h-screen" style={{ background: '#F5EDD8', backgroundImage: 'radial-gradient(ellipse at 20% 20%, #ffe8c8 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, #d4edda 0%, transparent 50%)' }}>
       {/* Page Header */}
       <div className="text-center px-10 pt-[60px] pb-10 relative">
         <div className="relative inline-block">
@@ -70,6 +75,13 @@ export default function App() {
             style={{ background: 'linear-gradient(90deg, var(--saffron), var(--green))' }}
           />
         </div>
+
+        <div className="mt-6 flex flex-col items-center gap-2">
+          <LanguageToggle />
+          <p className="text-xs" style={{ color: 'var(--text-soft)' }}>
+            Switch to preview screen copy in your preferred language.
+          </p>
+        </div>
       </div>
 
       {/* Section 1: Onboarding Flow */}
@@ -91,21 +103,54 @@ export default function App() {
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-8 justify-center px-10 pb-[60px]">
+      <div className="flex flex-wrap gap-8 justify-center px-10 pb-[40px]">
         <ScreenCard label="01 · Splash & Language">
           <LanguageSelectDesign />
         </ScreenCard>
-        <ScreenCard label="02 · Role Selection">
+        <ScreenCard label="02 · Role Selection (Farmer)">
           <RoleSelectDesign />
         </ScreenCard>
         <ScreenCard label="03 · OTP Verification">
           <OTPVerificationDesign />
         </ScreenCard>
-        <ScreenCard label="04 · Profile Setup">
+        <ScreenCard label="04 · Profile Setup — Empty">
+          <ProfileSetupEmptyDesign />
+        </ScreenCard>
+        <ScreenCard label="05 · Profile Setup — Filled">
           <ProfileSetupDesign />
         </ScreenCard>
-        <ScreenCard label="05 · Farmer Home">
+        <ScreenCard label="06 · Farmer Home (First Login)">
           <FarmerHomeDesign />
+        </ScreenCard>
+      </div>
+
+      <div className="text-center mx-auto mb-6">
+        <span
+          className="inline-block px-[14px] py-1 rounded-[20px] text-[11px] font-semibold tracking-[1.5px] uppercase mb-2.5 text-white"
+          style={{ background: 'var(--green)', letterSpacing: '1.5px' }}
+        >
+          OWNER ONBOARDING
+        </span>
+        <p className="text-sm" style={{ color: 'var(--text-soft)' }}>
+          Dedicated flow for equipment owners joining the platform
+        </p>
+      </div>
+
+      <div className="flex flex-wrap gap-8 justify-center px-10 pb-[60px]">
+        <ScreenCard label="O1 · Select Role (Owner)">
+          <RoleSelectOwnerDesign />
+        </ScreenCard>
+        <ScreenCard label="O2 · OTP Verification">
+          <OTPVerificationDesign />
+        </ScreenCard>
+        <ScreenCard label="O3 · Owner Profile Setup">
+          <ProfileSetupOwnerDesign />
+        </ScreenCard>
+        <ScreenCard label="O4 · Add First Equipment">
+          <AddEquipmentEmptyDesign />
+        </ScreenCard>
+        <ScreenCard label="O5 · Owner Dashboard">
+          <OwnerDashboardDesign />
         </ScreenCard>
       </div>
 
@@ -134,6 +179,9 @@ export default function App() {
         </ScreenCard>
         <ScreenCard label="07 · Search Results — List">
           <SearchResultsDesign />
+        </ScreenCard>
+        <ScreenCard label="07A · Filters Bottom Sheet">
+          <SearchFilterTrayDesign />
         </ScreenCard>
         <ScreenCard label="08 · Equipment Detail">
           <EquipmentDetailDesign />
@@ -291,6 +339,9 @@ export default function App() {
             </ScreenCard>
             <ScreenCard label="F5 · Search Equipment">
               <SearchDesign />
+            </ScreenCard>
+            <ScreenCard label="F5A · Filter Tray">
+              <SearchFilterTrayDesign />
             </ScreenCard>
             <ScreenCard label="F6 · Equipment Detail">
               <EquipmentDetailDesign />
@@ -612,7 +663,8 @@ export default function App() {
           User Flows · Form States · Toast Notifications · In-App Notifications
         </div>
       </div>
-    </div>
+      </div>
+    </LanguageProvider>
   );
 }
 
@@ -627,7 +679,106 @@ function ScreenCard({ label, children }: ScreenCardProps) {
       <div className="text-xs font-semibold tracking-wider uppercase text-center mb-3" style={{ color: 'var(--text-soft)', letterSpacing: '1px' }}>
         {label}
       </div>
-      {children}
+      <LanguageAwareContainer>{children}</LanguageAwareContainer>
     </div>
   );
+}
+
+function LanguageToggle() {
+  const { language, setLanguage } = useLanguage();
+  const options: { label: string; value: LanguageOption }[] = [
+    { label: 'English', value: 'english' },
+    { label: 'हिन्दी', value: 'hindi' },
+    { label: 'தமிழ்', value: 'tamil' },
+    { label: 'मराठी', value: 'marathi' }
+  ];
+
+  return (
+    <div className="inline-flex rounded-full p-1" style={{ background: 'rgba(0,0,0,0.05)' }}>
+      {options.map((option) => {
+        const isActive = option.value === language;
+        return (
+          <button
+            key={option.value}
+            type="button"
+            onClick={() => setLanguage(option.value)}
+            className="px-4 py-1.5 text-xs font-semibold rounded-full transition-colors"
+            style={{
+              fontFamily: "'Baloo 2', cursive",
+              background: isActive ? 'white' : 'transparent',
+              color: isActive ? 'var(--text-dark)' : 'var(--text-soft)',
+              boxShadow: isActive ? '0 6px 14px rgba(0,0,0,0.08)' : 'none'
+            }}
+          >
+            {option.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function LanguageAwareContainer({ children }: { children: React.ReactNode }) {
+  const { language } = useLanguage();
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const originalsRef = useRef(new WeakMap<Text, string>());
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+    let node = walker.nextNode() as Text | null;
+
+    while (node) {
+      const stored = originalsRef.current.get(node);
+      const baseText = stored ?? node.textContent ?? '';
+
+      if (!stored) {
+        originalsRef.current.set(node, baseText);
+      }
+
+      if (!baseText.includes('·')) {
+        node = walker.nextNode() as Text | null;
+        continue;
+      }
+
+      const parts = baseText.split('·').map((part) => part.trim());
+      const mapped = parts.map((part) => ({
+        text: part,
+        languages: detectLanguages(part)
+      }));
+      const exactMatch = mapped.find((entry) => entry.languages.includes(language));
+      const devanagariFallback = mapped.find((entry) => entry.languages.includes('hindi'));
+      const englishFallback = mapped.find((entry) => entry.languages.includes('english')) ?? mapped[0];
+
+      if (exactMatch) {
+        node.textContent = exactMatch.text;
+      } else if (language === 'marathi' && devanagariFallback) {
+        node.textContent = devanagariFallback.text;
+      } else if (language === 'hindi' && devanagariFallback) {
+        node.textContent = devanagariFallback.text;
+      } else {
+        node.textContent = englishFallback?.text ?? '';
+      }
+      node = walker.nextNode() as Text | null;
+    }
+  }, [language, children]);
+
+  return <div ref={containerRef}>{children}</div>;
+}
+
+const SCRIPT_MATCHERS: Record<LanguageOption, RegExp> = {
+  english: /[A-Za-z]/,
+  hindi: /[\u0900-\u097F]/,
+  marathi: /[\u0900-\u097F]/,
+  tamil: /[\u0B80-\u0BFF]/
+};
+
+function detectLanguages(value: string): LanguageOption[] {
+  return (Object.entries(SCRIPT_MATCHERS) as [LanguageOption, RegExp][]) 
+    .filter(([, regex]) => regex.test(value))
+    .map(([key]) => key);
 }
