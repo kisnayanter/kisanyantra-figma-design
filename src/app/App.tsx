@@ -13,6 +13,7 @@ import { ProfileSetupOwnerDesign } from './screens/ProfileSetupOwnerDesign';
 import { ProfileSetupTamilDesign } from './screens/ProfileSetupTamilDesign';
 import { ProfileSetupMarathiDesign } from './screens/ProfileSetupMarathiDesign';
 import { FarmerHomeDesign } from './screens/FarmerHomeDesign';
+import { SessionExpiredLoginDesign } from './screens/SessionExpiredLoginDesign';
 import { SearchDesign } from './screens/SearchDesign';
 import { VoiceAgentDesign } from './screens/VoiceAgentDesign';
 import { SearchResultsDesign } from './screens/SearchResultsDesign';
@@ -118,6 +119,9 @@ export default function App() {
         </ScreenCard>
         <ScreenCard label="05 · Profile Setup — Filled">
           <ProfileSetupDesign />
+        </ScreenCard>
+        <ScreenCard label="06 · Session Expired Re-login">
+          <SessionExpiredLoginDesign />
         </ScreenCard>
         <ScreenCard label="06 · Farmer Home (First Login)">
           <FarmerHomeDesign />
