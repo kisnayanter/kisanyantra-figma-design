@@ -26,6 +26,7 @@ import { AddEquipmentEmptyDesign } from './screens/AddEquipmentEmptyDesign';
 import { BookingRequestDesign } from './screens/BookingRequestDesign';
 import { BookingConfirmDesign } from './screens/BookingConfirmDesign';
 import { RatingScreenDesign } from './screens/RatingScreenDesign';
+import { BookEquipmentDesign } from './screens/BookEquipmentDesign';
 import { ToastNotificationsDesign } from './screens/ToastNotificationsDesign';
 import { NotificationCenterDesign } from './screens/NotificationCenterDesign';
 import { HomeWithNotificationBadgeDesign } from './screens/HomeWithNotificationBadgeDesign';
@@ -40,6 +41,7 @@ import { ContactOwnerDesign } from './screens/ContactOwnerDesign';
 import { ViewOnMapDesign } from './screens/ViewOnMapDesign';
 import { CompleteBookingDesign } from './screens/CompleteBookingDesign';
 import { RateBookingDesign } from './screens/RateBookingDesign';
+import { IncomingRequestsListDesign } from './screens/IncomingRequestsListDesign';
 export default function App() {
   return (
     <LanguageProvider>
@@ -190,6 +192,9 @@ export default function App() {
         <ScreenCard label="08 · Equipment Detail">
           <EquipmentDetailDesign />
         </ScreenCard>
+        <ScreenCard label="09 · Book Equipment">
+          <BookEquipmentDesign />
+        </ScreenCard>
       </div>
 
       {/* Section 3: Search & Profile */}
@@ -246,13 +251,16 @@ export default function App() {
         <ScreenCard label="12 · Add Equipment">
           <AddEquipmentDesign />
         </ScreenCard>
-        <ScreenCard label="13 · Booking Request">
+        <ScreenCard label="13 · All Incoming Requests">
+          <IncomingRequestsListDesign />
+        </ScreenCard>
+        <ScreenCard label="14 · Booking Request Detail">
           <BookingRequestDesign />
         </ScreenCard>
-        <ScreenCard label="14 · Booking Confirmed + Pay">
+        <ScreenCard label="15 · Booking Confirmed + Pay">
           <BookingConfirmDesign />
         </ScreenCard>
-        <ScreenCard label="15 · Rate Experience">
+        <ScreenCard label="16 · Rate Experience">
           <RatingScreenDesign />
         </ScreenCard>
       </div>
@@ -350,10 +358,13 @@ export default function App() {
             <ScreenCard label="F6 · Equipment Detail">
               <EquipmentDetailDesign />
             </ScreenCard>
-            <ScreenCard label="F7 · Booking Confirmed">
+            <ScreenCard label="F7 · Book Equipment">
+              <BookEquipmentDesign />
+            </ScreenCard>
+            <ScreenCard label="F8 · Booking Confirmed">
               <BookingConfirmDesign />
             </ScreenCard>
-            <ScreenCard label="F8 · Rate Experience">
+            <ScreenCard label="F9 · Rate Experience">
               <RatingScreenDesign />
             </ScreenCard>
           </div>

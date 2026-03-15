@@ -10,85 +10,87 @@ export function OwnerDashboardDesign() {
         }}
       >
         <div className="w-full h-full rounded-[28px] overflow-hidden relative flex flex-col" style={{ background: '#F8F5F0' }}>
-          {/* Header */}
-          <div 
-            className="px-[18px] pt-[14px] pb-6 rounded-b-[28px]"
-            style={{ background: 'linear-gradient(135deg, #1A1A2E 0%, #16213E 100%)' }}
-          >
-            <div className="absolute top-0 left-0 right-0 z-20 flex justify-between items-center px-[18px] py-[10px]" style={{ color: 'rgba(255,255,255,0.6)' }}>
-              <span className="font-bold text-[11px]" style={{ color: 'white' }}>9:48</span>
-              <div className="text-[11px]">📶</div>
-            </div>
+          {/* Status Bar */}
+          <div className="flex justify-between items-center px-[18px] py-[10px] relative z-10">
+            <span className="font-bold text-[11px]">9:48</span>
+            <div className="flex gap-1 items-center text-[11px]">📶 🔋</div>
+          </div>
 
-            <div className="flex justify-between items-center mb-4 pt-6 gap-3">
+          {/* Header - Orange Gradient for Consistency */}
+          <div 
+            className="px-[18px] pt-5 pb-6 rounded-b-[36px]"
+            style={{ background: 'linear-gradient(135deg, var(--saffron) 0%, #FF8C38 100%)' }}
+          >
+            <div className="flex justify-between items-center mb-4 gap-3">
               <div className="flex-1">
+                <div className="text-[12px]" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                  🚜 मालिक डैशबोर्ड · Owner Dashboard
+                </div>
                 <div 
-                  className="text-white text-[17px] font-bold"
+                  className="text-white text-[18px] font-bold mt-0.5"
                   style={{ fontFamily: "'Baloo 2', cursive" }}
                 >
-                  Harpreet Singh 🚜
-                </div>
-                <div className="text-[11px] mt-0.5" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                  Equipment Owner · Ludhiana, Punjab
+                  Harpreet Singh
                 </div>
               </div>
-              <button
-                type="button"
-                className="text-[10px] font-semibold px-3 py-1 rounded-full"
-                style={{
-                  background: 'rgba(255,255,255,0.15)',
-                  border: '1.5px solid rgba(255,255,255,0.35)',
-                  color: 'white'
-                }}
-              >
-                ↺ Switch to Farmer Mode
-              </button>
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg relative" style={{ background: 'rgba(255,255,255,0.1)' }}>
-                🔔
-                <div 
-                  className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full"
-                  style={{ background: 'var(--saffron)', border: '2px solid #1A1A2E' }}
-                />
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-base relative"
+                  style={{
+                    background: 'rgba(255,255,255,0.2)',
+                    border: '1.5px solid rgba(255,255,255,0.4)',
+                    color: 'white'
+                  }}
+                >
+                  🔔
+                  <div 
+                    className="absolute top-1 right-1 w-2 h-2 rounded-full"
+                    style={{ background: '#E74C3C', border: '2px solid var(--saffron)' }}
+                  />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Switch to Farmer Mode"
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-base"
+                  style={{
+                    background: 'rgba(255,255,255,0.2)',
+                    border: '1.5px solid rgba(255,255,255,0.4)',
+                    color: 'white'
+                  }}
+                >
+                  🔁
+                </button>
               </div>
             </div>
 
-            <div
-              className="rounded-2xl p-[14px] flex justify-between"
-              style={{ background: 'linear-gradient(135deg, var(--saffron) 0%, var(--gold) 100%)' }}
-            >
-              <div>
-                <div className="text-[10px] font-semibold tracking-wide uppercase" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            {/* Stats Cards */}
+            <div className="grid grid-cols-3 gap-2">
+              <div 
+                className="rounded-[14px] p-3"
+                style={{ background: 'rgba(255,255,255,0.2)' }}
+              >
+                <div className="text-white text-[16px] font-bold">₹54K</div>
+                <div className="text-white text-[9px]" style={{ opacity: 0.85 }}>
                   This Month
                 </div>
-                <div 
-                  className="text-white text-lg font-extrabold mt-1"
-                  style={{ fontFamily: "'Baloo 2', cursive" }}
-                >
-                  ₹54,000
-                </div>
               </div>
-              <div className="w-px mx-2" style={{ background: 'rgba(255,255,255,0.2)' }} />
-              <div>
-                <div className="text-[10px] font-semibold tracking-wide uppercase" style={{ color: 'rgba(255,255,255,0.75)' }}>
+              <div 
+                className="rounded-[14px] p-3"
+                style={{ background: 'rgba(255,255,255,0.2)' }}
+              >
+                <div className="text-white text-[16px] font-bold">₹2.4L</div>
+                <div className="text-white text-[9px]" style={{ opacity: 0.85 }}>
                   Total Earned
                 </div>
-                <div 
-                  className="text-white text-lg font-extrabold mt-1"
-                  style={{ fontFamily: "'Baloo 2', cursive" }}
-                >
-                  ₹2.4L
-                </div>
               </div>
-              <div className="w-px mx-2" style={{ background: 'rgba(255,255,255,0.2)' }} />
-              <div>
-                <div className="text-[10px] font-semibold tracking-wide uppercase" style={{ color: 'rgba(255,255,255,0.75)' }}>
+              <div 
+                className="rounded-[14px] p-3"
+                style={{ background: 'rgba(255,255,255,0.2)' }}
+              >
+                <div className="text-white text-[16px] font-bold">38</div>
+                <div className="text-white text-[9px]" style={{ opacity: 0.85 }}>
                   Bookings
-                </div>
-                <div 
-                  className="text-white text-lg font-extrabold mt-1"
-                  style={{ fontFamily: "'Baloo 2', cursive" }}
-                >
-                  38
                 </div>
               </div>
             </div>
