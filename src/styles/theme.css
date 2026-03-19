@@ -42,25 +42,75 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  /* KisanYantra Color System */
+  /* KisanYantra Color System - Updated Modern Palette */
+  
+  /* Primary Brand Colors - Deep Farm Green */
+  --green-primary: #1F7A4C;
+  --green-secondary: #2DAA6A;
+  --green-pale: #F0FDF4;
+  --green-tint: #DCFCE7;
+  
+  /* Legacy green (for backward compatibility) */
+  --green: #1F7A4C;
+  --green-light: #2DAA6A;
+  
+  /* Accent Color - Harvest Yellow */
+  --harvest-yellow: #F4B400;
+  --harvest-yellow-pale: #FFFBEB;
+  --harvest-yellow-tint: #FEF3C7;
+  
+  /* Legacy gold (for backward compatibility) */
+  --gold: #F4B400;
+  
+  /* Saffron Gradient - For Owner Screens */
   --saffron: #FF6B00;
   --saffron-light: #FF8C38;
+  --saffron-dark: #E85D00;
   --saffron-pale: #FFF3E8;
-  --green: #1A7A3B;
-  --green-light: #22A04F;
-  --green-pale: #E8F7EE;
-  --soil: #7B4F2E;
-  --gold: #F5A623;
-  --sky: #E8F4FD;
+  
+  /* Neutral Background System */
+  --bg-primary: #F6F8F7;
+  --bg-secondary: #FFFFFF;
   --cream: #FDFAF5;
   --cream-bg: #F5EDD8;
+  
+  /* Text Hierarchy */
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
   --text-dark: #1A1A1A;
-  --text-mid: #4A4A4A;
-  --text-soft: #888888;
+  --text-mid: #6B7280;
+  --text-soft: #9CA3AF;
+  
+  /* Utility Colors */
   --white: #FFFFFF;
+  --soil: #7B4F2E;
+  --sky: #E8F4FD;
   --dark-bg: #1A1A2E;
   --dark-bg-2: #16213E;
+  
+  /* Card & Shadow System - Floating Design */
+  --card-shadow-sm: 0 2px 8px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+  --card-shadow-md: 0 8px 24px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
+  --card-shadow-lg: 0 10px 30px rgba(0,0,0,0.08);
+  --card-shadow-green: 0 8px 24px rgba(31, 122, 76, 0.15), 0 2px 8px rgba(31, 122, 76, 0.1);
+  --card-shadow-saffron: 0 8px 24px rgba(255, 107, 0, 0.25), 0 4px 12px rgba(255, 107, 0, 0.15);
+  --card-shadow-yellow: 0 2px 8px rgba(244, 180, 0, 0.1);
   --card-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  
+  /* Gradient Definitions */
+  --gradient-green: linear-gradient(135deg, #1F7A4C 0%, #2DAA6A 100%);
+  --gradient-saffron: linear-gradient(135deg, #FF6B00 0%, #FF8C38 100%);
+  --gradient-yellow: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  
+  /* Owner Professional Blue Theme (Legacy - being phased out) */
+  --blue: #2563EB;
+  --blue-light: #3B82F6;
+  --blue-dark: #1E40AF;
+  --blue-pale: #EFF6FF;
+  --amber: #F59E0B;
+  --amber-light: #FBBF24;
+  --amber-pale: #FEF3C7;
 }
 
 .dark {
@@ -201,3 +251,406 @@
     line-height: 1.5;
   }
 }
+
+/* =============================================
+   KisanYantra Mobile-Native Animation System
+   Tap/press feedback · Entrance animations
+   ============================================= */
+
+/* === Keyframe Animations === */
+
+@keyframes ky-slide-down {
+  from { opacity: 0; transform: translateY(-14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ky-scale-in {
+  from { opacity: 0; transform: scale(0.88); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ky-fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ky-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes ky-pulse-green {
+  0%, 100% { box-shadow: 0 4px 20px rgba(31,122,76,0.35); }
+  50% { box-shadow: 0 8px 30px rgba(31,122,76,0.5), 0 0 0 3px rgba(31,122,76,0.08); }
+}
+
+@keyframes ky-pulse-saffron {
+  0%, 100% { box-shadow: 0 4px 16px rgba(255,107,0,0.3); }
+  50% { box-shadow: 0 8px 28px rgba(255,107,0,0.5), 0 0 0 3px rgba(255,107,0,0.08); }
+}
+
+@keyframes ky-badge-pop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Ripple tap feedback — expands from center on press */
+@keyframes ky-ripple {
+  0% { transform: scale(0); opacity: 0.35; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* Spring bounce-back after tap release */
+@keyframes ky-spring-back {
+  0% { transform: scale(0.95); }
+  40% { transform: scale(1.02); }
+  70% { transform: scale(0.99); }
+  100% { transform: scale(1); }
+}
+
+/* Tap flash — brief brightness pulse like haptic feedback */
+@keyframes ky-tap-flash {
+  0% { filter: brightness(1); }
+  30% { filter: brightness(0.92); }
+  100% { filter: brightness(1); }
+}
+
+/* === Phone Screen Scoped Animations === */
+/* .ky-phone-screen is added to ScreenCard wrappers in App.tsx */
+
+/* Header entrance animation */
+.ky-phone-screen [class*="rounded-b-"] {
+  animation: ky-slide-down 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Staggered content entrance using @starting-style */
+.ky-phone-screen .overflow-y-auto > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@starting-style {
+  .ky-phone-screen .overflow-y-auto > * {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.ky-phone-screen .overflow-y-auto > *:nth-child(1) { transition-delay: 0.06s; }
+.ky-phone-screen .overflow-y-auto > *:nth-child(2) { transition-delay: 0.13s; }
+.ky-phone-screen .overflow-y-auto > *:nth-child(3) { transition-delay: 0.2s; }
+.ky-phone-screen .overflow-y-auto > *:nth-child(4) { transition-delay: 0.27s; }
+.ky-phone-screen .overflow-y-auto > *:nth-child(5) { transition-delay: 0.34s; }
+.ky-phone-screen .overflow-y-auto > *:nth-child(6) { transition-delay: 0.41s; }
+.ky-phone-screen .overflow-y-auto > *:nth-child(7) { transition-delay: 0.48s; }
+.ky-phone-screen .overflow-y-auto > *:nth-child(n+8) { transition-delay: 0.55s; }
+
+/* Stats grid items scale in */
+.ky-phone-screen .grid > * {
+  animation: ky-scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.ky-phone-screen .grid > *:nth-child(1) { animation-delay: 0.15s; }
+.ky-phone-screen .grid > *:nth-child(2) { animation-delay: 0.22s; }
+.ky-phone-screen .grid > *:nth-child(3) { animation-delay: 0.29s; }
+
+/* =============================================
+   Semantic Tap Interaction Classes
+
+   AI AGENT REFERENCE: Each class defines the exact
+   tap/press behavior for one component type in the
+   mobile app. Apply the matching class to interactive
+   elements. Pattern:
+     - Default state = spring-back transition on release
+     - :active state = press feedback (fast)
+   ============================================= */
+
+[class*="ky-tap-"] {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+/* --- BACK / NAV BUTTON ---
+   Quick scale to 0.85, fast spring back.
+   Used on: ← back arrows, ✕ close buttons, header nav icons */
+.ky-tap-back {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ky-tap-back:active {
+  transform: scale(0.85);
+  transition: transform 0.06s ease;
+}
+
+/* --- PRIMARY CTA BUTTON ---
+   Scale 0.97, brightness dims, shadow reduces. Slow spring bounce.
+   Used on: Full-width gradient action buttons
+   ("Send OTP", "Complete Setup", "List Equipment", "Submit Rating") */
+.ky-tap-cta-primary {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.25s ease,
+              box-shadow 0.3s ease;
+}
+.ky-tap-cta-primary:active {
+  transform: scale(0.97);
+  filter: brightness(0.92);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  transition: transform 0.06s ease, filter 0.06s ease, box-shadow 0.06s ease;
+}
+
+/* --- SECONDARY / OUTLINED BUTTON ---
+   Scale 0.97, subtle dim. Used on: Cancel, Keep Booking,
+   outlined action buttons with white/transparent bg */
+.ky-tap-cta-secondary {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.2s ease;
+}
+.ky-tap-cta-secondary:active {
+  transform: scale(0.97);
+  filter: brightness(0.95);
+  transition: transform 0.06s ease, filter 0.06s ease;
+}
+
+/* --- TAB / SEGMENT CONTROL ITEM ---
+   NO scale. Opacity dim only. Background color handled by state.
+   Used on: Filter tabs ("All / Urgent / Today"),
+   booking tabs ("Active / Past"), notification filters.
+   Apply to each tab button, NOT the container */
+.ky-tap-tab {
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.15s ease;
+}
+.ky-tap-tab:active {
+  opacity: 0.7;
+  transition: opacity 0.06s ease;
+}
+
+/* --- SELECTION CHIP / TAG ---
+   Scale 0.95 + color toggle. Used on: Duration pills ("1 Day"),
+   filter chips ("High rated"), equipment chips ("Tractor"),
+   rating tags ("On time ✓"), farm size options */
+.ky-tap-chip {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease,
+              color 0.2s ease;
+}
+.ky-tap-chip:active {
+  transform: scale(0.95);
+  transition: transform 0.06s ease;
+}
+
+/* --- TAPPABLE CARD ---
+   Scale 0.98, shadow reduces. Navigates to detail view.
+   Used on: Equipment cards, booking cards, request cards,
+   share option cards. Has bg-white + rounded + shadow */
+.ky-tap-card {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+}
+.ky-tap-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+  transition: transform 0.06s ease, box-shadow 0.06s ease;
+}
+
+/* --- ICON BUTTON ---
+   Scale 0.88, quick spring. Used on: 🔔 notification bell,
+   🔁 role-switch, ⚙️ settings, filter icons.
+   Typically w-9 h-9 or w-10 h-10 rounded-xl */
+.ky-tap-icon {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ky-tap-icon:active {
+  transform: scale(0.88);
+  transition: transform 0.06s ease;
+}
+
+/* --- TEXT LINK ---
+   Opacity dims to 0.6, NO scale. Used on: "View All →",
+   "View Details →", "Change", "Resend OTP", "Reset" */
+.ky-tap-link {
+  transition: opacity 0.2s ease;
+}
+.ky-tap-link:active {
+  opacity: 0.6;
+  transition: opacity 0.06s ease;
+}
+
+/* --- STAR RATING ---
+   Individual star bounces up + scales 1.25 on tap.
+   Used on: ★ star elements in rating screens.
+   Apply to EACH star, not the container */
+.ky-tap-star {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-block;
+}
+.ky-tap-star:active {
+  transform: scale(1.25) translateY(-4px);
+  transition: transform 0.08s ease;
+}
+
+/* --- AVATAR / PROFILE PICKER ---
+   Scale 0.92 on tap. Used on: Avatar emoji circles
+   in profile setup screens */
+.ky-tap-avatar {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease;
+}
+.ky-tap-avatar:active {
+  transform: scale(0.92);
+  transition: transform 0.06s ease;
+}
+
+/* --- PHOTO UPLOAD ZONE ---
+   Opacity flash, NO scale. Used on: Dashed-border
+   upload areas ("Add Photo" / 📷) */
+.ky-tap-upload {
+  transition: opacity 0.25s ease;
+}
+.ky-tap-upload:active {
+  opacity: 0.65;
+  transition: opacity 0.06s ease;
+}
+
+/* --- CONFIRM / ACCEPT ACTION ---
+   Scale 0.96, brief dim. Positive actions.
+   Used on: "✓ Accept", "✓ Accept Booking" buttons */
+.ky-tap-action-confirm {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.25s ease,
+              box-shadow 0.3s ease;
+}
+.ky-tap-action-confirm:active {
+  transform: scale(0.96);
+  filter: brightness(0.93);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important;
+  transition: transform 0.06s ease, filter 0.06s ease, box-shadow 0.06s ease;
+}
+
+/* --- DESTRUCTIVE / REJECT ACTION ---
+   Scale 0.96, stronger dim. Negative actions.
+   Used on: "✕ Reject", "✕ Cancel", destructive buttons */
+.ky-tap-action-destructive {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.2s ease;
+}
+.ky-tap-action-destructive:active {
+  transform: scale(0.96);
+  filter: brightness(0.9);
+  transition: transform 0.06s ease, filter 0.06s ease;
+}
+
+/* --- SHARE BUTTON ---
+   Scale 0.97. Used on: WhatsApp share, SMS share,
+   copy link buttons */
+.ky-tap-share {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.2s ease;
+}
+.ky-tap-share:active {
+  transform: scale(0.97);
+  filter: brightness(0.93);
+  transition: transform 0.06s ease, filter 0.06s ease;
+}
+
+/* --- LIST ITEM / NOTIFICATION ROW ---
+   Scale 0.99, brief bg tint. Entire row tappable.
+   Used on: Notification items, activity feed rows */
+.ky-tap-list-item {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color 0.3s ease;
+}
+.ky-tap-list-item:active {
+  transform: scale(0.99);
+  background-color: rgba(0,0,0,0.02);
+  transition: transform 0.06s ease, background-color 0.06s ease;
+}
+
+/* --- RADIO / OPTION CARD ---
+   Scale 0.99, border/bg transition. Single-select options.
+   Used on: Payment methods, cancellation reasons, role cards,
+   pricing options ("Per Hour" / "Per Day") */
+.ky-tap-radio {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.2s ease,
+              background-color 0.2s ease;
+}
+.ky-tap-radio:active {
+  transform: scale(0.99);
+  transition: transform 0.06s ease;
+}
+
+/* --- CALENDAR DATE CELL ---
+   NO scale. Brief brightness dim on tap.
+   Used on: Date cells in booking/reschedule calendars */
+.ky-tap-calendar-cell {
+  transition: background-color 0.2s ease,
+              color 0.2s ease;
+}
+.ky-tap-calendar-cell:active {
+  filter: brightness(0.9);
+  transition: filter 0.06s ease;
+}
+
+/* --- TOGGLE SWITCH ---
+   NO scale on switch. Thumb slides via child transition.
+   Used on: Availability toggle, notification toggle */
+.ky-tap-toggle {
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ky-tap-toggle > div {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- BOTTOM NAV TAB ---
+   NO scale. Color + opacity transition.
+   Used on: Home / Bookings / Profile bottom nav items */
+.ky-tap-nav {
+  transition: color 0.2s ease, opacity 0.15s ease;
+}
+.ky-tap-nav:active {
+  opacity: 0.65;
+  transition: opacity 0.06s ease;
+}
+
+/* --- MIC / LARGE CIRCULAR ACTION ---
+   Deep scale 0.9, strong spring back.
+   Used on: Voice agent mic button, floating action buttons */
+.ky-tap-mic {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+}
+.ky-tap-mic:active {
+  transform: scale(0.9);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+/* === Continuous Ambient Animations === */
+
+/* Large decorative emojis float */
+.ky-phone-screen .text-\[36px\] {
+  animation: ky-float 3s ease-in-out infinite;
+}
+.ky-phone-screen .text-\[32px\] {
+  animation: ky-float 3.5s ease-in-out 0.5s infinite;
+}
+
+/* Notification badge pulse */
+.ky-phone-screen .w-2.h-2.rounded-full {
+  animation: ky-badge-pop 2s ease-in-out infinite;
+}
+
+/* Input focus ring — green glow */
+.ky-phone-screen input:focus {
+  box-shadow: 0 0 0 3px rgba(31,122,76,0.12);
+  outline: none;
+}
+
+/* === Utility Classes === */
+.ky-float { animation: ky-float 3s ease-in-out infinite; }
+.ky-pulse-green { animation: ky-pulse-green 2.5s ease-in-out infinite; }
+.ky-pulse-saffron { animation: ky-pulse-saffron 2.5s ease-in-out infinite; }
