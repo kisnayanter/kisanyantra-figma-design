@@ -1,18 +1,46 @@
 # Module 1: Authentication & Onboarding
 
-> Screens: LanguageSelectDesign, RoleSelectDesign, RoleSelectFarmerDesign, RoleSelectOwnerDesign, OTPVerificationDesign
+> Screens: LanguageSelectDesign, LandingHomeDesign, RoleSelectDesign, RoleSelectFarmerDesign, RoleSelectOwnerDesign, OTPVerificationDesign, RequestPhoneVerifyDesign, RequestOTPDesign, BookingPhoneVerifyDesign, BookingOTPDesign, SearchGuestDesign, SessionExpiredLoginDesign
 
 ---
 
 ## Flow Summary
 
+### Search-First Entry (Farmer — Primary Flow)
+
+The app prioritizes search over registration. Farmers can search without signing up.
+
 ```
-1. User opens app → Select Language
-2. Select Role (Farmer / Owner)
-3. Enter Phone Number → Send OTP
-4. Enter 6-digit OTP → Verify
-5. Receive access_token + refresh_token
-6. Redirect to Profile Setup (Module 2)
+1. User opens app → Select Language (LanguageSelectDesign)
+2. Landing Home (LandingHomeDesign) → Choose: "Find Equipment" or "List My Equipment"
+3a. Farmer taps "Find Equipment" → Guest Search (SearchGuestDesign) — NO registration needed
+4a. Search Results → If found: Equipment Detail → Book (requires phone verification inline)
+4b. Search Results → If empty: "Post a Request" → Phone Verify inline → OTP → Request Posted
+5. After first booking/request, prompt to complete profile (deferred)
+```
+
+### Owner Onboarding (Full Registration Required)
+
+```
+1. Language Select → Landing Home → "List My Equipment"
+2. Owner Role + Phone (RoleSelectOwnerDesign) → Send OTP
+3. OTP Verification (OTPVerificationDesign) → Verify
+4. Profile Setup (Module 2) → Add First Equipment
+```
+
+### Inline Phone Verification (Context-Specific)
+
+Phone verification is embedded inline during booking and request flows:
+
+```
+Request Flow:  SearchResultsEmpty → PostRequest → RequestPhoneVerifyDesign → RequestOTPDesign → Request Posted
+Booking Flow:  BookEquipment → BookingPhoneVerifyDesign → BookingOTPDesign → Booking Confirmed
+```
+
+### Session Recovery
+
+```
+Token expired → SessionExpiredLoginDesign → Re-enter phone → OTP → Resume
 ```
 
 ---

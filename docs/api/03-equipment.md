@@ -1,6 +1,6 @@
 # Module 3: Equipment
 
-> Screens: AddEquipmentDesign, AddEquipmentEmptyDesign, EquipmentDetailDesign, OwnerDashboardDesign (My Listings)
+> Screens: AddEquipmentDesign, AddEquipmentEmptyDesign, EquipmentDetailDesign, OwnerDashboardDesign (My Listings), OwnerEquipmentListDesign, EquipmentEditDesign
 
 ---
 
@@ -9,18 +9,29 @@
 ```
 Owner adds equipment → List on platform → Farmers browse details → Check availability → Book
 
-Owner Dashboard:
-  - View my listings (active/paused)
-  - Add new equipment
-  - Edit existing equipment
-  - Toggle availability
+Owner Equipment Management:
+  OwnerEquipmentListDesign → View all listings (Listed/Available/Paused tabs)
+    ├── Add Equipment → AddEquipmentEmptyDesign → AddEquipmentDesign
+    ├── Edit Equipment → EquipmentEditDesign (brand, model, year, HP, pricing, availability, photos)
+    ├── Pause / Resume listing → Toggle availability
+    └── Delete listing → Remove from platform
+
+Equipment Detail (Farmer View):
+  EquipmentDetailDesign → Full detail with photos, specs, reviews, calendar, Book Now CTA
+
+Equipment Stats per listing (OwnerEquipmentListDesign):
+  - Total bookings count
+  - Total earnings from this equipment
+  - Rating and review count
+  - Current status (Available / Paused)
 ```
 
 ---
 
 ## 3.1 List Owner's Equipment
 
-> Screen: OwnerDashboardDesign — "My Listings" section
+> Screen: OwnerEquipmentListDesign — Full equipment management view with stats
+> Also shown in: OwnerDashboardDesign — "My Listings" section
 
 ```
 GET /equipment/mine
@@ -98,10 +109,26 @@ GET /equipment/mine
       "next_cursor": null,
       "has_more": false,
       "total_count": 2
+    },
+    "summary": {
+      "total_listed": 3,
+      "available": 2,
+      "paused": 1
     }
   }
 }
 ```
+
+The `summary` object powers the stats bar in the OwnerEquipmentListDesign header (3 stat cards: Listed, Available, Paused).
+
+Each equipment item includes stats used by OwnerEquipmentListDesign cards:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `total_bookings` | int | Lifetime booking count for this equipment |
+| `total_earned` | int | Lifetime earnings in INR from this equipment |
+| `rating_avg` | float | Average rating (1.0-5.0) |
+| `review_count` | int | Number of reviews |
 
 ---
 
@@ -271,6 +298,8 @@ Content-Type: multipart/form-data
 
 ## 3.5 Update Equipment
 
+> Screen: EquipmentEditDesign — Edit form with all equipment fields
+
 ```
 PATCH /equipment/{equipment_id}
 Content-Type: multipart/form-data
@@ -278,13 +307,27 @@ Content-Type: multipart/form-data
 
 **Headers:** `Authorization: Bearer <token>`
 
-Same fields as create, all optional. Only send changed fields.
-
-Additionally:
+**Editable fields (all optional — send only changed fields):**
 
 | Field | Type | Description |
 |-------|------|-------------|
+| `brand` | string | Brand name (2-100 chars) |
+| `model` | string | Model name (2-100 chars) |
+| `year_of_purchase` | int | 1990-current year |
+| `horse_power` | int | 1-500 |
+| `condition` | string | `excellent`, `good`, `fair` |
+| `has_operator` | bool | Whether driver is included |
+| `price_per_hour` | int | INR, min 100 |
+| `price_per_day` | int | INR, min 500 |
+| `is_available` | bool | Current availability toggle |
+| `location_address` | string | Full address text |
+| `location_lat` | float | Latitude |
+| `location_lng` | float | Longitude |
+| `description` | string | Free-text description, max 500 chars |
+| `photos[]` | file[] | New photos to add (up to 5 total, JPEG/PNG, max 5MB each) |
 | `delete_photo_ids[]` | string[] | IDs of photos to remove |
+
+**Note:** `type` (equipment type) is **locked after creation** — shown as read-only in EquipmentEditDesign with a lock icon.
 
 **Response: 200**
 
@@ -294,6 +337,11 @@ Additionally:
   "data": {
     "id": "eq-uuid-001",
     "display_name": "Mahindra 475 DI",
+    "condition": "excellent",
+    "price_per_day": 2400,
+    "price_per_hour": 400,
+    "is_available": true,
+    "description": "Well maintained tractor with new tires. Available with operator.",
     "updated_at": "2025-07-10T12:00:00Z"
   },
   "message": "Equipment updated successfully"
@@ -360,11 +408,17 @@ DELETE /equipment/{equipment_id}
 3. **Location**: Store as PostGIS point for spatial queries. Pre-compute geohash for efficient nearby searches.
 4. **Status logic**: `active` = available for booking, `paused` = owner toggled off, `deleted` = soft-deleted.
 5. **Equipment types**: Seed from fixed enum: `tractor`, `harvester`, `cultivator`, `pump`. Extensible via admin.
+6. **Condition field**: Enum: `excellent`, `good`, `fair`. Used in EquipmentEditDesign as a dropdown.
+7. **Description field**: Free-text, max 500 chars. Shown in EquipmentDetailDesign. Supports all 4 languages.
+8. **Delete with active bookings**: `DELETE /equipment/{id}` returns `409` if equipment has pending/confirmed bookings. EquipmentEditDesign shows warning: "This will permanently remove this listing and cancel any pending bookings."
+9. **Earnings per equipment**: Aggregate from completed bookings for this equipment. Shown in OwnerEquipmentListDesign.
 
 ## Flutter Implementation Notes
 
-1. Equipment type selector shows tractor/harvester/cultivator as large tap targets with emojis.
-2. Photo upload: Show camera/gallery picker, preview before upload, support drag to reorder.
-3. Pricing: Show both per-hour and per-day fields. Per-hour is optional.
-4. Availability toggle is a switch component (green when on).
-5. Location: Auto-detect from GPS, allow manual edit. Show on mini-map.
+1. **OwnerEquipmentListDesign**: Green gradient header with summary stats (Listed, Available, Paused). Add Equipment button in header. Cards show equipment photo, name, HP, price, rating, booking count, earnings. Action buttons: Edit, Pause/Resume, Delete.
+2. **EquipmentEditDesign**: Green gradient header. Form fields for all editable attributes. Equipment type shown as locked/read-only. Photo section with change photo button. Pricing grid (per day + per hour). Availability toggle (green switch). Description textarea. Danger zone at bottom with Delete button and warning text.
+3. Equipment type selector shows tractor/harvester/cultivator as large tap targets with emojis.
+4. Photo upload: Show camera/gallery picker, preview before upload, support drag to reorder.
+5. Pricing: Show both per-hour and per-day fields. Per-hour is optional.
+6. Availability toggle is a switch component (green when on).
+7. Location: Auto-detect from GPS, allow manual edit. Show on mini-map.

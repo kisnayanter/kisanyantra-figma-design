@@ -4,6 +4,7 @@ import type { LanguageOption } from './contexts/language';
 
 // Shared screens
 import { LanguageSelectDesign } from './screens/shared/LanguageSelectDesign';
+import { LandingHomeDesign } from './screens/shared/LandingHomeDesign';
 import { RoleSelectDesign } from './screens/shared/RoleSelectDesign';
 import { OTPVerificationDesign } from './screens/shared/OTPVerificationDesign';
 import { ToastNotificationsDesign } from './screens/shared/ToastNotificationsDesign';
@@ -47,6 +48,19 @@ import { RequestPostedConfirmDesign } from './screens/farmer/RequestPostedConfir
 import { OfferDetailDesign } from './screens/farmer/OfferDetailDesign';
 import { SearchResultsEmptyDesign } from './screens/farmer/SearchResultsEmptyDesign';
 import { FarmerFabMenuDesign } from './screens/farmer/FarmerFabMenuDesign';
+import { RequestPhoneVerifyDesign } from './screens/farmer/RequestPhoneVerifyDesign';
+import { RequestOTPDesign } from './screens/farmer/RequestOTPDesign';
+import { BookingPhoneVerifyDesign } from './screens/farmer/BookingPhoneVerifyDesign';
+import { BookingOTPDesign } from './screens/farmer/BookingOTPDesign';
+import { SearchGuestDesign } from './screens/farmer/SearchGuestDesign';
+import { SearchResultsEmptyGuestDesign } from './screens/farmer/SearchResultsEmptyGuestDesign';
+import { FarmerHomeActiveDesign } from './screens/farmer/FarmerHomeActiveDesign';
+import { FarmerProfileViewDesign } from './screens/farmer/FarmerProfileViewDesign';
+import { RequestStatusTrackingDesign } from './screens/farmer/RequestStatusTrackingDesign';
+import { RequestManageDesign } from './screens/farmer/RequestManageDesign';
+import { RequestFulfilledDesign } from './screens/farmer/RequestFulfilledDesign';
+import { RequestExpiredDesign } from './screens/farmer/RequestExpiredDesign';
+import { CancelBookingConfirmDesign } from './screens/farmer/CancelBookingConfirmDesign';
 
 // Owner screens
 import { RoleSelectOwnerDesign } from './screens/owner/RoleSelectOwnerDesign';
@@ -63,6 +77,17 @@ import { BookingConfirmDesign as OwnerBookingConfirmDesign } from './screens/own
 import { OwnerBookingStatusTrackingDesign } from './screens/owner/BookingStatusTrackingDesign';
 import { OfferSentConfirmDesign } from './screens/owner/OfferSentConfirmDesign';
 import { OwnerFabMenuDesign } from './screens/owner/OwnerFabMenuDesign';
+import { OwnerNearbyRequestAlertDesign } from './screens/owner/OwnerNearbyRequestAlertDesign';
+import { OwnerEquipmentListDesign } from './screens/owner/OwnerEquipmentListDesign';
+import { EquipmentEditDesign } from './screens/owner/EquipmentEditDesign';
+import { OwnerEarningsDesign } from './screens/owner/OwnerEarningsDesign';
+
+// Shared screens (additional)
+import { AppSettingsDesign } from './screens/shared/AppSettingsDesign';
+import { HelpSupportDesign } from './screens/shared/HelpSupportDesign';
+
+// Interactive Prototype
+import { InteractivePrototype } from './prototype/InteractivePrototype';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'farmer' | 'owner'>('farmer');
@@ -144,30 +169,39 @@ export default function App() {
         {/* FARMER FLOWS */}
         {activeTab === 'farmer' && (
           <>
-            {/* Farmer Onboarding Flow */}
+            {/* NEW: Interactive Prototype */}
+            <div className="mt-[60px] px-10 pb-[60px] flex justify-center">
+              <InteractivePrototype
+                accentColor="var(--saffron)"
+                title="Search-First Farmer Flow"
+                subtitle="Tap the screen or use arrows to walk through the new flow with Flutter-style transitions"
+                screens={[
+                  { id: 'lang', label: 'Language Selection', component: <LanguageSelectDesign />, tapHint: 'Continue button' },
+                  { id: 'landing', label: 'Landing — Choose Action', component: <LandingHomeDesign />, tapHint: 'Find Equipment button' },
+                  { id: 'search', label: 'Search (No Registration!)', component: <SearchGuestDesign />, tapHint: 'Search input' },
+                  { id: 'empty', label: 'No Results → Post Request', component: <SearchResultsEmptyGuestDesign />, tapHint: 'Post a Request button' },
+                  { id: 'phone', label: 'Phone Verification', component: <RequestPhoneVerifyDesign />, tapHint: 'Send OTP button' },
+                  { id: 'otp', label: 'OTP & Post Request', component: <RequestOTPDesign />, tapHint: 'Verify button' },
+                  { id: 'confirm', label: 'Request Posted!', component: <RequestConfirmDesign />, tapHint: 'Done' },
+                ]}
+              />
+            </div>
+
+            {/* Search-First Entry Flow */}
             <FlowSection
-              badge="ONBOARDING"
+              badge="ENTRY FLOW"
               badgeColor="var(--saffron)"
-              title="Farmer Onboarding Journey"
-              subtitle="From signup to first equipment search"
+              title="Search-First Entry (New)"
+              subtitle="Language → Landing → Search directly — no registration needed"
             >
               <ScreenCard label="F1 · Language Selection">
                 <LanguageSelectDesign />
               </ScreenCard>
-              <ScreenCard label="F2 · Role Selection">
-                <RoleSelectFarmerDesign />
+              <ScreenCard label="F2 · Landing Home">
+                <LandingHomeDesign />
               </ScreenCard>
-              <ScreenCard label="F3 · OTP Verification">
-                <OTPVerificationDesign />
-              </ScreenCard>
-              <ScreenCard label="F4 · Profile Setup (Empty)">
-                <ProfileSetupEmptyDesign />
-              </ScreenCard>
-              <ScreenCard label="F5 · Profile Setup (Filled)">
-                <ProfileSetupFarmerDesign />
-              </ScreenCard>
-              <ScreenCard label="F6 · Session Expired">
-                <SessionExpiredLoginDesign />
+              <ScreenCard label="F3 · Search (Guest, No Nav)">
+                <SearchGuestDesign />
               </ScreenCard>
             </FlowSection>
 
@@ -176,12 +210,15 @@ export default function App() {
               badge="DASHBOARD"
               badgeColor="var(--saffron)"
               title="Farmer Dashboard & Home"
-              subtitle="First-time and returning user experiences"
+              subtitle="After completing first booking or request"
             >
               <ScreenCard label="D1 · Home (First Time)">
                 <FarmerHomeDesign />
               </ScreenCard>
-              <ScreenCard label="D2 · Home (With Notifications)">
+              <ScreenCard label="D2 · Home (Active Request + Booking)">
+                <FarmerHomeActiveDesign />
+              </ScreenCard>
+              <ScreenCard label="D3 · Home (With Notifications)">
                 <HomeWithNotificationBadgeDesign />
               </ScreenCard>
               <ScreenCard label="D3 · FAB Menu (+ Expanded)">
@@ -208,8 +245,8 @@ export default function App() {
               <ScreenCard label="S3 · Search Results">
                 <SearchResultsDesign />
               </ScreenCard>
-              <ScreenCard label="S3b · No Results (Empty)">
-                <SearchResultsEmptyDesign />
+              <ScreenCard label="S3b · No Results (Guest)">
+                <SearchResultsEmptyGuestDesign />
               </ScreenCard>
               <ScreenCard label="S4 · Filter Tray">
                 <SearchFilterTrayDesign />
@@ -219,45 +256,127 @@ export default function App() {
               </ScreenCard>
             </FlowSection>
 
-            {/* Request Equipment Flow */}
+            {/* PROTOTYPE: Request Flow */}
+            <div className="px-10 pb-[60px] flex justify-center">
+              <InteractivePrototype
+                accentColor="var(--saffron)"
+                title="Post Request Flow"
+                subtitle="No results → Fill request → Verify phone → Request posted"
+                screens={[
+                  { id: 'empty', label: 'No Results Found', component: <SearchResultsEmptyGuestDesign />, tapHint: 'Post a Request' },
+                  { id: 'form', label: 'Post Request Form', component: <PostRequestDesign />, tapHint: 'Submit' },
+                  { id: 'phone', label: 'Phone Verification', component: <RequestPhoneVerifyDesign />, tapHint: 'Send OTP' },
+                  { id: 'otp', label: 'OTP Verification', component: <RequestOTPDesign />, tapHint: 'Verify' },
+                  { id: 'confirm', label: 'Request Posted!', component: <RequestConfirmDesign />, tapHint: 'Done' },
+                ]}
+              />
+            </div>
+
+            {/* Request Equipment Flow — now includes phone verification */}
             <FlowSection
               badge="REQUEST EQUIPMENT"
               badgeColor="var(--saffron)"
-              title="Request Equipment Flow"
-              subtitle="Post a request when no listings match — get offers from nearby owners"
+              title="Request Equipment Flow (Updated)"
+              subtitle="No results → Post Request → Phone verify inline → Get offers from owners"
             >
               <ScreenCard label="RQ1 · Post Request Form">
                 <PostRequestDesign />
               </ScreenCard>
-              <ScreenCard label="RQ2 · Request Confirmed">
+              <ScreenCard label="RQ2 · Phone Verification">
+                <RequestPhoneVerifyDesign />
+              </ScreenCard>
+              <ScreenCard label="RQ3 · OTP & Submit">
+                <RequestOTPDesign />
+              </ScreenCard>
+              <ScreenCard label="RQ4 · Request Confirmed">
                 <RequestConfirmDesign />
               </ScreenCard>
-              <ScreenCard label="RQ3 · Request Posted">
+              <ScreenCard label="RQ5 · Request Posted">
                 <RequestPostedConfirmDesign />
               </ScreenCard>
-              <ScreenCard label="RQ4 · My Requests List">
+              <ScreenCard label="RQ6 · My Requests List">
                 <MyRequestsDesign />
               </ScreenCard>
-              <ScreenCard label="RQ5 · Offers Received">
+              <ScreenCard label="RQ7 · Offers Received">
                 <RequestOffersDesign />
               </ScreenCard>
-              <ScreenCard label="RQ6 · Offer Detail (from Owner)">
+              <ScreenCard label="RQ8 · Offer Detail (from Owner)">
                 <OfferDetailDesign />
               </ScreenCard>
-              <ScreenCard label="RQ7 · Accept Offer & Book">
+              <ScreenCard label="RQ9 · Accept Offer & Book">
                 <AcceptOfferDesign />
               </ScreenCard>
             </FlowSection>
+
+            {/* PROTOTYPE: Request Management Lifecycle */}
+            <div className="px-10 pb-[60px] flex justify-center">
+              <InteractivePrototype
+                accentColor="var(--saffron)"
+                title="Request Management Lifecycle"
+                subtitle="Track request → Manage → Receive offers → Accept → Fulfilled (removed from listings)"
+                screens={[
+                  { id: 'posted', label: 'Request Posted', component: <RequestConfirmDesign />, tapHint: 'Track Request' },
+                  { id: 'tracking', label: 'Request Status Timeline', component: <RequestStatusTrackingDesign />, tapHint: 'View Offers' },
+                  { id: 'manage', label: 'Manage Request', component: <RequestManageDesign />, tapHint: 'Expand Radius' },
+                  { id: 'offers', label: 'Offers Received', component: <RequestOffersDesign />, tapHint: 'Accept Offer' },
+                  { id: 'accept', label: 'Accept & Book', component: <AcceptOfferDesign />, tapHint: 'Confirm' },
+                  { id: 'fulfilled', label: 'Request Fulfilled!', component: <RequestFulfilledDesign />, tapHint: 'Done' },
+                ]}
+              />
+            </div>
+
+            {/* Request Management Lifecycle */}
+            <FlowSection
+              badge="REQUEST LIFECYCLE"
+              badgeColor="var(--saffron)"
+              title="Request Management Lifecycle"
+              subtitle="After posting: Track status → Manage/expand → Review offers → Accept → Fulfilled (auto-removed from global list)"
+            >
+              <ScreenCard label="RL1 · Request Status Timeline">
+                <RequestStatusTrackingDesign />
+              </ScreenCard>
+              <ScreenCard label="RL2 · Manage Request">
+                <RequestManageDesign />
+              </ScreenCard>
+              <ScreenCard label="RL3 · Request Fulfilled">
+                <RequestFulfilledDesign />
+              </ScreenCard>
+              <ScreenCard label="RL4 · Request Expired">
+                <RequestExpiredDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* PROTOTYPE: Booking Flow */}
+            <div className="px-10 pb-[60px] flex justify-center">
+              <InteractivePrototype
+                accentColor="var(--saffron)"
+                title="Booking Flow (Equipment Found)"
+                subtitle="Equipment found → Book → Verify phone → Booking confirmed"
+                screens={[
+                  { id: 'detail', label: 'Equipment Detail', component: <EquipmentDetailDesign />, tapHint: 'Book Now' },
+                  { id: 'book', label: 'Select Dates & Book', component: <BookEquipmentDesign />, tapHint: 'Send Booking' },
+                  { id: 'phone', label: 'Phone Verification', component: <BookingPhoneVerifyDesign />, tapHint: 'Send OTP' },
+                  { id: 'otp', label: 'OTP & Confirm', component: <BookingOTPDesign />, tapHint: 'Verify & Book' },
+                  { id: 'confirmed', label: 'Booking Confirmed!', component: <BookingConfirmDesign />, tapHint: 'Done' },
+                ]}
+              />
+            </div>
 
             {/* Booking Management Flow */}
             <FlowSection
               badge="BOOKING MANAGEMENT"
               badgeColor="var(--saffron)"
               title="Complete Booking Lifecycle (Farmer)"
-              subtitle="Create, track, manage, and complete bookings"
+              subtitle="Book → Verify phone → Confirm → Track → Complete"
             >
               <ScreenCard label="B1 · Book Equipment">
                 <BookEquipmentDesign />
+              </ScreenCard>
+              <ScreenCard label="B1b · Phone Verification">
+                <BookingPhoneVerifyDesign />
+              </ScreenCard>
+              <ScreenCard label="B1c · OTP & Confirm Booking">
+                <BookingOTPDesign />
               </ScreenCard>
               <ScreenCard label="B2 · Booking Confirmed">
                 <BookingConfirmDesign />
@@ -276,6 +395,9 @@ export default function App() {
               </ScreenCard>
               <ScreenCard label="B7 · Cancel Booking">
                 <CancelBookingDesign />
+              </ScreenCard>
+              <ScreenCard label="B7b · Booking Cancelled">
+                <CancelBookingConfirmDesign />
               </ScreenCard>
               <ScreenCard label="B8 · Share Booking">
                 <ShareBookingDetailsDesign />
@@ -320,19 +442,37 @@ export default function App() {
 
             {/* Profile Management Flow */}
             <FlowSection
-              badge="PROFILE MANAGEMENT"
+              badge="PROFILE & ACCOUNT"
               badgeColor="var(--saffron)"
-              title="Profile Management"
-              subtitle="Update profile and language preferences"
+              title="Profile & Account Management"
+              subtitle="Complete profile (prompted after first booking/request), update settings, session management"
             >
-              <ScreenCard label="P1 · Update Profile">
+              <ScreenCard label="P0 · Profile View">
+                <FarmerProfileViewDesign />
+              </ScreenCard>
+              <ScreenCard label="P1 · Profile Setup (Empty)">
+                <ProfileSetupEmptyDesign />
+              </ScreenCard>
+              <ScreenCard label="P2 · Profile Setup (Filled)">
+                <ProfileSetupFarmerDesign />
+              </ScreenCard>
+              <ScreenCard label="P3 · Update Profile">
                 <UpdateProfileDesign />
               </ScreenCard>
-              <ScreenCard label="P2 · Profile (Tamil)">
+              <ScreenCard label="P4 · Profile (Tamil)">
                 <ProfileSetupTamilDesign />
               </ScreenCard>
-              <ScreenCard label="P3 · Profile (Marathi)">
+              <ScreenCard label="P5 · Profile (Marathi)">
                 <ProfileSetupMarathiDesign />
+              </ScreenCard>
+              <ScreenCard label="P6 · Session Expired">
+                <SessionExpiredLoginDesign />
+              </ScreenCard>
+              <ScreenCard label="P7 · App Settings">
+                <AppSettingsDesign />
+              </ScreenCard>
+              <ScreenCard label="P8 · Help & Support">
+                <HelpSupportDesign />
               </ScreenCard>
             </FlowSection>
           </>
@@ -341,26 +481,45 @@ export default function App() {
         {/* OWNER FLOWS */}
         {activeTab === 'owner' && (
           <>
-            {/* Owner Onboarding Flow */}
+            {/* Owner Entry & Onboarding Flow */}
+            <div className="mt-[60px] px-10 pb-[60px] flex justify-center">
+              <InteractivePrototype
+                accentColor="var(--green)"
+                title="Owner Registration Flow"
+                subtitle="Tap the screen or use arrows — owners must register to list equipment"
+                screens={[
+                  { id: 'lang', label: 'Language Selection', component: <LanguageSelectDesign />, tapHint: 'Continue button' },
+                  { id: 'landing', label: 'Landing — List Equipment', component: <LandingHomeDesign />, tapHint: 'List My Equipment button' },
+                  { id: 'role', label: 'Owner Role + Phone', component: <RoleSelectOwnerDesign />, tapHint: 'Send OTP button' },
+                  { id: 'otp', label: 'OTP Verification', component: <OTPVerificationDesign />, tapHint: 'Verify button' },
+                  { id: 'profile', label: 'Owner Profile Setup', component: <ProfileSetupOwnerDesign />, tapHint: 'Complete Setup button' },
+                  { id: 'equipment', label: 'Add First Equipment', component: <AddEquipmentEmptyDesign />, tapHint: 'Add Equipment button' },
+                ]}
+              />
+            </div>
+
             <FlowSection
               badge="ONBOARDING"
               badgeColor="var(--green)"
-              title="Owner Onboarding Journey"
-              subtitle="From signup to first equipment listing"
+              title="Owner Onboarding Journey (Updated)"
+              subtitle="Landing → Register → Profile → First listing"
             >
               <ScreenCard label="O1 · Language Selection">
                 <LanguageSelectDesign />
               </ScreenCard>
-              <ScreenCard label="O2 · Role Selection">
+              <ScreenCard label="O2 · Landing Home">
+                <LandingHomeDesign />
+              </ScreenCard>
+              <ScreenCard label="O3 · Owner Role + Phone">
                 <RoleSelectOwnerDesign />
               </ScreenCard>
-              <ScreenCard label="O3 · OTP Verification">
+              <ScreenCard label="O4 · OTP Verification">
                 <OTPVerificationDesign />
               </ScreenCard>
-              <ScreenCard label="O4 · Profile Setup">
+              <ScreenCard label="O5 · Profile Setup">
                 <ProfileSetupOwnerDesign />
               </ScreenCard>
-              <ScreenCard label="O5 · Add First Equipment">
+              <ScreenCard label="O6 · Add First Equipment">
                 <AddEquipmentEmptyDesign />
               </ScreenCard>
             </FlowSection>
@@ -389,17 +548,62 @@ export default function App() {
             {/* Equipment Management Flow */}
             <FlowSection
               badge="EQUIPMENT MANAGEMENT"
-              badgeColor="var(--saffron)"
+              badgeColor="var(--green)"
               title="Equipment Management"
               subtitle="Add, edit, and manage equipment listings"
             >
-              <ScreenCard label="E1 · Add Equipment (Empty)">
+              <ScreenCard label="E1 · My Equipment List">
+                <OwnerEquipmentListDesign />
+              </ScreenCard>
+              <ScreenCard label="E2 · Add Equipment (Empty)">
                 <AddEquipmentEmptyDesign />
               </ScreenCard>
-              <ScreenCard label="E2 · Add Equipment (Filled)">
+              <ScreenCard label="E3 · Add Equipment (Filled)">
                 <AddEquipmentDesign />
               </ScreenCard>
+              <ScreenCard label="E4 · Edit Equipment">
+                <EquipmentEditDesign />
+              </ScreenCard>
             </FlowSection>
+
+            {/* Earnings Flow */}
+            <FlowSection
+              badge="EARNINGS"
+              badgeColor="var(--green)"
+              title="Owner Earnings"
+              subtitle="Track rental income and withdrawal"
+            >
+              <ScreenCard label="ER1 · My Earnings">
+                <OwnerEarningsDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* Owner Nearby Notifications */}
+            <FlowSection
+              badge="OWNER NOTIFICATIONS"
+              badgeColor="var(--green)"
+              title="Nearby Request Alerts"
+              subtitle="Owners within 100 km are automatically notified when farmers post equipment requests"
+            >
+              <ScreenCard label="N1 · Push Notification + Alert Center">
+                <OwnerNearbyRequestAlertDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* PROTOTYPE: Owner Opportunities Flow */}
+            <div className="px-10 pb-[60px] flex justify-center">
+              <InteractivePrototype
+                accentColor="var(--green)"
+                title="Owner Opportunities Flow"
+                subtitle="Notification received → Browse requests → Send offer → Confirmed"
+                screens={[
+                  { id: 'alert', label: 'Nearby Request Alert', component: <OwnerNearbyRequestAlertDesign />, tapHint: 'View Request' },
+                  { id: 'opps', label: 'Nearby Opportunities', component: <EquipmentOpportunitiesDesign />, tapHint: 'Send Offer' },
+                  { id: 'offer', label: 'Send Offer to Farmer', component: <SendOfferDesign />, tapHint: 'Send Offer' },
+                  { id: 'sent', label: 'Offer Sent!', component: <OfferSentConfirmDesign />, tapHint: 'Done' },
+                ]}
+              />
+            </div>
 
             {/* Equipment Opportunities Flow (Owner) */}
             <FlowSection
@@ -418,6 +622,21 @@ export default function App() {
                 <OfferSentConfirmDesign />
               </ScreenCard>
             </FlowSection>
+
+            {/* PROTOTYPE: Owner Booking Flow */}
+            <div className="px-10 pb-[60px] flex justify-center">
+              <InteractivePrototype
+                accentColor="var(--green)"
+                title="Owner Booking Management"
+                subtitle="Incoming request → Review → Confirm → Track status"
+                screens={[
+                  { id: 'list', label: 'Incoming Requests', component: <IncomingRequestsListDesign />, tapHint: 'View Request' },
+                  { id: 'detail', label: 'Booking Request', component: <BookingRequestDesign />, tapHint: 'Accept' },
+                  { id: 'confirm', label: 'Booking Confirmed', component: <OwnerBookingConfirmDesign />, tapHint: 'Track' },
+                  { id: 'status', label: 'Booking Status', component: <OwnerBookingStatusTrackingDesign />, tapHint: 'Done' },
+                ]}
+              />
+            </div>
 
             {/* Booking Management Flow (Owner) */}
             <FlowSection
@@ -443,15 +662,21 @@ export default function App() {
             {/* Communication & Support Flow */}
             <FlowSection
               badge="COMMUNICATION"
-              badgeColor="var(--saffron)"
+              badgeColor="var(--green)"
               title="Communication & Support"
-              subtitle="Notifications and farmer communication"
+              subtitle="Notifications, farmer communication, and help"
             >
               <ScreenCard label="C1 · Toast Notifications">
                 <ToastNotificationsDesign />
               </ScreenCard>
               <ScreenCard label="C2 · Contact Farmer">
                 <ContactOwnerDesign />
+              </ScreenCard>
+              <ScreenCard label="C3 · App Settings">
+                <AppSettingsDesign />
+              </ScreenCard>
+              <ScreenCard label="C4 · Help & Support">
+                <HelpSupportDesign />
               </ScreenCard>
             </FlowSection>
 

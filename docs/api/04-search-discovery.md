@@ -1,20 +1,30 @@
 # Module 4: Search & Discovery
 
-> Screens: FarmerHomeDesign, HomeWithNotificationBadgeDesign, SearchDesign, SearchResultsDesign, SearchFilterTrayDesign, VoiceAgentDesign
+> Screens: FarmerHomeDesign, FarmerHomeActiveDesign, HomeWithNotificationBadgeDesign, SearchDesign, SearchGuestDesign, SearchResultsDesign, SearchResultsEmptyDesign, SearchResultsEmptyGuestDesign, SearchFilterTrayDesign, VoiceAgentDesign, FarmerFabMenuDesign, OwnerFabMenuDesign
 
 ---
 
 ## Flow Summary
 
 ```
-Farmer Home → Quick Actions (Search / Voice)
+Entry (Guest):
+  Landing Home → "Find Equipment" → Search (Guest, no nav) → Results
+  └── No Results → SearchResultsEmptyGuestDesign → "Post a Request" → Phone Verify → Request
+
+Entry (Registered):
+  Farmer Home → FAB Menu (+) → Quick Actions (Post Request / Voice Search / Search Equipment)
   ├── Text Search → Results with filters → Equipment Detail
+  ├── No Results → SearchResultsEmptyDesign → "Post a Request" CTA
   └── Voice Agent (Kisan Mitra) → Transcription → Auto-search → Results
 
-Farmer Home also shows:
-  - Suggested equipment nearby (5 km radius)
-  - Quick action buttons
-  - Active booking count
+Farmer Home (3 states):
+  - FarmerHomeDesign: First-time user, empty state
+  - FarmerHomeActiveDesign: Active request + booking cards
+  - HomeWithNotificationBadgeDesign: With notification badge
+
+FAB Quick Actions Menu:
+  - Farmer: Post Request, Voice Search, Search Equipment
+  - Owner: Add Equipment, View Opportunities, Manage Bookings
 ```
 
 ---

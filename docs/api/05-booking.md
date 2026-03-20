@@ -1,21 +1,29 @@
 # Module 5: Booking
 
-> Screens: BookingRequestDesign, BookingConfirmDesign, CancelBookingDesign, RescheduleBookingDesign, CompleteBookingDesign
+> Screens: BookEquipmentDesign, BookingPhoneVerifyDesign, BookingOTPDesign, BookingConfirmDesign, CancelBookingConfirmDesign, BookingRequestDesign (owner), CancelBookingDesign, RescheduleBookingDesign, CompleteBookingDesign, AcceptOfferDesign
 
 ---
 
 ## Flow Summary
 
 ```
-Farmer Side:
-  Equipment Detail → Book Instantly / Request → Booking Created (pending)
-  → Owner Accepts → Booking Confirmed → Choose Payment → In Progress → Complete → Rate
+Farmer Side (Direct Booking):
+  Equipment Detail → Book Equipment (BookEquipmentDesign, calendar + date/time selection)
+  → Phone Verify (BookingPhoneVerifyDesign) → OTP (BookingOTPDesign)
+  → Booking Confirmed (BookingConfirmDesign)
+  → Owner Accepts → In Progress → Complete → Rate
+
+Farmer Side (From Offer):
+  Request Posted → Owner Sends Offer → Farmer Views Offer (OfferDetailDesign)
+  → Accept Offer (AcceptOfferDesign) → Booking Created (auto-confirmed)
 
 Owner Side:
-  Incoming Request → Accept / Decline → Equipment in Use → Booking Complete
+  Incoming Request (IncomingRequestsListDesign) → Review (BookingRequestDesign)
+  → Accept / Decline → Equipment in Use → Booking Complete
 
 Cancellation:
   Either party → Cancel with reason → Refund calculated → Cancelled
+  → CancelBookingConfirmDesign (confirmation screen with refund details, owner notified, equipment released)
 
 Reschedule:
   Farmer requests → New dates/duration → Owner approval required → Rescheduled
@@ -244,6 +252,37 @@ POST /bookings/{booking_id}/cancel
   "message": "Booking cancelled. Refund of ₹6,300 will be processed in 5-7 working days."
 }
 ```
+
+---
+
+## 5.3b Cancellation Confirmation Response
+
+> Screen: CancelBookingConfirmDesign — Shown after successful cancellation
+
+The cancel booking response (5.3) is used to render the CancelBookingConfirmDesign screen, which displays:
+
+**UI Elements from Response:**
+
+| UI Element | Source Field |
+|-----------|-------------|
+| Booking number | `data.booking_number` (e.g. "BK-2025-07-0834") |
+| Status badge | `data.status` → "CANCELLED" in red |
+| Equipment name | `data.equipment.display_name` (from booking detail) |
+| Owner name | `data.owner.full_name` (from booking detail) |
+| Original dates | `data.start_date` to `data.end_date` |
+| Total amount | `data.total_amount` |
+| Cancelled timestamp | `data.cancellation.cancelled_at` |
+| Refund amount | `data.cancellation.refund.refund_amount` (e.g. ₹7,200) |
+| Refund method | `data.cancellation.refund.refund_method` (e.g. "UPI · ****4521") |
+| Estimated refund date | `data.cancellation.refund.estimated_refund_days` |
+| Refund progress | Calculate from `cancelled_at` vs estimated completion |
+
+**"What Happens Next" checklist (client-side):**
+1. "Owner has been notified" ✅
+2. "Equipment is now available for others" ✅
+3. "Refund processing initiated" ✅
+
+**CTAs:** "Search Equipment" (primary, saffron) → navigates to search. "Back to Home" (text link).
 
 ---
 

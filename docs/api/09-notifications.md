@@ -1,6 +1,6 @@
 # Module 9: Notifications
 
-> Screens: NotificationCenterDesign, ToastNotificationsDesign, HomeWithNotificationBadgeDesign
+> Screens: NotificationCenterDesign, ToastNotificationsDesign, HomeWithNotificationBadgeDesign, OwnerNearbyRequestAlertDesign
 
 ---
 
@@ -385,6 +385,12 @@ PATCH /notifications/preferences
 | `rating_reminder` | messages | Prompt to rate after completion | Yes (Rate Now) |
 | `equipment_listed` | messages | Equipment successfully listed | No |
 | `new_message` | messages | Message from counterparty | Yes (Reply) |
+| `nearby_request` | opportunities | Farmer posts equipment request within owner's area | Yes (View & Offer) |
+| `offer_received` | bookings | Owner sends offer on farmer's request | Yes (View Offer) |
+| `offer_accepted` | opportunities | Farmer accepts owner's offer → booking created | No |
+| `offer_declined` | opportunities | Farmer declines owner's offer | No |
+| `request_expired` | opportunities | Request expired before acceptance | No |
+| `request_fulfilled` | bookings | Farmer's request fulfilled (offer accepted → booking) | No |
 
 ---
 

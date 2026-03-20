@@ -143,6 +143,9 @@ The `Accept-Language` header controls response string localization. User's prefe
 | 9 | Notifications | `09-notifications.md` | Push, in-app, notification center, badges |
 | 10 | Location & Maps | `10-location-maps.md` | Geocoding, distance, directions, tracking |
 | 11 | Communication | `11-communication.md` | Contact owner, WhatsApp, call, messages |
+| 12 | Equipment Requests | `12-equipment-requests.md` | Post request, manage, track, fulfill, phone verification |
+| 13 | Offers | `13-offers.md` | Owner opportunities, send offer, farmer accept/decline |
+| 14 | Profile, Settings & Help | `14-profile-settings.md` | Profile view, app settings, notifications, language, help & support |
 
 ---
 
@@ -223,13 +226,55 @@ Review
 ├── photos[]
 └── created_at
 
+Request
+├── id (UUID)
+├── request_number (REQ-YYYY-MM-XXXX)
+├── farmer_id → User
+├── status (searching|offers_received|fulfilled|cancelled|expired)
+├── equipment_type (tractor|harvester|cultivator|pump)
+├── horse_power_min, horse_power_max
+├── start_date, end_date
+├── duration_days
+├── budget_per_day, budget_max_total
+├── needs_operator (bool)
+├── location (lat, lng, address)
+├── search_radius_km
+├── notes (max 500 chars)
+├── voice_message_url
+├── preferred_contact (whatsapp|call|in_app)
+├── owners_notified (int)
+├── offers_count (int)
+├── accepted_offer_id → Offer (nullable)
+├── booking_id → Booking (nullable)
+├── expires_at
+├── cancelled_at, cancelled_reason
+├── fulfilled_at
+└── created_at, updated_at
+
+Offer
+├── id (UUID)
+├── offer_number (OFR-YYYY-MM-XXXX)
+├── request_id → Request
+├── owner_id → User
+├── equipment_id → Equipment
+├── status (pending|accepted|declined|request_fulfilled|expired)
+├── price_per_day, total_price (INR)
+├── includes[] (operator, trailer_hitch, insurance, fuel)
+├── delivery_time (HH:MM)
+├── message (max 500 chars)
+├── payment_methods_accepted[] (cash, upi)
+├── decline_reason (nullable)
+├── booking_id → Booking (nullable)
+├── responded_at (nullable)
+└── created_at, updated_at
+
 Notification
 ├── id (UUID)
 ├── user_id → User
-├── type (booking_request|payment|booking_confirmed|rating_reminder|equipment_listed|payment_reminder)
+├── type (booking_request|payment|booking_confirmed|rating_reminder|equipment_listed|payment_reminder|nearby_request|offer_accepted|offer_declined|request_expired)
 ├── title, body
 ├── data (JSON — contextual payload)
 ├── is_read (bool)
-├── category (bookings|payments|messages)
+├── category (bookings|payments|messages|opportunities)
 └── created_at
 ```
