@@ -60,6 +60,12 @@ export function LandingHomeDesign() {
       tamil: '🔓 தேட பதிவு தேவையில்லை',
       marathi: '🔓 शोधण्यासाठी नोंदणी आवश्यक नाही'
     }),
+    signInLink: t({
+      english: 'Already have an account? Sign in',
+      hindi: 'पहले से खाता है? साइन इन करें',
+      tamil: 'ஏற்கனவே கணக்கு உள்ளதா? உள்நுழையவும்',
+      marathi: 'आधीच खाते आहे का? साइन इन करा'
+    }),
     trusted: t({
       english: '2,500+ farmers trust KisanYantra',
       hindi: '2,500+ किसान KisanYantra पर भरोसा करते हैं',
@@ -206,6 +212,16 @@ export function LandingHomeDesign() {
                 }}
               >
                 {strings.listCta}
+              </button>
+            </div>
+
+            {/* Sign-in Link */}
+            <div className="text-center mt-3">
+              <button
+                className="ky-tap-link text-[11px] font-medium transition-colors hover:underline"
+                style={{ color: 'var(--saffron)' }}
+              >
+                {strings.signInLink}
               </button>
             </div>
 

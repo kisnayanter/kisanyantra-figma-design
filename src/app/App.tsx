@@ -5,6 +5,9 @@ import type { LanguageOption } from './contexts/language';
 // Shared screens
 import { LanguageSelectDesign } from './screens/shared/LanguageSelectDesign';
 import { LandingHomeDesign } from './screens/shared/LandingHomeDesign';
+import { SignInPhoneDesign } from './screens/shared/SignInPhoneDesign';
+import { SignInOTPDesign } from './screens/shared/SignInOTPDesign';
+import { SignInDesign } from './screens/shared/SignInDesign';
 import { RoleSelectDesign } from './screens/shared/RoleSelectDesign';
 import { OTPVerificationDesign } from './screens/shared/OTPVerificationDesign';
 import { ToastNotificationsDesign } from './screens/shared/ToastNotificationsDesign';
@@ -67,7 +70,7 @@ import { RoleSelectOwnerDesign } from './screens/owner/RoleSelectOwnerDesign';
 import { ProfileSetupOwnerDesign } from './screens/owner/ProfileSetupOwnerDesign';
 import { OwnerDashboardDesign } from './screens/owner/OwnerDashboardDesign';
 import { OwnerDashboardFirstTimeDesign } from './screens/owner/OwnerDashboardFirstTimeDesign';
-import { AddEquipmentDesign } from './screens/owner/AddEquipmentDesign';
+import { AddEquipmentDesignV2 } from './screens/owner/AddEquipmentDesignV2';
 import { AddEquipmentEmptyDesign } from './screens/owner/AddEquipmentEmptyDesign';
 import { BookingRequestDesign } from './screens/owner/BookingRequestDesign';
 import { IncomingRequestsListDesign } from './screens/owner/IncomingRequestsListDesign';
@@ -187,6 +190,22 @@ export default function App() {
               />
             </div>
 
+            {/* Sign-in Flow Prototype */}
+            <div className="px-10 pb-[60px] flex justify-center">
+              <InteractivePrototype
+                accentColor="var(--green)"
+                title="Existing Customer Sign-in Flow"
+                subtitle="Separate login flow for existing farmers and owners with role-agnostic OTP verification"
+                screens={[
+                  { id: 'landing', label: 'Landing Home', component: <LandingHomeDesign />, tapHint: 'Sign in link' },
+                  { id: 'signin-phone', label: 'Sign-in Phone', component: <SignInPhoneDesign />, tapHint: 'Send OTP button' },
+                  { id: 'signin-otp', label: 'Sign-in OTP', component: <SignInOTPDesign />, tapHint: 'Verify button' },
+                  { id: 'farmer-dashboard', label: 'Farmer Dashboard', component: <FarmerHomeDesign />, tapHint: 'Search button' },
+                  { id: 'owner-dashboard', label: 'Owner Dashboard', component: <OwnerDashboardDesign />, tapHint: 'Add Equipment button' },
+                ]}
+              />
+            </div>
+
             {/* Search-First Entry Flow */}
             <FlowSection
               badge="ENTRY FLOW"
@@ -202,6 +221,30 @@ export default function App() {
               </ScreenCard>
               <ScreenCard label="F3 · Search (Guest, No Nav)">
                 <SearchGuestDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* Sign-in Flow (Existing Customers) */}
+            <FlowSection
+              badge="SIGN-IN"
+              badgeColor="var(--green)"
+              title="Existing Customer Sign-in Flow"
+              subtitle="Separate login flow for farmers and owners with role-agnostic OTP verification"
+            >
+              <ScreenCard label="S1 · Landing Home">
+                <LandingHomeDesign />
+              </ScreenCard>
+              <ScreenCard label="S2 · Sign-in Phone">
+                <SignInPhoneDesign />
+              </ScreenCard>
+              <ScreenCard label="S3 · Sign-in OTP (Role-agnostic)">
+                <SignInOTPDesign />
+              </ScreenCard>
+              <ScreenCard label="S4 · Farmer Dashboard">
+                <FarmerHomeDesign />
+              </ScreenCard>
+              <ScreenCard label="S5 · Owner Dashboard">
+                <OwnerDashboardDesign />
               </ScreenCard>
             </FlowSection>
 
@@ -558,8 +601,8 @@ export default function App() {
               <ScreenCard label="E2 · Add Equipment (Empty)">
                 <AddEquipmentEmptyDesign />
               </ScreenCard>
-              <ScreenCard label="E3 · Add Equipment (Filled)">
-                <AddEquipmentDesign />
+              <ScreenCard label="E3b · Add Equipment (NEW Visual Grid)">
+                <AddEquipmentDesignV2 />
               </ScreenCard>
               <ScreenCard label="E4 · Edit Equipment">
                 <EquipmentEditDesign />

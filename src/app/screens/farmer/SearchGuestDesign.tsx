@@ -5,11 +5,77 @@ export function SearchGuestDesign() {
   const t = (options: Parameters<typeof selectText>[0]) => selectText(options);
 
   const categories = [
-    { label: t({ english: 'Tractor', hindi: 'ट्रैक्टर', tamil: 'டிராக்டர்', marathi: 'ट्रॅक्टर' }), emoji: '🚜', active: true },
-    { label: t({ english: 'Harvester', hindi: 'हार्वेस्टर', tamil: 'ஹார்வெஸ்டர்', marathi: 'हार्वेस्टर' }), emoji: '🌾', active: false },
-    { label: t({ english: 'Pump', hindi: 'पंप', tamil: 'பம்ப்', marathi: 'पंप' }), emoji: '💧', active: false },
-    { label: t({ english: 'Cultivator', hindi: 'कल्टीवेटर', tamil: 'கல்டிவேட்டர்', marathi: 'कल्टीव्हेटर' }), emoji: '🌱', active: false }
+    { label: t({ english: 'All', hindi: 'सभी', tamil: 'அனைத்தும்', marathi: 'सर्व' }), emoji: '🔍', active: true },
+    { label: t({ english: 'Soil Prep', hindi: 'मिट्टी तैयारी', tamil: 'மண் தயாரிப்பு', marathi: 'माती तयारी' }), emoji: '🌱', active: false },
+    { label: t({ english: 'Sowing', hindi: 'बुवाई', tamil: 'விதைத்தல்', marathi: 'बियाणे रोवणे' }), emoji: '🌾', active: false },
+    { label: t({ english: 'Protection', hindi: 'सुरक्षा', tamil: 'பாதுகாப்பு', marathi: 'संरक्षण' }), emoji: '🛡️', active: false },
+    { label: t({ english: 'Irrigation', hindi: 'सिंचाई', tamil: 'நீர்ப்பாசனம்', marathi: 'सिंचन' }), emoji: '💧', active: false },
+    { label: t({ english: 'Harvest', hindi: 'फसल कटाई', tamil: 'அறுவடை', marathi: 'कापणी' }), emoji: '✂️', active: false },
+    { label: t({ english: 'Post-Harvest', hindi: 'फसल कटाई के बाद', tamil: 'அறுவடைக்குப் பிறகு', marathi: 'कापणीनंतर' }), emoji: '📦', active: false },
+    { label: t({ english: 'Transport', hindi: 'परिवहन', tamil: 'போக்குவரத்து', marathi: 'वाहतूक' }), emoji: '🚛', active: false }
   ];
+
+  const equipmentTypes = [
+    // Soil Preparation
+    { emoji: '🚜', label: t({ english: 'Tractor', hindi: 'ट्रैक्टर', tamil: 'டிராக்டர்', marathi: 'ट्रॅक्टर' }), category: 'soil' },
+    { emoji: '🌱', label: t({ english: 'Cultivator', hindi: 'कल्टीवेटर', tamil: 'கல்டிவேட்டர்', marathi: 'कल्टीव्हेटर' }), category: 'soil' },
+    { emoji: '⚙️', label: t({ english: 'Rotavator', hindi: 'रोटावेटर', tamil: 'ரோடாவேட்டர்', marathi: 'रोटाव्हेटर' }), category: 'soil' },
+    { emoji: '🔧', label: t({ english: 'Plough', hindi: 'हल', tamil: 'உழவுயந்திரம்', marathi: 'नांगर' }), category: 'soil' },
+    { emoji: '⬇️', label: t({ english: 'Harrow', hindi: 'हैरो', tamil: 'ஹாரோ', marathi: 'हॅरो' }), category: 'soil' },
+    { emoji: '🔄', label: t({ english: 'Tiller', hindi: 'टिलर', tamil: 'டில்லர்', marathi: 'टिलर' }), category: 'soil' },
+    { emoji: '🏍️', label: t({ english: 'Power Tiller', hindi: 'पावर टिलर', tamil: 'பவர் டில்லர்', marathi: 'पावर टिलर' }), category: 'soil' },
+
+    // Sowing & Planting
+    { emoji: '🌾', label: t({ english: 'Seed Drill', hindi: 'सीड ड्रिल', tamil: 'விதை இயந்திரம்', marathi: 'बीज ड्रिल' }), category: 'sowing' },
+    { emoji: '🌿', label: t({ english: 'Planter', hindi: 'प्लांटर', tamil: 'நடவு இயந்திரம்', marathi: 'प्लांटर' }), category: 'sowing' },
+    { emoji: '🌱', label: t({ english: 'Transplanter', hindi: 'ट्रांसप्लांटर', tamil: 'நடவு இயந்திரம்', marathi: 'ट्रांसप्लांटर' }), category: 'sowing' },
+
+    // Plant Protection
+    { emoji: '💧', label: t({ english: 'Sprayer', hindi: 'स्प्रेयर', tamil: 'தெளிப்பு இயந்திரம்', marathi: 'स्प्रेयर' }), category: 'protection' },
+    { emoji: '🚁', label: t({ english: 'Agri Drone', hindi: 'कृषि ड्रोन', tamil: 'விவசாய ட்ரோன்', marathi: 'शेती ड्रोन' }), category: 'protection' },
+    { emoji: '�️', label: t({ english: 'Duster', hindi: 'डस्टर', tamil: 'தூளிப்பு இயந்திரம்', marathi: 'डस्टर' }), category: 'protection' },
+    { emoji: '🔥', label: t({ english: 'Flame Weeder', hindi: 'फ्लेम वीडर', tamil: 'சுவாளை களையகரணி', marathi: 'ज्वाला खतरी' }), category: 'protection' },
+
+    // Irrigation
+    { emoji: '💦', label: t({ english: 'Water Pump', hindi: 'वाटर पंप', tamil: 'நீர் பம்ப்', marathi: 'पाणी पंप' }), category: 'irrigation' },
+    { emoji: '�', label: t({ english: 'Sprinkler', hindi: 'स्प्रिंकलर', tamil: 'சிதறல் பாசனம்', marathi: 'स्प्रिंकलर' }), category: 'irrigation' },
+    { emoji: '💧', label: t({ english: 'Drip System', hindi: 'ड्रिप सिस्टम', tamil: 'சொட்டு நீர்ப்பாசனம்', marathi: 'ड्रिप सिस्टम' }), category: 'irrigation' },
+    { emoji: '🌊', label: t({ english: 'Rain Gun', hindi: 'रेन गन', tamil: 'மழை துப்பாக்கி', marathi: 'रेन गन' }), category: 'irrigation' },
+
+    // Harvesting
+    { emoji: '🌾', label: t({ english: 'Harvester', hindi: 'हार्वेस्टर', tamil: 'அறுவடை இயந்திரம்', marathi: 'हार्वेस्टर' }), category: 'harvest' },
+    { emoji: '✂️', label: t({ english: 'Thresher', hindi: 'थ्रेशर', tamil: 'தவிர் இயந்திரம்', marathi: 'थ्रेशर' }), category: 'harvest' },
+    { emoji: '🌽', label: t({ english: 'Maize Harvester', hindi: 'मक्का हार्वेस्टर', tamil: 'சோளம் அறுவடை இயந்திரம்', marathi: 'मका हार्वेस्टर' }), category: 'harvest' },
+    { emoji: '🌾', label: t({ english: 'Reaper', hindi: 'रीपर', tamil: 'அறுவடை இயந்திரம்', marathi: 'रीपर' }), category: 'harvest' },
+    { emoji: '🥔', label: t({ english: 'Potato Digger', hindi: 'आलू डिगर', tamil: 'உருளைக்கிழங்கு தோண்டி', marathi: 'बटाटा डिगर' }), category: 'harvest' },
+
+    // Post-Harvest
+    { emoji: '🔄', label: t({ english: 'Baler', hindi: 'बेलर', tamil: 'பொதி இயந்திரம்', marathi: 'बेलर' }), category: 'post' },
+    { emoji: '🌡️', label: t({ english: 'Dryer', hindi: 'ड्रायर', tamil: 'உலர் இயந்திரம்', marathi: 'ड्रायर' }), category: 'post' },
+    { emoji: '🌬️', label: t({ english: 'Winnower', hindi: 'विनोअर', tamil: 'விடுப்பு இயந்திரம்', marathi: 'विनोअर' }), category: 'post' },
+    { emoji: '📦', label: t({ english: 'Grader', hindi: 'ग्रेडर', tamil: 'தரவரிசை இயந்திரம்', marathi: 'ग्रेडर' }), category: 'post' },
+
+    // Transport
+    { emoji: '🛒', label: t({ english: 'Trailer', hindi: 'ट्रेलर', tamil: 'ட்ரெய்லர்', marathi: 'ट्रेलर' }), category: 'transport' },
+    { emoji: '🚛', label: t({ english: 'Truck', hindi: 'ट्रक', tamil: 'லாரி', marathi: 'ट्रक' }), category: 'transport' }
+  ];
+
+  // Filter equipment based on active category
+  const filteredEquipment = categories.find(cat => cat.active)?.label === 'All' 
+    ? equipmentTypes 
+    : equipmentTypes.filter(e => {
+        const activeCatLabel = categories.find(cat => cat.active)?.label;
+        const categoryMap: Record<string, string> = {
+          'Soil Prep': 'soil',
+          'Sowing': 'sowing', 
+          'Protection': 'protection',
+          'Irrigation': 'irrigation',
+          'Harvest': 'harvest',
+          'Post-Harvest': 'post',
+          'Transport': 'transport'
+        };
+        return e.category === categoryMap[activeCatLabel || ''];
+      });
 
   const recents = ['Tractor near Hinganghat', 'Harvester with driver'];
 
@@ -95,11 +161,12 @@ export function SearchGuestDesign() {
                 <div className="text-[16px] font-semibold mb-3" style={{ color: 'var(--text-dark)' }}>
                   {strings.popularEquipment}
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                {/* Horizontal scrollable categories */}
+                <div className="flex gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   {categories.map((category) => (
                     <button
                       key={category.label}
-                      className="ky-tap-chip h-11 rounded-[16px] text-[12px] font-semibold flex items-center justify-center"
+                      className="ky-tap-chip h-11 rounded-[16px] text-[12px] font-semibold flex items-center justify-center whitespace-nowrap flex-shrink-0"
                       style={{
                         border: category.active ? '1.5px solid var(--saffron)' : '1.5px solid #E6E1D8',
                         background: category.active ? 'rgba(255,139,56,0.12)' : '#FFF',
@@ -109,6 +176,33 @@ export function SearchGuestDesign() {
                       {category.emoji} {category.label}
                     </button>
                   ))}
+                </div>
+                
+                {/* Equipment grid for active category */}
+                <div className="mt-4">
+                  <div className="grid grid-cols-2 gap-2">
+                    {filteredEquipment.slice(0, 6).map((equipment) => (
+                      <button
+                        key={equipment.label}
+                        className="ky-tap-chip h-16 rounded-[12px] text-[11px] font-medium flex flex-col items-center justify-center"
+                        style={{
+                          border: '1px solid #E6E1D8',
+                          background: '#FFF',
+                          color: 'var(--text-dark)'
+                        }}
+                      >
+                        <div className="text-lg mb-1">{equipment.emoji}</div>
+                        <div className="text-center leading-tight">{equipment.label}</div>
+                      </button>
+                    ))}
+                  </div>
+                  {filteredEquipment.length > 6 && (
+                    <div className="text-center mt-2">
+                      <button className="text-[11px] font-medium" style={{ color: 'var(--saffron)' }}>
+                        +{filteredEquipment.length - 6} more
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 
