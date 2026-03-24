@@ -18,6 +18,11 @@ export function MyRequestsDesign() {
     radius: t({ english: 'radius', hindi: 'दायरा', tamil: 'ஆரம்', marathi: 'परिसर' }),
     days: t({ english: 'days', hindi: 'दिन', tamil: 'நாட்கள்', marathi: 'दिवस' }),
     tip: t({ english: 'Share your request on WhatsApp to get faster responses', hindi: 'तेज़ जवाब पाने के लिए WhatsApp पर अपना अनुरोध शेयर करें', tamil: 'விரைவான பதிலைப் பெற WhatsApp இல் உங்கள் கோரிக்கையைப் பகிரவும்', marathi: 'जलद प्रतिसाद मिळवण्यासाठी WhatsApp वर तुमची विनंती शेअर करा' }),
+    postRequest: t({ english: 'Post Request', hindi: 'अनुरोध पोस्ट करें', tamil: 'கோரிக்கை பதிவு செய்', marathi: 'विनंती पोस्ट करा' }),
+    postNewRequest: t({ english: 'Post New Request', hindi: 'नया अनुरोध पोस्ट करें', tamil: 'புதிய கோரிக்கை பதிவு செய்', marathi: 'नवीन विनंती पोस्ट करा' }),
+    noRequests: t({ english: 'No requests yet', hindi: 'कोई अनुरोध नहीं', tamil: 'இன்னும் கோரிக்கைகள் இல்லை', marathi: 'अजून कोणतेही विनंती नाही' }),
+    noRequestsSub: t({ english: 'Search equipment and post a request', hindi: 'उपकरण खोजें और अनुरोध पोस्ट करें', tamil: 'உபகரணம் தேடி கோரிக்கை பதிவு செய்யுங்கள்', marathi: 'उपकरण शोधा आणि विनंती पोस्ट करा' }),
+    postFirstRequest: t({ english: 'Post Your First Request', hindi: 'अपना पहला अनुरोध पोस्ट करें', tamil: 'உங்கள் முதல் கோரிக்கையைப் பதிவு செய்யுங்கள்', marathi: 'आपली पहिली विनंती पोस्ट करा' }),
   };
 
   return (
@@ -60,6 +65,12 @@ export function MyRequestsDesign() {
                   {strings.title}
                 </div>
               </div>
+              <div
+                className="ky-tap-cta-primary w-8 h-8 rounded-[10px] flex items-center justify-center text-white text-base"
+                style={{ background: 'rgba(255,255,255,0.2)' }}
+              >
+                ➕
+              </div>
             </div>
           </div>
 
@@ -101,11 +112,19 @@ export function MyRequestsDesign() {
                     >
                       50 HP Tractor
                     </div>
-                    <div
-                      className="text-[9px] font-bold px-2 py-0.5 rounded-full"
-                      style={{ background: 'var(--green-pale)', color: 'var(--green)' }}
-                    >
-                      2 {strings.offersReceived}
+                    <div className="flex items-center gap-2">
+                      <div
+                        className="text-[9px] font-bold px-2 py-0.5 rounded-full"
+                        style={{ background: 'var(--green-pale)', color: 'var(--green)' }}
+                      >
+                        2 {strings.offersReceived}
+                      </div>
+                      <div
+                        className="ky-tap-icon w-7 h-7 rounded-lg flex items-center justify-center cursor-pointer"
+                        style={{ background: 'var(--saffron-pale)', color: 'var(--saffron)' }}
+                      >
+                        ✏️
+                      </div>
                     </div>
                   </div>
                   <div className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
@@ -164,15 +183,23 @@ export function MyRequestsDesign() {
                     >
                       Combine Harvester
                     </div>
-                    <div
-                      className="text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1"
-                      style={{ background: 'var(--saffron-pale)', color: 'var(--saffron)' }}
-                    >
-                      <span
-                        className="inline-block w-1.5 h-1.5 rounded-full"
-                        style={{ background: 'var(--saffron)', animation: 'pulse 1.5s infinite' }}
-                      />
-                      {strings.searching}
+                    <div className="flex items-center gap-2">
+                      <div
+                        className="text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1"
+                        style={{ background: 'var(--saffron-pale)', color: 'var(--saffron)' }}
+                      >
+                        <span
+                          className="inline-block w-1.5 h-1.5 rounded-full"
+                          style={{ background: 'var(--saffron)', animation: 'pulse 1.5s infinite' }}
+                        />
+                        {strings.searching}
+                      </div>
+                      <div
+                        className="ky-tap-icon w-7 h-7 rounded-lg flex items-center justify-center cursor-pointer"
+                        style={{ background: 'var(--saffron-pale)', color: 'var(--saffron)' }}
+                      >
+                        ✏️
+                      </div>
                     </div>
                   </div>
                   <div className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
@@ -209,6 +236,36 @@ export function MyRequestsDesign() {
                 <div className="text-[11px] font-semibold" style={{ color: 'var(--green)' }}>
                   {strings.tip}
                 </div>
+              </div>
+            </div>
+
+            {/* Empty State Card - shown when no requests */}
+            <div
+              className="rounded-[20px] p-6 text-center"
+              style={{ background: 'white', boxShadow: 'var(--card-shadow)' }}
+            >
+              <div className="text-[48px] mb-4">📋</div>
+              <div
+                className="text-[16px] font-bold mb-2"
+                style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
+              >
+                {strings.noRequests}
+              </div>
+              <div className="text-[13px] mb-4" style={{ color: 'var(--text-soft)' }}>
+                {strings.noRequestsSub}
+              </div>
+              <div
+                className="ky-tap-cta-primary rounded-[12px] py-3 px-6 text-[13px] font-bold text-white mx-auto"
+                style={{ 
+                  background: 'linear-gradient(135deg, var(--saffron), #FF8C38)', 
+                  boxShadow: '0 4px 16px rgba(255,107,0,0.35)',
+                  width: 'fit-content'
+                }}
+              >
+                <span className="flex items-center gap-2">
+                  <span>➕</span>
+                  <span>{strings.postFirstRequest}</span>
+                </span>
               </div>
             </div>
           </div>

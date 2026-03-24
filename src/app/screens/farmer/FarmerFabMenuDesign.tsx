@@ -6,8 +6,8 @@ export function FarmerFabMenuDesign() {
   const t = (options: Parameters<typeof selectText>[0]) => selectText(options);
 
   const strings = {
-    postRequest: t({ english: 'Post a Request', hindi: 'अनुरोध पोस्ट करें', tamil: 'கோரிக்கை பதிவு செய்', marathi: 'विनंती पोस्ट करा' }),
-    postRequestSub: t({ english: 'Find equipment nearby', hindi: 'आसपास उपकरण खोजें', tamil: 'அருகில் உபகரணம் கண்டுபிடி', marathi: 'जवळपास उपकरण शोधा' }),
+    myRequests: t({ english: 'My Requests', hindi: 'मेरे अनुरोध', tamil: 'எனது கோரிக்கைகள்', marathi: 'माझ्या विनंत्या' }),
+    myRequestsSub: t({ english: 'Track your equipment needs', hindi: 'अपनी उपकरण आवश्यकताओं को ट्रैक करें', tamil: 'உங்கள் உபகரணத் தேவைகளைக் கண்காணிக்கவும்', marathi: 'तुमच्या उपकरण गरजांचा मागोवा घ्या' }),
     voiceSearch: t({ english: 'Voice Search', hindi: 'आवाज़ से खोजें', tamil: 'குரல் தேடல்', marathi: 'आवाजाने शोधा' }),
     voiceSearchSub: t({ english: 'Talk to Kisan Mitra', hindi: 'किसान मित्र से बात करें', tamil: 'கிசான் மித்ராவிடம் பேசு', marathi: 'किसान मित्राशी बोला' }),
     searchEquipment: t({ english: 'Search Equipment', hindi: 'उपकरण खोजें', tamil: 'உபகரணம் தேடு', marathi: 'उपकरण शोधा' }),
@@ -17,9 +17,9 @@ export function FarmerFabMenuDesign() {
 
   const menuItems = [
     {
-      icon: '📢',
-      label: strings.postRequest,
-      sub: strings.postRequestSub,
+      icon: '�',
+      label: strings.myRequests,
+      sub: strings.myRequestsSub,
       gradient: 'linear-gradient(135deg, var(--saffron), #FF8C38)',
       shadow: '0 4px 16px rgba(255,107,0,0.3)',
     },
