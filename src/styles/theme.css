@@ -42,6 +42,11 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
+  /* KisanYantra Font System - Matches Flutter App */
+  --font-heading: 'Baloo 2', cursive;
+  --font-body: 'DM Sans', sans-serif;
+  --font-devanagari: 'Noto Sans Devanagari', sans-serif;
+  
   /* KisanYantra Color System - Updated Modern Palette */
   
   /* Primary Brand Colors - Deep Farm Green */
@@ -198,6 +203,7 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
   }
 
   /**
@@ -207,6 +213,11 @@
 
   html {
     font-size: var(--font-size);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
   }
 
   h1 {
@@ -237,18 +248,21 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: var(--font-body);
   }
 
   button {
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
+    font-family: var(--font-heading);
   }
 
-  input {
+  input, textarea, select {
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+    font-family: var(--font-body);
   }
 }
 
