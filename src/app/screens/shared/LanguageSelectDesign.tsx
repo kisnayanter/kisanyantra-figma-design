@@ -62,44 +62,147 @@ export function LanguageSelectDesign() {
                 भाषा चुनें · Choose your language
               </div>
               
-              <div className="flex flex-col gap-[10px] mb-5">
-                <div
-                  className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px] bg-white"
-                  style={{ border: '1.5px solid white' }}
-                >
-                  <span className="text-2xl">🇮🇳</span>
-                  <span className="font-bold text-[15px]" style={{ color: 'var(--saffron)' }}>Hindi</span>
-                  <span 
-                    className="ml-auto text-[13px]"
-                    style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'var(--text-soft)' }}
-                  >
-                    हिंदी
-                  </span>
-                </div>
-                {['Tamil · தமிழ்', 'Marathi · मराठी'].map((lang) => (
+              <div className="max-h-[280px] overflow-y-auto pr-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <div className="flex flex-col gap-[10px]">
                   <div
-                    key={lang}
+                    className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px] bg-white"
+                    style={{ border: '1.5px solid white' }}
+                  >
+                    <span className="text-2xl">🇮🇳</span>
+                    <span className="font-bold text-[15px]" style={{ color: 'var(--saffron)' }}>Hindi</span>
+                    <span 
+                      className="ml-auto text-[13px]"
+                      style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'var(--text-soft)' }}
+                    >
+                      हिंदी
+                    </span>
+                  </div>
+                  <div
                     className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px]"
                     style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)' }}
                   >
                     <span className="text-2xl">🇮🇳</span>
-                    <span className="font-bold text-[15px] text-white">{lang.split('·')[0]}</span>
+                    <span className="font-bold text-[15px] text-white">English</span>
                     <span 
                       className="ml-auto text-[13px]"
                       style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'rgba(255,255,255,0.7)' }}
                     >
-                      {lang.split('·')[1]}
+                      English
                     </span>
                   </div>
-                ))}
+                  
+                  {/* Rest in alphabetical order */}
+                  <div
+                    className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px]"
+                    style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)' }}
+                  >
+                    <span className="text-2xl">🇮🇳</span>
+                    <span className="font-bold text-[15px] text-white">Bengali</span>
+                    <span 
+                      className="ml-auto text-[13px]"
+                      style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'rgba(255,255,255,0.7)' }}
+                    >
+                      বাংলা
+                    </span>
+                  </div>
+                  <div
+                    className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px]"
+                    style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)' }}
+                  >
+                    <span className="text-2xl">🇮🇳</span>
+                    <span className="font-bold text-[15px] text-white">Gujarati</span>
+                    <span 
+                      className="ml-auto text-[13px]"
+                      style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'rgba(255,255,255,0.7)' }}
+                    >
+                      ગુજરાતી
+                    </span>
+                  </div>
+                  <div
+                    className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px]"
+                    style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)' }}
+                  >
+                    <span className="text-2xl">🇮🇳</span>
+                    <span className="font-bold text-[15px] text-white">Kannada</span>
+                    <span 
+                      className="ml-auto text-[13px]"
+                      style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'rgba(255,255,255,0.7)' }}
+                    >
+                      ಕನ್ನಡ
+                    </span>
+                  </div>
+                  <div
+                    className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px]"
+                    style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)' }}
+                  >
+                    <span className="text-2xl">🇮🇳</span>
+                    <span className="font-bold text-[15px] text-white">Malayalam</span>
+                    <span 
+                      className="ml-auto text-[13px]"
+                      style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'rgba(255,255,255,0.7)' }}
+                    >
+                      മലയാളം
+                    </span>
+                  </div>
+                  <div
+                    className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px]"
+                    style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)' }}
+                  >
+                    <span className="text-2xl">🇮🇳</span>
+                    <span className="font-bold text-[15px] text-white">Marathi</span>
+                    <span 
+                      className="ml-auto text-[13px]"
+                      style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'rgba(255,255,255,0.7)' }}
+                    >
+                      मराठी
+                    </span>
+                  </div>
+                  <div
+                    className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px]"
+                    style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)' }}
+                  >
+                    <span className="text-2xl">🇮🇳</span>
+                    <span className="font-bold text-[15px] text-white">Punjabi</span>
+                    <span 
+                      className="ml-auto text-[13px]"
+                      style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'rgba(255,255,255,0.7)' }}
+                    >
+                      ਪੰਜਾਬੀ
+                    </span>
+                  </div>
+                  <div
+                    className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px]"
+                    style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)' }}
+                  >
+                    <span className="text-2xl">🇮🇳</span>
+                    <span className="font-bold text-[15px] text-white">Tamil</span>
+                    <span 
+                      className="ml-auto text-[13px]"
+                      style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'rgba(255,255,255,0.7)' }}
+                    >
+                      தமிழ்
+                    </span>
+                  </div>
+                  <div
+                    className="ky-tap-radio w-full rounded-2xl p-[14px] flex items-center gap-[14px]"
+                    style={{ background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)' }}
+                  >
+                    <span className="text-2xl">🇮🇳</span>
+                    <span className="font-bold text-[15px] text-white">Telugu</span>
+                    <span 
+                      className="ml-auto text-[13px]"
+                      style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", color: 'rgba(255,255,255,0.7)' }}
+                    >
+                      తెలుగు
+                    </span>
+                  </div>
+                </div>
               </div>
-
-              <button
-                className="ky-tap-cta-primary w-full bg-white rounded-2xl p-[14px] font-bold text-[15px]"
-                style={{ color: 'var(--saffron)', boxShadow: '0 4px 20px rgba(0,0,0,0.2)' }}
-              >
-                आगे बढ़ें · Continue →
-              </button>
+              
+              {/* Scroll indicator */}
+              <div className="flex justify-center mt-3">
+                <div className="w-8 h-1 bg-white rounded-full opacity-60"></div>
+              </div>
             </div>
           </div>
 

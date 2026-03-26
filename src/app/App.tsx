@@ -66,7 +66,8 @@ import { RequestExpiredDesign } from './screens/farmer/RequestExpiredDesign';
 import { CancelBookingConfirmDesign } from './screens/farmer/CancelBookingConfirmDesign';
 
 // Owner screens
-import { RoleSelectOwnerDesign } from './screens/owner/RoleSelectOwnerDesign';
+import { OwnerPhoneVerifyDesign } from './screens/owner/OwnerPhoneVerifyDesign';
+import { OwnerOTPVerificationDesign } from './screens/owner/OwnerOTPVerificationDesign';
 import { ProfileSetupOwnerDesign } from './screens/owner/ProfileSetupOwnerDesign';
 import { OwnerDashboardDesign } from './screens/owner/OwnerDashboardDesign';
 import { OwnerDashboardFirstTimeDesign } from './screens/owner/OwnerDashboardFirstTimeDesign';
@@ -533,8 +534,8 @@ export default function App() {
                 screens={[
                   { id: 'lang', label: 'Language Selection', component: <LanguageSelectDesign />, tapHint: 'Continue button' },
                   { id: 'landing', label: 'Landing — List Equipment', component: <LandingHomeDesign />, tapHint: 'List My Equipment button' },
-                  { id: 'role', label: 'Owner Role + Phone', component: <RoleSelectOwnerDesign />, tapHint: 'Send OTP button' },
-                  { id: 'otp', label: 'OTP Verification', component: <OTPVerificationDesign />, tapHint: 'Verify button' },
+                  { id: 'phone', label: 'Owner Phone Verify', component: <OwnerPhoneVerifyDesign />, tapHint: 'Send OTP button' },
+                  { id: 'otp', label: 'Owner OTP Verification', component: <OwnerOTPVerificationDesign />, tapHint: 'Verify button' },
                   { id: 'profile', label: 'Owner Profile Setup', component: <ProfileSetupOwnerDesign />, tapHint: 'Complete Setup button' },
                   { id: 'equipment', label: 'Add First Equipment', component: <AddEquipmentEmptyDesign />, tapHint: 'Add Equipment button' },
                 ]}
@@ -545,7 +546,7 @@ export default function App() {
               badge="ONBOARDING"
               badgeColor="var(--green)"
               title="Owner Onboarding Journey (Updated)"
-              subtitle="Landing → Register → Profile → First listing"
+              subtitle="Landing → Phone Verify → OTP → Profile → First listing"
             >
               <ScreenCard label="O1 · Language Selection">
                 <LanguageSelectDesign />
@@ -553,11 +554,11 @@ export default function App() {
               <ScreenCard label="O2 · Landing Home">
                 <LandingHomeDesign />
               </ScreenCard>
-              <ScreenCard label="O3 · Owner Role + Phone">
-                <RoleSelectOwnerDesign />
+              <ScreenCard label="O3 · Owner Phone Verification">
+                <OwnerPhoneVerifyDesign />
               </ScreenCard>
-              <ScreenCard label="O4 · OTP Verification">
-                <OTPVerificationDesign />
+              <ScreenCard label="O4 · Owner OTP Verification">
+                <OwnerOTPVerificationDesign />
               </ScreenCard>
               <ScreenCard label="O5 · Profile Setup">
                 <ProfileSetupOwnerDesign />

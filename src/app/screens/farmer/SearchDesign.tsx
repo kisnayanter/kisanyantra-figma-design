@@ -2,10 +2,59 @@ import { FarmerBottomNav } from '../../components/FarmerBottomNav';
 
 export function SearchDesign() {
   const categories = [
-    { label: '🚜 Tractor', active: true },
-    { label: '🌾 Harvester', active: false },
-    { label: '💧 Pump', active: false },
-    { label: '🌱 Cultivator', active: false }
+    { label: '🔍 All', active: true },
+    { label: '🌱 Soil Prep', active: false },
+    { label: '🌾 Sowing', active: false },
+    { label: '🛡️ Protection', active: false },
+    { label: '💧 Irrigation', active: false },
+    { label: '✂️ Harvest', active: false },
+    { label: '📦 Post-Harvest', active: false },
+    { label: '🚛 Transport', active: false }
+  ];
+
+  const equipmentTypes = [
+    // Soil preparation
+    { emoji: '🚜', label: 'Tractor', category: 'soil' },
+    { emoji: '🌱', label: 'Cultivator', category: 'soil' },
+    { emoji: '⚙️', label: 'Rotavator', category: 'soil' },
+    { emoji: '🔧', label: 'Plough', category: 'soil' },
+    { emoji: '⬇️', label: 'Harrow', category: 'soil' },
+    { emoji: '🔄', label: 'Tiller', category: 'soil' },
+    { emoji: '🏍️', label: 'Power Tiller', category: 'soil' },
+
+    // Sowing & planting
+    { emoji: '🌾', label: 'Seed Drill', category: 'sowing' },
+    { emoji: '🌿', label: 'Planter', category: 'sowing' },
+    { emoji: '🌱', label: 'Transplanter', category: 'sowing' },
+
+    // Crop protection
+    { emoji: '💧', label: 'Sprayer', category: 'protection' },
+    { emoji: '🚁', label: 'Agri Drone', category: 'protection' },
+    { emoji: '🌬️', label: 'Duster', category: 'protection' },
+    { emoji: '🔥', label: 'Flame Weeder', category: 'protection' },
+
+    // Irrigation
+    { emoji: '💦', label: 'Water Pump', category: 'irrigation' },
+    { emoji: '🚿', label: 'Sprinkler', category: 'irrigation' },
+    { emoji: '💧', label: 'Drip System', category: 'irrigation' },
+    { emoji: '🌊', label: 'Rain Gun', category: 'irrigation' },
+
+    // Harvesting
+    { emoji: '🌾', label: 'Harvester', category: 'harvest' },
+    { emoji: '✂️', label: 'Thresher', category: 'harvest' },
+    { emoji: '🌾', label: 'Reaper', category: 'harvest' },
+    { emoji: '🌽', label: 'Maize Harvester', category: 'harvest' },
+    { emoji: '🥔', label: 'Potato Digger', category: 'harvest' },
+
+    // Post-harvest
+    { emoji: '🔄', label: 'Baler', category: 'post' },
+    { emoji: '🌡️', label: 'Dryer', category: 'post' },
+    { emoji: '🌬️', label: 'Winnower', category: 'post' },
+    { emoji: '📦', label: 'Grader', category: 'post' },
+
+    // Transport
+    { emoji: '🛒', label: 'Trailer', category: 'transport' },
+    { emoji: '🚛', label: 'Truck', category: 'transport' }
   ];
 
   const recents = ['Tractor near Hinganghat', 'Harvester with driver'];
@@ -51,47 +100,77 @@ export function SearchDesign() {
             </div>
 
             <div className="mt-5">
+              {/* Location Search Box */}
               <div 
-                className="bg-white rounded-[16px] px-4 h-14 flex items-center gap-3"
+                className="ky-tap-location bg-white rounded-[16px] px-4 h-14 flex items-center gap-3 cursor-pointer transition-all hover:scale-[1.02]"
                 style={{ boxShadow: '0 8px 20px rgba(0,0,0,0.12)' }}
               >
-                <span className="text-base">🔍</span>
-                <input
-                  type="text"
-                  placeholder="Search equipment near you"
-                  className="flex-1 text-[14px] outline-none bg-transparent"
-                  style={{ color: 'var(--text-dark)' }}
-                />
+                <span className="text-base">📍</span>
+                <div className="flex-1">
+                  <div className="text-[14px] font-medium" style={{ color: 'var(--text-dark)' }}>
+                    Around Current Location
+                  </div>
+                  <div className="text-[10px] text-gray-500">Within 25 km</div>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="flex-1 relative">
             <div className="h-full overflow-y-auto px-5 pt-6 pb-10">
-              {/* Location */}
-              <div className="mb-7 flex items-center justify-between">
-                <div className="text-[13px] font-medium" style={{ color: 'var(--text-mid)' }}>
-                  📍 Near <span style={{ fontWeight: 700 }}>Hinganghat</span>, Wardha
+              {/* Date Required */}
+              <div className="mb-7">
+                <div className="text-[16px] font-semibold mb-4" style={{ color: 'var(--text-dark)' }}>
+                  � When do you need it?
                 </div>
-                <button className="ky-tap-link text-[12px] font-semibold" style={{ color: 'var(--saffron)' }}>
-                  Change
-                </button>
+                <div
+                  className="bg-white rounded-[20px] p-4 border-2 border-dashed"
+                  style={{ 
+                    borderColor: 'var(--saffron)', 
+                    background: 'linear-gradient(135deg, rgba(255,139,56,0.05) 0%, rgba(255,140,56,0.02) 100%)',
+                    boxShadow: '0 4px 16px rgba(255,139,56,0.15)'
+                  }}
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-[14px] font-medium" style={{ color: 'var(--text-dark)' }}>
+                        Select required date
+                      </div>
+                      <div className="text-[12px] mt-1" style={{ color: 'var(--text-hint)' }}>
+                        Tap to open calendar →
+                      </div>
+                    </div>
+                    <div
+                      className="w-12 h-12 rounded-full flex items-center justify-center"
+                      style={{ background: 'var(--saffron)' }}
+                    >
+                      <span className="text-white text-xl">📅</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Categories */}
               <div className="mb-7">
-                <div className="text-[16px] font-semibold mb-3" style={{ color: 'var(--text-dark)' }}>
-                  Popular equipment
+                <div className="text-[16px] font-semibold mb-4" style={{ color: 'var(--text-dark)' }}>
+                  🚜 What do you need?
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                {/* Horizontal scrollable categories */}
+                <div className="flex gap-2 overflow-x-auto pb-3" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   {categories.map((category) => (
                     <button
                       key={category.label}
-                      className="ky-tap-chip h-11 rounded-[16px] text-[12px] font-semibold flex items-center justify-center"
+                      className="ky-tap-chip h-11 rounded-[20px] text-[12px] font-semibold flex items-center justify-center whitespace-nowrap flex-shrink-0 px-4 transition-all"
                       style={{
-                        border: category.active ? '1.5px solid var(--saffron)' : '1.5px solid #E6E1D8',
-                        background: category.active ? 'rgba(255,139,56,0.12)' : '#FFF',
-                        color: category.active ? 'var(--saffron)' : 'var(--text-mid)'
+                        border: category.active ? '2px solid var(--saffron)' : '1.5px solid #E6E1D8',
+                        background: category.active 
+                          ? 'linear-gradient(135deg, rgba(255,139,56,0.15) 0%, rgba(255,140,56,0.08) 100%)' 
+                          : '#FFF',
+                        color: category.active ? 'var(--saffron)' : 'var(--text-mid)',
+                        boxShadow: category.active 
+                          ? '0 4px 12px rgba(255,139,56,0.25)' 
+                          : '0 2px 8px rgba(0,0,0,0.08)',
+                        transform: category.active ? 'scale(1.05)' : 'scale(1)'
                       }}
                     >
                       {category.label}
@@ -102,11 +181,14 @@ export function SearchDesign() {
 
               {/* Recent searches */}
               <div className="mb-7">
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-3">
                   <div className="text-[16px] font-semibold" style={{ color: 'var(--text-dark)' }}>
-                    Recent searches
+                    🕐 Recent searches
                   </div>
-                  <button className="ky-tap-link text-[12px] font-semibold" style={{ color: 'var(--saffron)' }}>
+                  <button className="ky-tap-link text-[12px] font-semibold px-3 py-1 rounded-full" style={{ 
+                    color: 'var(--saffron)',
+                    background: 'rgba(255,139,56,0.1)'
+                  }}>
                     Clear
                   </button>
                 </div>
@@ -114,18 +196,26 @@ export function SearchDesign() {
                   {recents.map((item) => (
                     <div
                       key={item}
-                      className="ky-tap-list-item rounded-[14px] px-3 py-2.5 flex items-center gap-2 text-[12px]"
-                      style={{ background: '#FFF', border: '1px solid #EFEAE1', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}
+                      className="ky-tap-list-item rounded-[16px] px-4 py-3 flex items-center gap-3 text-[12px] transition-all hover:scale-[1.02]"
+                      style={{ 
+                        background: 'linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%)', 
+                        border: '1px solid #EFEAE1', 
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                      }}
                     >
-                      <span style={{ color: 'var(--text-soft)' }}>🕘</span>
-                      <span style={{ color: 'var(--text-dark)' }}>{item}</span>
+                      <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ 
+                        background: 'rgba(255,139,56,0.1)' 
+                      }}>
+                        <span style={{ color: 'var(--saffron)', fontSize: '14px' }}>🕘</span>
+                      </div>
+                      <span style={{ color: 'var(--text-dark)', fontWeight: '500' }}>{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-2 w-10 h-1.5 rounded-full" style={{ background: '#D4CEC5' }} />
+            <div className="absolute left-1/2 -translate-x-1/2 bottom-2 w-10 h-1.5 rounded-full bg-gray-400 opacity-60 transition-all duration-300 hover:opacity-80"></div>
           </div>
 
           {/* Bottom Nav */}
