@@ -15,47 +15,47 @@ const categories = [
 // Complete equipment list with all types
 const equipmentTypes = [
   // Soil Preparation
-  { emoji: '🚜', label: 'Tractor', category: 'soil', description: 'Main farming vehicle' },
-  { emoji: '🌱', label: 'Cultivator', category: 'soil', description: 'Soil preparation' },
-  { emoji: '⚙️', label: 'Rotavator', category: 'soil', description: 'Rotary tiller' },
-  { emoji: '🔧', label: 'Plough', category: 'soil', description: 'Traditional plough' },
-  { emoji: '⬇️', label: 'Harrow', category: 'soil', description: 'Soil leveling' },
-  { emoji: '🔄', label: 'Tiller', category: 'soil', description: 'Mini tiller' },
-  { emoji: '🏍️', label: 'Power Tiller', category: 'soil', description: 'Compact tiller' },
+  { image: '/src/assets/equipment/tractors.png', label: 'Tractor', category: 'soil', description: 'Main farming vehicle' },
+  { image: '/src/assets/equipment/cultivator.png', label: 'Cultivator', category: 'soil', description: 'Soil preparation' },
+  { image: '/src/assets/equipment/rotavator.png', label: 'Rotavator', category: 'soil', description: 'Rotary tiller' },
+  { image: '/src/assets/equipment/plough.png', label: 'Plough', category: 'soil', description: 'Traditional plough' },
+  { image: '/src/assets/equipment/tiller.png', label: 'Harrow', category: 'soil', description: 'Soil leveling' },
+  { image: '/src/assets/equipment/tiller.png', label: 'Tiller', category: 'soil', description: 'Mini tiller' },
+  { image: '/src/assets/equipment/power_tiller.png', label: 'Power Tiller', category: 'soil', description: 'Compact tiller' },
 
   // Sowing & Planting
-  { emoji: '🌾', label: 'Seed Drill', category: 'sowing', description: 'Precision sowing' },
-  { emoji: '🌿', label: 'Planter', category: 'sowing', description: 'Row planting' },
-  { emoji: '🌱', label: 'Transplanter', category: 'sowing', description: 'Rice transplanting' },
+  { image: '/src/assets/equipment/seed_drill.png', label: 'Seed Drill', category: 'sowing', description: 'Precision sowing' },
+  { image: '/src/assets/equipment/planter.png', label: 'Planter', category: 'sowing', description: 'Row planting' },
+  { image: '/src/assets/equipment/transplanter.png', label: 'Transplanter', category: 'sowing', description: 'Rice transplanting' },
 
   // Plant Protection
-  { emoji: '💧', label: 'Sprayer', category: 'protection', description: 'Pesticide spraying' },
-  { emoji: '🚁', label: 'Agri Drone', category: 'protection', description: 'Aerial spraying', isNew: true },
-  { emoji: '🌫️', label: 'Duster', category: 'protection', description: 'Powder application' },
-  { emoji: '🔥', label: 'Flame Weeder', category: 'protection', description: 'Weed control' },
+  { image: '/src/assets/equipment/sprayer.png', label: 'Sprayer', category: 'protection', description: 'Pesticide spraying' },
+  { image: '/src/assets/equipment/drone.png', label: 'Agri Drone', category: 'protection', description: 'Aerial spraying', isNew: true },
+  { image: '/src/assets/equipment/duster.png', label: 'Duster', category: 'protection', description: 'Powder application' },
+  { image: '/src/assets/equipment/flame_weeder.png', label: 'Flame Weeder', category: 'protection', description: 'Weed control' },
 
   // Irrigation
-  { emoji: '💦', label: 'Water Pump', category: 'irrigation', description: 'Water lifting' },
-  { emoji: '🚿', label: 'Sprinkler', category: 'irrigation', description: 'Overhead irrigation' },
-  { emoji: '💧', label: 'Drip System', category: 'irrigation', description: 'Micro irrigation' },
-  { emoji: '🌊', label: 'Rain Gun', category: 'irrigation', description: 'High pressure sprinkler' },
+  { image: '/src/assets/equipment/water_pump.png', label: 'Water Pump', category: 'irrigation', description: 'Water lifting' },
+  { image: '/src/assets/equipment/sprinkler.png', label: 'Sprinkler', category: 'irrigation', description: 'Overhead irrigation' },
+  { image: '/src/assets/equipment/drip_system.png', label: 'Drip System', category: 'irrigation', description: 'Micro irrigation' },
+  { image: '/src/assets/equipment/rain_gun.png', label: 'Rain Gun', category: 'irrigation', description: 'High pressure sprinkler' },
 
   // Harvesting
-  { emoji: '🌾', label: 'Harvester', category: 'harvest', description: 'Combine harvester' },
-  { emoji: '✂️', label: 'Thresher', category: 'harvest', description: 'Grain separation' },
-  { emoji: '🌽', label: 'Maize Harvester', category: 'harvest', description: 'Corn harvesting' },
-  { emoji: '🌾', label: 'Reaper', category: 'harvest', description: 'Crop cutter' },
-  { emoji: '🥔', label: 'Potato Digger', category: 'harvest', description: 'Root crop harvester' },
+  { image: '/src/assets/equipment/harvestor.png', label: 'Harvester', category: 'harvest', description: 'Combine harvester' },
+  { image: '/src/assets/equipment/thresher.png', label: 'Thresher', category: 'harvest', description: 'Grain separation' },
+  { image: '/src/assets/equipment/maize_harvester.png', label: 'Maize Harvester', category: 'harvest', description: 'Corn harvesting' },
+  { image: '/src/assets/equipment/reaper.png', label: 'Reaper', category: 'harvest', description: 'Crop cutter' },
+  { image: '/src/assets/equipment/potato_digger.png', label: 'Potato Digger', category: 'harvest', description: 'Root crop harvester' },
 
   // Post-Harvest
-  { emoji: '🔄', label: 'Baler', category: 'post', description: 'Hay baling' },
-  { emoji: '🌡️', label: 'Dryer', category: 'post', description: 'Grain drying' },
-  { emoji: '🌬️', label: 'Winnower', category: 'post', description: 'Cleaning winnower' },
-  { emoji: '📦', label: 'Grader', category: 'post', description: 'Fruit/veg grading' },
+  { image: '/src/assets/equipment/baler.png', label: 'Baler', category: 'post', description: 'Hay baling' },
+  { image: '/src/assets/equipment/dryer.png', label: 'Dryer', category: 'post', description: 'Grain drying' },
+  { image: '/src/assets/equipment/winnower.png', label: 'Winnower', category: 'post', description: 'Cleaning winnower' },
+  { image: '/src/assets/equipment/grader.png', label: 'Grader', category: 'post', description: 'Fruit/veg grading' },
 
   // Transport
-  { emoji: '🛒', label: 'Trailer', category: 'transport', description: 'Farm trailer' },
-  { emoji: '🚛', label: 'Truck', category: 'transport', description: 'Transport vehicle' },
+  { image: '/src/assets/equipment/trailer.png', label: 'Trailer', category: 'transport', description: 'Farm trailer' },
+  { image: '/src/assets/equipment/truck.png', label: 'Truck', category: 'transport', description: 'Transport vehicle' },
 
   // Other
   { emoji: '➕', label: 'Other', category: 'all', description: 'Custom equipment' },
@@ -288,13 +288,24 @@ export function AddEquipmentDesignV2() {
                         </div>
                       )}
                       
-                      {/* Equipment Icon */}
+                      {/* Equipment Image */}
                       <div 
-                        className={`text-3xl mb-1 transition-transform duration-200 ${
+                        className={`w-16 h-16 mb-3 object-cover rounded-lg transition-transform duration-200 ${
                           isHovered ? 'scale-110' : ''
                         }`}
+                        style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))' }}
                       >
-                        {type.emoji}
+                        {type.image ? (
+                          <img 
+                            src={type.image} 
+                            alt={type.label}
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-3xl">
+                            {type.emoji}
+                          </div>
+                        )}
                       </div>
                       
                       {/* Labels */}
@@ -574,7 +585,18 @@ export function AddEquipmentDesignV2() {
                             NEW
                           </div>
                         )}
-                        <div className="text-2xl mb-0.5">{type.emoji}</div>
+                        <div className="w-12 h-12 mb-1 flex items-center justify-center">
+                          {type.image ? (
+                            <img 
+                              src={type.image} 
+                              alt={type.label}
+                              className="w-full h-full object-cover rounded-lg"
+                              style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))' }}
+                            />
+                          ) : (
+                            <div className="text-2xl">{type.emoji}</div>
+                          )}
+                        </div>
                         <div 
                           className="text-[9px] font-bold leading-tight" 
                           style={{ color: isSelected ? 'var(--green)' : 'var(--text-dark)' }}
