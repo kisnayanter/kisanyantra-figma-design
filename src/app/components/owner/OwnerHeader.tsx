@@ -3,8 +3,14 @@ import { ReactNode } from 'react';
 interface OwnerHeaderProps {
   title: string;
   subtitle?: string;
+  userName?: string;
+  greeting?: string;
+  activeStatus?: string;
   showNotification?: boolean;
+  notificationCount?: number;
+  showSettings?: boolean;
   showRoleSwitch?: boolean;
+  showNotificationBadge?: boolean;
   children?: ReactNode;
   role?: 'farmer' | 'owner';
 }
@@ -12,8 +18,14 @@ interface OwnerHeaderProps {
 export function OwnerHeader({ 
   title, 
   subtitle, 
-  showNotification = false, 
+  userName,
+  greeting,
+  activeStatus,
+  showNotification = false,
+  notificationCount,
+  showSettings = false,
   showRoleSwitch = false,
+  showNotificationBadge = false,
   children,
   role = 'owner'
 }: OwnerHeaderProps) {
@@ -23,7 +35,7 @@ export function OwnerHeader({
   
   return (
     <div 
-      className="px-5 pt-5 pb-6 rounded-b-[36px] relative"
+      className="px-[18px] pt-5 pb-6 rounded-b-[36px] relative"
       style={{ 
         background: gradient,
         boxShadow: shadow,
@@ -36,28 +48,42 @@ export function OwnerHeader({
     >
       <div className="flex justify-between items-center mb-4 gap-3">
         <div className="flex-1">
-          {subtitle && (
+          {(greeting || subtitle) && (
             <div 
               className="text-[13px] font-medium tracking-wide" 
               style={{ color: 'rgba(255,255,255,0.85)', fontFamily: "'Inter', sans-serif" }}
             >
-              {subtitle}
+              {greeting || subtitle}
             </div>
           )}
           <div 
             className="text-white text-[24px] font-bold leading-tight mt-0.5"
             style={{ fontFamily: "'Poppins', sans-serif" }}
           >
-            {title}
+            {userName ? userName : title}
           </div>
+          {activeStatus && (
+            <div className="flex items-center gap-2 mt-1">
+              <div 
+                className="w-2 h-2 rounded-full animate-pulse"
+                style={{ background: '#4ade80' }}
+              />
+              <span 
+                className="text-[11px]" 
+                style={{ color: 'rgba(255,255,255,0.8)', fontFamily: "'Inter', sans-serif" }}
+              >
+                {activeStatus}
+              </span>
+            </div>
+          )}
         </div>
         
-        {(showNotification || showRoleSwitch) && (
+        {(showNotification || showSettings || showRoleSwitch) && (
           <div className="flex items-center gap-2">
             {showNotification && (
               <button
                 type="button"
-                className="w-9 h-9 rounded-xl flex items-center justify-center text-base backdrop-blur-sm transition-transform active:scale-95"
+                className="ky-tap-icon w-9 h-9 rounded-xl flex items-center justify-center text-base relative backdrop-blur-sm"
                 style={{
                   background: 'rgba(255,255,255,0.15)',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
@@ -65,20 +91,21 @@ export function OwnerHeader({
                 }}
               >
                 🔔
-              </button>
-            )}
-            {showRoleSwitch && (
-              <button
-                type="button"
-                aria-label="Switch to Farmer Mode"
-                className="w-9 h-9 rounded-xl flex items-center justify-center text-base backdrop-blur-sm transition-transform active:scale-95"
-                style={{
-                  background: 'rgba(255,255,255,0.15)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                  color: 'white'
-                }}
-              >
-                🔁
+                {(notificationCount && notificationCount > 0) ? (
+                  <div 
+                    className="absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center"
+                    style={{ background: '#ef4444', border: '2px solid white' }}
+                  >
+                    <span className="text-white text-[10px] font-bold" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      {notificationCount > 9 ? '9+' : notificationCount}
+                    </span>
+                  </div>
+                ) : showNotificationBadge && (
+                  <div 
+                    className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full animate-pulse"
+                    style={{ background: 'var(--saffron)', border: '2px solid white' }}
+                  />
+                )}
               </button>
             )}
           </div>

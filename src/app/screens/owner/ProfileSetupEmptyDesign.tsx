@@ -1,7 +1,10 @@
 import { useLanguage } from '../../contexts/language';
+import { useState } from 'react';
 
 export function ProfileSetupEmptyDesign() {
-  const { selectText } = useLanguage();
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [termsType, setTermsType] = useState<'terms' | 'privacy'>('terms');
+  const { selectText, language } = useLanguage();
   const t = (options: Parameters<typeof selectText>[0]) => selectText(options);
 
   const strings = {
@@ -43,6 +46,38 @@ export function ProfileSetupEmptyDesign() {
     cta: t({ english: 'Complete required fields', hindi: 'आवश्यक फ़ील्ड भरें', tamil: 'தேவையான புலங்களை நிரப்பவும்', marathi: 'आवश्यक माहिती भरा' })
   };
 
+  const openTermsModal = (type: 'terms' | 'privacy') => {
+    console.log('Opening modal with type:', type);
+    setTermsType(type);
+    setShowTermsModal(true);
+  };
+
+  const getTermsContent = () => {
+    if (termsType === 'terms') {
+      return {
+        title: language === 'hindi' ? 'नियम और शर्तें' : language === 'tamil' ? 'விதிமுறைகள்' : language === 'marathi' ? 'नियम आणि अटी' : 'Terms & Conditions',
+        content: language === 'hindi' 
+          ? 'किसानयंत्रा प्लेटफॉर्म का उपयोग करके आप हमारी सेवाओं के नियमों और शर्तों से सहमत होते हैं। यह सुनिश्चित करता है कि आप उपकरण किराए पर या अन्य सेवाओं का उपयोग करने के लिए जिम्मेदारी लेंगे।'
+          : language === 'tamil'
+          ? 'கிசன் யந்திரா தளத்தைப் பயன்படுத்துவதன் மூலம் நீங்கள் எங்கள் சேவைகளின் விதிமுறைகள் மற்றும் நிபந்தனைகளுக்கு இணங்குகிறீர்கள். இது உபகரணங்களை வாடகைக்கும் அல்லது பிற சேவைகளைப் பயன்படுத்துவதற்குப் பொறுப்புகிறீர்கள் என்பதை உறுதிப்படுத்துகிறது.'
+          : language === 'marathi'
+          ? 'किसानयंत्रा प्लॅटफॉर्म वापरून आपण आमच्या सेवांच्या अटींशी सहमत असता. याचा अर्थ आपण उपकरण भाड़ेवर किंवा इतर सेवा वापरून जबाबदारी स्वीकारता.'
+          : 'By using the KisanYantra platform, you agree to our terms of service. This includes your responsibility for equipment rentals and other services provided through our platform.'
+      };
+    } else {
+      return {
+        title: language === 'hindi' ? 'गोपनीयता नीति' : language === 'tamil' ? 'தனியுரிமை கொள்கை' : language === 'marathi' ? 'गोपनीयता धोरण' : 'Privacy Policy',
+        content: language === 'hindi'
+          ? 'हम आपकी व्यक्तिगत जानकारी की सुरक्षा करने के लिए प्रतिबद्ध हैं। आपका डेटा केवल उपकरण बुकिंग और सेवा वितरण के लिए उपयोग किया जाता है, और हम इसे तृतीय पक्षों के साथ साझा नहीं करते।'
+          : language === 'tamil'
+          ? 'உங்கள் தனிப்பட்ட தகவலைப் பாதுகாக்க நாங்கள் உறுதிப்புகிறோம். உங்கள் தரவு கருவிப்பங்கள் மற்றும் சேவை வழங்குதலுக்கு மட்டும் பயன்படுத்தப்படுகிறது, மேல்வரில் பகிர்வித்துவத்துவதில்லை.'
+          : language === 'marathi'
+          ? 'आपल्या वैयक्तिक माहितीचे संरक्षण करण्यासाठी आपण तयार आहोत. फक्त उपकरण भाड़े आणि सेवा पुरवठावर आपला डेटा वापरला जातो आणि आपण तो तृतीय पक्षांशी सामाईल करत नाही.'
+          : 'We are committed to protecting your personal information. Your data is only used for equipment bookings and service delivery, and we never share it with third parties without your consent.'
+      };
+    }
+  };
+
   const formFields = [
     { key: 'fullName', label: t({ english: 'Full Name', hindi: 'पूरा नाम', tamil: 'முழுபெயர்', marathi: 'पूर्ण नाव' }), placeholder: strings.placeholders.fullName, icon: '👤' },
     { key: 'village', label: t({ english: 'Village', hindi: 'गाँव', tamil: 'கிராமம்', marathi: 'गाव' }), placeholder: strings.placeholders.village, icon: '🏘️' },
@@ -51,15 +86,109 @@ export function ProfileSetupEmptyDesign() {
   ];
 
   return (
-    <div className="relative mx-auto" style={{ width: '320px', height: '640px' }}>
-      <div 
-        className="absolute inset-0 rounded-[36px] overflow-hidden"
-        style={{
-          background: '#111',
-          padding: '10px',
-          boxShadow: '0 0 0 1px #333, 0 24px 64px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1)'
-        }}
-      >
+    <>
+      {/* Modal rendered outside container */}
+      {showTermsModal && (
+        <>
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center animate-in fade-in duration-200">
+            {/* Backdrop */}
+            <div 
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setShowTermsModal(false)}
+            />
+            
+            {/* Modal Content */}
+            <div className="relative bg-white rounded-[20px] w-[280px] max-h-[400px] overflow-hidden shadow-2xl animate-in slide-in-from-bottom duration-300 z-[10000]">
+              {/* Header */}
+              <div 
+                className="p-4 border-b"
+                style={{ borderColor: 'var(--cream)', background: '#FFF4E6' }}
+              >
+                <div className="flex items-center justify-between">
+                  <h3 className="text-[16px] font-bold" style={{ color: 'var(--saffron)' }}>
+                    {getTermsContent().title}
+                  </h3>
+                  <button
+                    onClick={() => setShowTermsModal(false)}
+                    className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-white/50"
+                    style={{ color: 'var(--saffron)' }}
+                  >
+                    <span className="text-lg">×</span>
+                  </button>
+                </div>
+              </div>
+              
+              {/* Content */}
+              <div className="p-4 overflow-y-auto max-h-[250px]">
+                <div className="text-[13px] leading-relaxed" style={{ color: 'var(--text-dark)' }}>
+                  {getTermsContent().content}
+                </div>
+                
+                {/* Additional sections */}
+                <div className="mt-4 space-y-3">
+                  <div className="text-[12px]" style={{ color: 'var(--text-mid)' }}>
+                    <strong style={{ color: 'var(--text-dark)' }}>
+                      {language === 'hindi' ? 'डेटा संरक्षण' : language === 'tamil' ? 'தரவு பாதுகாப்பு' : language === 'marathi' ? 'डेटा संरक्षण' : 'Data Protection'}
+                    </strong>
+                    <p className="mt-1">
+                      {language === 'hindi' 
+                        ? 'आपका डेटा एन्क्रिप्टेड रूप में संग्रहीत किया जाता है और केवल आवश्यक सेवाओं के लिए उपयोग किया जाता है।'
+                        : language === 'tamil'
+                        ? 'உங்கள் தரவு குறியாக்கப்பட்ட வடிவத்தில் சேமிக்கப்படுகிறது மற்றும் அவசரச் சேவைகளுக்கு மட்டுமே பயன்படுத்தப்படுகிறது.'
+                        : language === 'marathi'
+                        ? 'आपला डेटा एन्क्रिप्टेड फॉर्मॅटमध्ये साठवला जातो आणि फक्त आवश्यक सेवांसाठी वापरला जातो.'
+                        : 'Your data is stored in encrypted format and used only for essential services.'
+                      }
+                    </p>
+                  </div>
+                  
+                  <div className="text-[12px]" style={{ color: 'var(--text-mid)' }}>
+                    <strong style={{ color: 'var(--text-dark)' }}>
+                      {language === 'hindi' ? 'उपयोग की शर्तें' : language === 'tamil' ? 'பயன்பாட்டு நிபந்தனைகள்' : language === 'marathi' ? 'वापराच्या अटी' : 'Usage Terms'}
+                    </strong>
+                    <p className="mt-1">
+                      {language === 'hindi'
+                        ? 'प्लेटफॉर्म का उपयोग केवल कृषि उपकरणों के लिए है। किसी भी अवैध गतिविधि के लिए जिम्मेदारी उपयोगकर्ता की होगी।'
+                        : language === 'tamil'
+                        ? 'தளம் வேளாண் கருவிகளுக்கு மட்டுமே பயன்படுத்தப்படுகிறது. எந்தவொரு சட்டவிரோத செயல்பாட்டிற்கும் பொறுப்பு பயனருக்கு உரியது.'
+                        : language === 'marathi'
+                        ? 'प्लॅटफॉर्म फक्त शेती उपकरणांसाठी आहे. कोणत्याही अवैध कृतीसाठी जबाबदारी वापरकर्त्याची असेल.'
+                        : 'The platform is intended for agricultural equipment only. Users are responsible for any illegal activities.'
+                      }
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Footer */}
+              <div className="p-4 border-t" style={{ borderColor: 'var(--cream)' }}>
+                <button
+                  onClick={() => setShowTermsModal(false)}
+                  className="w-full py-2 rounded-lg font-semibold text-sm transition-colors"
+                  style={{ 
+                    background: 'var(--saffron)', 
+                    color: 'white',
+                    boxShadow: '0 2px 8px rgba(255,127,0,0.3)'
+                  }}
+                >
+                  {language === 'hindi' ? 'समझ गया' : language === 'tamil' ? 'புரிந்தது' : language === 'marathi' ? 'समजले' : 'Got it'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Main Container */}
+      <div className="relative mx-auto" style={{ width: '320px', height: '640px' }}>
+        <div 
+          className="absolute inset-0 rounded-[36px] overflow-hidden"
+          style={{
+            background: '#111',
+            padding: '10px',
+            boxShadow: '0 0 0 1px #333, 0 24px 64px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1)'
+          }}
+        >
         <div className="w-full h-full rounded-[28px] overflow-hidden relative flex flex-col" style={{ background: '#F8F5F0' }}>
           {/* Status Bar */}
           <div className="flex justify-between items-center px-[18px] py-[10px] relative z-10">
@@ -231,7 +360,22 @@ export function ProfileSetupEmptyDesign() {
                 style={{ background: 'white', border: '2px solid #E8E3DA' }}
               />
               <div className="text-[11px] leading-relaxed" style={{ color: 'var(--text-mid)' }}>
-                {strings.terms}
+                I agree to the{' '}
+                <button 
+                  onClick={() => openTermsModal('terms')}
+                  className="font-semibold underline"
+                  style={{ color: 'var(--saffron)' }}
+                >
+                  Terms & Conditions
+                </button>
+                {' '}and{' '}
+                <button 
+                  onClick={() => openTermsModal('privacy')}
+                  className="font-semibold underline"
+                  style={{ color: 'var(--saffron)' }}
+                >
+                  Privacy Policy
+                </button>
               </div>
             </div>
           </div>
@@ -256,6 +400,6 @@ export function ProfileSetupEmptyDesign() {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }

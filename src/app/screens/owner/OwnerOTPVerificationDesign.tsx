@@ -93,73 +93,67 @@ export function OwnerOTPVerificationDesign() {
                 </div>
               </div>
             </div>
-
-            {/* Progress Bar - No step indicator, just progress */}
-            <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.2)' }}>
-              <div 
-                className="h-full rounded-full transition-all"
-                style={{ background: 'white', width: '66%' }}
-              />
-            </div>
           </div>
 
-          {/* OTP Card - Overlapping */}
+          {/* OTP Card - Responsive Layout */}
           <div className="flex-1 px-5 pb-5 -mt-4">
-            <div className="bg-white rounded-[20px] p-5 mb-4" style={{ boxShadow: 'var(--card-shadow-green)' }}>
-              <div className="text-center mb-4">
-                <div className="text-[12px] mb-1" style={{ color: 'var(--text-soft)' }}>
-                  {strings.sentInfo}
-                </div>
-                <div className="text-[14px] font-bold" style={{ color: 'var(--text-dark)' }}>
-                  +91 98765 43210
-                </div>
-              </div>
-
-              {/* OTP Boxes - Green Theme */}
-              <div className="flex gap-2 justify-center mb-5">
-                {[5, 4, 7, 2, 8, 3].map((digit, i) => (
-                  <div
-                    key={i}
-                    className="w-11 h-12 rounded-xl flex items-center justify-center text-[20px] font-bold"
-                    style={{
-                      background: 'var(--green-pale)',
-                      border: '2px solid var(--green-primary)',
-                      boxShadow: '0 2px 8px rgba(26,122,59,0.15)',
-                      color: 'var(--text-dark)'
-                    }}
-                  >
-                    {digit}
+            <div className="min-h-full flex flex-col justify-center py-4">
+              <div className="bg-white rounded-[20px] p-5 mb-4" style={{ boxShadow: 'var(--card-shadow-green)' }}>
+                <div className="text-center mb-4">
+                  <div className="text-[12px] mb-1" style={{ color: 'var(--text-soft)' }}>
+                    {strings.sentInfo}
                   </div>
-                ))}
+                  <div className="text-[14px] font-bold" style={{ color: 'var(--text-dark)' }}>
+                    +91 98765 43210
+                  </div>
+                </div>
+
+                {/* OTP Boxes - Green Theme */}
+                <div className="flex gap-2 justify-center mb-5">
+                  {[5, 4, 7, 2, 8, 3].map((digit, i) => (
+                    <div
+                      key={i}
+                      className="w-11 h-12 rounded-xl flex items-center justify-center text-[20px] font-bold"
+                      style={{
+                        background: 'var(--green-pale)',
+                        border: '2px solid var(--green-primary)',
+                        boxShadow: '0 2px 8px rgba(26,122,59,0.15)',
+                        color: 'var(--text-dark)'
+                      }}
+                    >
+                      {digit}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Info Text */}
+                <div className="text-center">
+                  <div className="text-[11px] mb-2" style={{ color: 'var(--text-soft)' }}>
+                    {strings.editHint}<br />
+                    {strings.editHintShort}
+                  </div>
+                  <div className="text-[11px]" style={{ color: 'var(--text-soft)' }}>
+                    {strings.noCode}
+                  </div>
+                  <button
+                    className="ky-tap-link text-[12px] font-bold mt-1"
+                    style={{ color: 'var(--green-primary)' }}
+                  >
+                    {strings.resend}
+                  </button>
+                </div>
               </div>
 
-              {/* Info Text */}
-              <div className="text-center">
-                <div className="text-[11px] mb-2" style={{ color: 'var(--text-soft)' }}>
-                  {strings.editHint}<br />
-                  {strings.editHintShort}
-                </div>
-                <div className="text-[11px]" style={{ color: 'var(--text-soft)' }}>
-                  {strings.noCode}
-                </div>
-                <button
-                  className="ky-tap-link text-[12px] font-bold mt-1"
-                  style={{ color: 'var(--green-primary)' }}
-                >
-                  {strings.resend}
-                </button>
-              </div>
-            </div>
-
-            {/* Keyboard Hint Card */}
-            <div 
-              className="rounded-[16px] p-4"
-              style={{ background: '#F5F2ED', border: '1px solid #E8E3DA' }}
-            >
-              <div className="flex items-center gap-3">
-                <div className="text-2xl">⌨️</div>
-                <div className="text-[11px] leading-relaxed" style={{ color: 'var(--text-mid)' }}>
-                  {strings.keyboardHelper}
+              {/* Keyboard Hint Card */}
+              <div 
+                className="rounded-[16px] p-4"
+                style={{ background: '#F5F2ED', border: '1px solid #E8E3DA' }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="text-2xl">⌨️</div>
+                  <div className="text-[11px] leading-relaxed" style={{ color: 'var(--text-mid)' }}>
+                    {strings.keyboardHelper}
+                  </div>
                 </div>
               </div>
             </div>

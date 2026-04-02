@@ -563,9 +563,6 @@ export default function App() {
               <ScreenCard label="O5 · Profile Setup">
                 <ProfileSetupOwnerDesign />
               </ScreenCard>
-              <ScreenCard label="O6 · Add First Equipment">
-                <AddEquipmentEmptyDesign />
-              </ScreenCard>
             </FlowSection>
 
             {/* Owner Dashboard Flow */}

@@ -25,10 +25,10 @@ export function OwnerPhoneVerifyDesign() {
       marathi: 'फोन नंबर'
     }),
     phonePlaceholder: t({
-      english: 'Enter your phone number',
-      hindi: 'अपना फोन नंबर दर्ज करें',
-      tamil: 'உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்',
-      marathi: 'आपला फोन नंबर एंटर करा'
+      english: '98765 4321',
+      hindi: '98765 4321',
+      tamil: '98765 4321',
+      marathi: '98765 4321'
     }),
     sendOtp: t({
       english: 'Send OTP',
@@ -74,15 +74,7 @@ export function OwnerPhoneVerifyDesign() {
               <div className="text-[13px] mb-1" style={{ color: 'rgba(255,255,255,0.7)' }}>
                 {strings.ownerRegistration}
               </div>
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <motion.div
-                  animate={{ translateY: [0, -4, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                  className="text-[28px]"
-                  style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.3))' }}
-                >
-                  🚜
-                </motion.div>
+              <div className="flex items-center justify-center mb-2">
                 <div
                   className="text-white text-[28px] font-extrabold"
                   style={{ fontFamily: "'Baloo 2', cursive", letterSpacing: '-0.5px' }}
@@ -100,14 +92,15 @@ export function OwnerPhoneVerifyDesign() {
           </div>
 
           {/* Registration Form */}
-          <div className="flex-1 overflow-y-auto px-5 pb-5 -mt-4">
-            <div
-              className="bg-white rounded-[20px] p-5 relative overflow-hidden"
-              style={{
-                boxShadow: 'var(--card-shadow-green)',
-                border: '2px solid var(--green-primary)'
-              }}
-            >
+          <div className="flex-1 px-5 pb-5 -mt-4">
+            <div className="min-h-full flex flex-col justify-center py-4">
+              <div
+                className="bg-white rounded-[20px] p-5 relative overflow-hidden"
+                style={{
+                  boxShadow: 'var(--card-shadow-green)',
+                  border: '2px solid var(--green-primary)'
+                }}
+              >
               {/* Accent stripe */}
               <div className="absolute top-0 left-0 right-0 h-1" style={{ background: 'linear-gradient(90deg, var(--green-primary), var(--green-light))' }} />
 
@@ -123,14 +116,15 @@ export function OwnerPhoneVerifyDesign() {
                   className="bg-white rounded-[16px] px-4 h-14 flex items-center gap-3 border border-gray-200"
                   style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}
                 >
-                  <span className="text-[14px] font-medium" style={{ color: 'var(--text-dark)' }}>
-                    🇮🇳 +91
-                  </span>
+                  <div className="flex items-center gap-1">
+                    <span className="text-[14px]" style={{ color: 'var(--text-dark)' }}>🇮🇳</span>
+                    <span className="text-[14px] font-medium" style={{ color: 'var(--text-dark)' }}>+91</span>
+                  </div>
                   <input
                     type="tel"
                     placeholder={strings.phonePlaceholder}
-                    className="flex-1 text-[14px] outline-none bg-transparent"
-                    style={{ color: 'var(--text-dark)' }}
+                    className="flex-1 text-[14px] outline-none bg-transparent border-none"
+                    style={{ color: 'var(--text-dark)', width: '120px' }}
                   />
                 </div>
               </div>
@@ -145,9 +139,8 @@ export function OwnerPhoneVerifyDesign() {
               >
                 {strings.sendOtp}
               </button>
-            </div>
+              </div>
 
-            
             {/* Trust Badge */}
             <div className="text-center mt-6">
               <div
@@ -158,14 +151,15 @@ export function OwnerPhoneVerifyDesign() {
               </div>
             </div>
           </div>
-
-          {/* Notch */}
-          <div
-            className="absolute top-[10px] left-1/2 -translate-x-1/2 w-20 h-6 bg-[#111] z-50"
-            style={{ borderRadius: '0 0 14px 14px' }}
-          />
         </div>
       </div>
+
+      {/* Notch */}
+      <div
+        className="absolute top-[10px] left-1/2 -translate-x-1/2 w-20 h-6 bg-[#111] z-50"
+        style={{ borderRadius: '0 0 14px 14px' }}
+      />
+    </div>
     </div>
   );
 }

@@ -1,9 +1,40 @@
 import { useLanguage } from '../../contexts/language';
 import { OwnerBottomNav } from '../../components/OwnerBottomNav';
+import { OwnerHeader } from '../../components/owner/OwnerHeader';
+import { OwnerActionStatsCards } from '../../components/owner/OwnerActionStatsCards';
+import { RequestCard } from '../../components/owner/RequestCard';
+import { OpportunityCard } from '../../components/owner/OpportunityCard';
 
 export function OwnerDashboardDesign() {
   const { selectText } = useLanguage();
   const t = (options: Parameters<typeof selectText>[0]) => selectText(options);
+
+  // Get time-based greeting
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) {
+      return t({
+        english: 'Good Morning 👋',
+        hindi: 'सुप्रभात 👋',
+        tamil: 'காலை வணக்கம் 👋',
+        marathi: 'सुप्रभात 👋'
+      });
+    } else if (hour < 18) {
+      return t({
+        english: 'Good Afternoon 👋',
+        hindi: 'शुभ दोपहर 👋',
+        tamil: 'மதிய வணக்கம் 👋',
+        marathi: 'शुभ दुपार 👋'
+      });
+    } else {
+      return t({
+        english: 'Good Evening 👋',
+        hindi: 'शुभ संध्या 👋',
+        tamil: 'மாலை வணக்கம் 👋',
+        marathi: 'शुभ संध्याकाळ 👋'
+      });
+    }
+  };
 
   const strings = {
     subtitle: t({
@@ -77,6 +108,54 @@ export function OwnerDashboardDesign() {
       hindi: '/घंटा',
       tamil: '/மணி',
       marathi: '/तास'
+    }),
+    activeStatus: t({
+      english: 'Active',
+      hindi: 'सक्रिय',
+      tamil: 'செயலில்',
+      marathi: 'सक्रिय'
+    }),
+    requestsPending: t({
+      english: 'requests pending',
+      hindi: 'अनुरोध लंबित',
+      tamil: 'கோரிக்கைகள் நிலுவையில்',
+      marathi: 'विनंत्या प्रलंबित'
+    }),
+    viewAllRequests: t({
+      english: 'View All',
+      hindi: 'सभी देखें',
+      tamil: 'அனைத்தையும் பார்க்கவும்',
+      marathi: 'सर्व पहा'
+    }),
+    moreRequests: t({
+      english: 'more requests',
+      hindi: 'और अनुरोध',
+      tamil: 'மேலும் கோரிக்கைகள்',
+      marathi: 'अधिक विनंत्या'
+    }),
+    sendOffer: t({
+      english: 'Send Offer',
+      hindi: 'प्रस्ताव भेजें',
+      tamil: 'சலுகையை அனுப்பவும்',
+      marathi: 'ऑफर पाठवा'
+    }),
+    viewAllOpportunities: t({
+      english: 'View All Opportunities',
+      hindi: 'सभी अवसर देखें',
+      tamil: 'அனைத்து வாய்ப்புகளையும் பார்க்கவும்',
+      marathi: 'सर्व संधी पहा'
+    }),
+    kmAway: t({
+      english: 'km away',
+      hindi: 'किमी दूर',
+      tamil: 'கி.மீ தொலைவில்',
+      marathi: 'किमी दूर'
+    }),
+    newOpportunities: t({
+      english: 'NEW',
+      hindi: 'नया',
+      tamil: 'புதிய',
+      marathi: 'नवीन'
     })
   };
 
@@ -97,212 +176,115 @@ export function OwnerDashboardDesign() {
             <div className="flex gap-1 items-center text-[11px]">📶 🔋</div>
           </div>
 
-          {/* Modern Header with Green Gradient */}
-          <div 
-            className="px-[18px] pt-5 pb-6 rounded-b-[36px] relative"
-            style={{ 
-              background: 'var(--gradient-green)',
-              boxShadow: 'var(--card-shadow-green)',
-              backgroundImage: `
-                var(--gradient-green),
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
-              `,
-              backgroundBlendMode: 'overlay'
-            }}
+          {/* Modern Header with Action Stats */}
+          <OwnerHeader
+            title="Harpreet Singh"
+            userName="Harpreet Singh"
+            greeting={getGreeting()}
+            activeStatus={`${strings.activeStatus} • 3 ${strings.requestsPending}`}
+            showNotification={true}
+            notificationCount={3}
+            showSettings={true}
           >
-            <div className="flex justify-between items-center mb-4 gap-3">
-              <div className="flex-1">
-                <div className="text-[13px] font-medium tracking-wide" style={{ color: 'rgba(255,255,255,0.85)', fontFamily: "'Inter', sans-serif" }}>
-                  🌿 {strings.subtitle}
-                </div>
-                <div 
-                  className="text-white text-[24px] font-bold mt-0.5"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
-                >
-                  Harpreet Singh
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  className="ky-tap-icon w-9 h-9 rounded-xl flex items-center justify-center text-base relative backdrop-blur-sm transition-transform active:scale-95"
-                  style={{
-                    background: 'rgba(255,255,255,0.15)',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                    color: 'white'
-                  }}
-                >
-                  🔔
-                  <div 
-                    className="absolute top-1 right-1 w-2 h-2 rounded-full"
-                    style={{ background: 'var(--saffron)', border: '1.5px solid white' }}
-                  />
-                </button>
-                <button
-                  type="button"
-                  aria-label="Switch to Farmer Mode"
-                  className="ky-tap-icon w-9 h-9 rounded-xl flex items-center justify-center text-base backdrop-blur-sm transition-transform active:scale-95"
-                  style={{
-                    background: 'rgba(255,255,255,0.15)',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                    color: 'white'
-                  }}
-                >
-                  🔁
-                </button>
-              </div>
-            </div>
-
-            {/* Stats Cards */}
-            <div className="grid grid-cols-3 gap-2">
-              <div 
-                className="rounded-[14px] p-3"
-                style={{ background: 'rgba(255,255,255,0.2)' }}
-              >
-                <div className="text-white text-[18px] font-bold" style={{ fontFamily: "'Poppins', sans-serif" }}>₹54K</div>
-                <div className="text-white text-[10px] font-medium" style={{ opacity: 0.85, fontFamily: "'Inter', sans-serif" }}>
-                  {strings.thisMonth}
-                </div>
-              </div>
-              <div 
-                className="rounded-[14px] p-3"
-                style={{ background: 'rgba(255,255,255,0.2)' }}
-              >
-                <div className="text-white text-[18px] font-bold" style={{ fontFamily: "'Poppins', sans-serif" }}>₹2.4L</div>
-                <div className="text-white text-[10px] font-medium" style={{ opacity: 0.85, fontFamily: "'Inter', sans-serif" }}>
-                  {strings.totalEarned}
-                </div>
-              </div>
-              <div 
-                className="rounded-[14px] p-3"
-                style={{ background: 'rgba(255,255,255,0.2)' }}
-              >
-                <div className="text-white text-[18px] font-bold" style={{ fontFamily: "'Poppins', sans-serif" }}>38</div>
-                <div className="text-white text-[10px] font-medium" style={{ opacity: 0.85, fontFamily: "'Inter', sans-serif" }}>
-                  {strings.bookings}
-                </div>
-              </div>
-            </div>
-          </div>
+            <OwnerActionStatsCards
+              pendingRequests={3}
+              activeBookings={2}
+              totalBookings={38}
+            />
+          </OwnerHeader>
 
           {/* Body */}
           <div className="flex-1 overflow-y-auto px-4 py-4">
             {/* Incoming Requests */}
-            <div className="flex justify-between items-center mb-[10px]">
+            <div className="flex justify-between items-center mb-2">
               <div 
                 className="text-[16px] font-bold"
                 style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--text-primary)' }}
               >
                 🔔 {strings.incomingRequests}
               </div>
-              <button className="ky-tap-link text-[12px] font-semibold" style={{ color: 'var(--saffron)', fontFamily: "'Inter', sans-serif" }}>{strings.viewAll}</button>
+              <button className="ky-tap-link text-[12px] font-semibold" style={{ color: 'var(--saffron)', fontFamily: "'Inter', sans-serif" }}>
+                {strings.viewAllRequests}
+              </button>
             </div>
 
-            <div className="bg-white rounded-[20px] p-4 mb-3" style={{ boxShadow: 'var(--card-shadow-sm)' }}>
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-2xl" style={{ background: 'var(--green-pale)' }}>👨‍🌾</div>
-                <div className="flex-1">
-                  <div className="text-[13px] font-bold" style={{ color: 'var(--text-primary)', fontFamily: "'Poppins', sans-serif" }}>
-                    Need to book equipment instead?
-                  </div>
-                  <div className="text-[11px] mt-0.5" style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}>
-                    Tap below to hop back into the Farmer experience.
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="ky-tap-icon text-[10px] font-semibold px-3 py-1 rounded-full"
-                  style={{ background: 'var(--saffron)', color: 'white' }}
-                >
-                  Switch Role
-                </button>
-              </div>
-            </div>
+            <div className="space-y-2 mb-4">
+              <RequestCard
+                farmerName="Ramu Kisan"
+                location="Wardha, Maharashtra"
+                duration="3 days"
+                dates="Jul 10–12"
+                price="₹7,200"
+                paymentMethod="Cash"
+                urgencyTimer="1:42:30"
+                urgencyLevel="urgent"
+                onAccept={() => console.log('Accept')}
+                onReject={() => console.log('Reject')}
+              />
 
-            <div
-              className="ky-tap-card bg-white rounded-[20px] p-4 mb-3"
-              style={{ boxShadow: 'var(--card-shadow-sm)', borderLeft: '4px solid var(--saffron)' }}
-            >
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <div className="font-bold text-[14px]" style={{ color: 'var(--text-primary)', fontFamily: "'Poppins', sans-serif" }}>Ramu Kisan</div>
-                  <div className="text-[11px]" style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}>📍 Wardha, Maharashtra · 3 days</div>
-                </div>
-                <div 
-                  className="rounded-[10px] px-2 py-0.5 text-[10px] font-bold"
-                  style={{ background: '#FFF3E8', border: '1.5px solid #FFD0A8', color: 'var(--saffron)' }}
-                >
-                  ⏱ 1:42:30
-                </div>
-              </div>
-              <div className="flex gap-2 mb-[10px]">
-                {['📅 Jul 10–12', '💰 ₹7,200', '💵 Cash'].map((item) => (
-                  <div 
-                    key={item}
-                    className="rounded-lg px-2 py-0.5 text-[10px] font-semibold"
-                    style={{ background: 'var(--green-pale)', color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-              <div className="flex gap-2">
-                <div
-                  className="ky-tap-action-destructive flex-1 rounded-[10px] py-2 text-xs font-bold text-center"
-                  style={{ background: '#FFF0F0', border: '1.5px solid #FFCCCC', color: '#CC3333' }}
-                >
-                  ✕ Reject
-                </div>
-                <div
-                  className="ky-tap-action-confirm flex-[2] rounded-[10px] py-2 text-xs font-bold text-white text-center"
-                  style={{ background: 'var(--gradient-saffron)', boxShadow: 'var(--card-shadow-saffron)', fontFamily: "'Poppins', sans-serif" }}
-                >
-                  ✓ Accept Booking
-                </div>
-              </div>
+              <RequestCard
+                farmerName="Suresh Patil"
+                location="Nagpur, Maharashtra"
+                duration="2 days"
+                dates="Jul 15–16"
+                price="₹4,800"
+                paymentMethod="UPI"
+                urgencyTimer="5:20:15"
+                urgencyLevel="high"
+                onAccept={() => console.log('Accept')}
+                onReject={() => console.log('Reject')}
+              />
+
+              <button 
+                className="w-full text-center text-[11px] font-semibold py-2 rounded-lg"
+                style={{ color: 'var(--saffron)', background: '#FFF3E8', fontFamily: "'Inter', sans-serif" }}
+              >
+                +1 {strings.moreRequests} • {strings.viewAllRequests} →
+              </button>
             </div>
 
             {/* Equipment Opportunities */}
-            <div
-              className="ky-tap-card bg-white rounded-[20px] p-4 mb-3"
-              style={{
-                boxShadow: 'var(--card-shadow-sm)',
-                borderLeft: '4px solid var(--green)'
-              }}
-            >
-              <div className="flex items-start gap-3">
-                <div
-                  className="w-11 h-11 rounded-xl flex items-center justify-center text-[22px] flex-shrink-0"
-                  style={{ background: 'var(--green-pale)' }}
-                >
-                  {'\u{1F4B0}'}
-                </div>
-                <div className="flex-1">
-                  <div className="flex justify-between items-start mb-1">
-                    <div
-                      className="font-bold text-[14px]"
-                      style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--text-primary)' }}
-                    >
-                      {strings.equipmentOpportunities}
-                    </div>
-                    <div
-                      className="rounded-[8px] px-2 py-0.5 text-[9px] font-bold"
-                      style={{ background: 'var(--saffron-pale)', color: 'var(--saffron)' }}
-                    >
-                      5 NEW
-                    </div>
-                  </div>
-                  <div className="text-[11px]" style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}>
-                    {strings.opportunitiesDesc}
-                  </div>
-                  <button
-                    className="ky-tap-link text-[11px] font-bold mt-2"
-                    style={{ color: 'var(--green)' }}
-                  >
-                    {strings.viewAll} {'\u2192'}
-                  </button>
-                </div>
+            <div className="flex justify-between items-center mb-2">
+              <div 
+                className="text-[16px] font-bold"
+                style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--text-primary)' }}
+              >
+                💰 {strings.equipmentOpportunities}
               </div>
+              <div
+                className="text-[11px] font-bold px-2 py-1 rounded-full"
+                style={{ background: 'var(--saffron-pale)', color: 'var(--saffron)' }}
+              >
+                5 {strings.newOpportunities}
+              </div>
+            </div>
+
+            <div className="space-y-2 mb-4">
+              <OpportunityCard
+                equipmentType="Tractor (50+ HP)"
+                location="Wardha"
+                distance={`12 ${strings.kmAway}`}
+                dates="Jul 15-17"
+                budget="₹7,000-8,000"
+                onSendOffer={() => console.log('Send offer')}
+              />
+
+              <OpportunityCard
+                equipmentType="Combine Harvester"
+                location="Nagpur"
+                distance={`25 ${strings.kmAway}`}
+                dates="Jul 20-22"
+                budget="₹14,000-16,000"
+                farmerCount={3}
+                onSendOffer={() => console.log('Send offer')}
+              />
+
+              <button 
+                className="w-full text-center text-[11px] font-semibold py-2 rounded-lg"
+                style={{ color: 'var(--green)', background: 'var(--green-pale)', fontFamily: "'Inter', sans-serif" }}
+              >
+                {strings.viewAllOpportunities} →
+              </button>
             </div>
 
             {/* My Listings */}

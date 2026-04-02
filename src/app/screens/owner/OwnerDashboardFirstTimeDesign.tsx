@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useLanguage } from '../../contexts/language';
-import { OnboardingTour, ownerFirstTimeTour } from '../../components/OnboardingTour';
+import { ArrowHighlightTour } from '../../components/ArrowHighlightTour';
+import { ownerFirstTimeTour } from '../../components/HighlightTour';
 import { OwnerBottomNav } from '../../components/OwnerBottomNav';
+import { OwnerHeader } from '../../components/owner/OwnerHeader';
+import { OwnerActionStatsCards } from '../../components/owner/OwnerActionStatsCards';
 
 export function OwnerDashboardFirstTimeDesign() {
   const [showTour, setShowTour] = useState(true);
+  const phoneContainerRef = useRef<HTMLDivElement | null>(null);
   const { selectText } = useLanguage();
   const t = (options: Parameters<typeof selectText>[0]) => selectText(options);
 
@@ -81,7 +85,7 @@ export function OwnerDashboardFirstTimeDesign() {
           boxShadow: '0 0 0 1px #333, 0 24px 64px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.1)'
         }}
       >
-        <div className="w-full h-full rounded-[28px] overflow-hidden relative flex flex-col" style={{ background: 'var(--bg-primary)' }}>
+        <div ref={phoneContainerRef} className="w-full h-full rounded-[28px] overflow-hidden relative flex flex-col" style={{ background: 'var(--bg-primary)' }}>
           {/* Status Bar */}
           <div className="flex justify-between items-center px-[18px] py-[10px] relative z-10">
             <span className="font-bold text-[11px]" style={{ fontFamily: "'Inter', sans-serif" }}>9:48</span>
@@ -89,81 +93,27 @@ export function OwnerDashboardFirstTimeDesign() {
           </div>
 
           {/* Modern Header with Green Gradient */}
-          <div 
-            className="px-[18px] pt-5 pb-6 rounded-b-[36px] relative"
-            style={{ 
-              background: 'var(--gradient-green)',
-              boxShadow: 'var(--card-shadow-green)',
-              backgroundImage: `
-                var(--gradient-green),
-                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
-              `,
-              backgroundBlendMode: 'overlay'
-            }}
-          >
-            <div className="flex justify-between items-center mb-4 gap-3">
-              <div className="flex-1">
-                <div className="text-[13px] font-medium tracking-wide" style={{ color: 'rgba(255,255,255,0.85)', fontFamily: "'Inter', sans-serif" }}>
-                  {strings.greeting}
-                </div>
-                <div 
-                  className="text-white text-[24px] font-bold mt-0.5"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
-                >
-                  {strings.subtitle}
-                </div>
+          <div id="owner-welcome-area" data-tour-target="welcome">
+            <OwnerHeader
+              title={strings.subtitle}
+              greeting={strings.greeting}
+              showNotification={true}
+              showSettings={true}
+            >
+              {/* Stats Cards - Empty State */}
+              <div id="owner-stats-cards" data-tour-target="stats">
+                <OwnerActionStatsCards
+                  pendingRequests={0}
+                  activeBookings={0}
+                  totalBookings={0}
+                />
               </div>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  className="ky-tap-icon w-9 h-9 rounded-xl flex items-center justify-center text-base"
-                  style={{
-                    background: 'rgba(255,255,255,0.2)',
-                    border: '1.5px solid rgba(255,255,255,0.4)',
-                    color: 'white'
-                  }}
-                >
-                  🔔
-                </button>
-              </div>
-            </div>
-
-            {/* Stats Cards - Empty State */}
-            <div className="grid grid-cols-3 gap-2">
-              <div 
-                className="rounded-[14px] p-3"
-                style={{ background: 'rgba(255,255,255,0.2)' }}
-              >
-                <div className="text-white text-[18px] font-bold" style={{ fontFamily: "'Poppins', sans-serif" }}>₹0</div>
-                <div className="text-white text-[10px] font-medium" style={{ opacity: 0.85, fontFamily: "'Inter', sans-serif" }}>
-                  {strings.earnings}
-                </div>
-              </div>
-              <div 
-                className="rounded-[14px] p-3"
-                style={{ background: 'rgba(255,255,255,0.2)' }}
-              >
-                <div className="text-white text-[16px] font-bold">0</div>
-                <div className="text-white text-[9px]" style={{ opacity: 0.85 }}>
-                  {strings.bookings}
-                </div>
-              </div>
-              <div 
-                className="rounded-[14px] p-3"
-                style={{ background: 'rgba(255,255,255,0.2)' }}
-              >
-                <div className="text-white text-[16px] font-bold">0</div>
-                <div className="text-white text-[9px]" style={{ opacity: 0.85 }}>
-                  {strings.equipment}
-                </div>
-              </div>
-            </div>
+            </OwnerHeader>
           </div>
 
           {/* Body - Empty State */}
-          <div className="flex-1 flex flex-col items-center justify-center px-5 pb-5">
+          <div className="flex-1 overflow-y-auto flex flex-col items-center justify-center px-5 pb-5 pt-8">
             <div className="text-center">
-              <div className="text-[64px] mb-4">🚜</div>
               <div 
                 className="text-[24px] font-bold mb-2"
                 style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--text-primary)' }}
@@ -175,6 +125,8 @@ export function OwnerDashboardFirstTimeDesign() {
               </div>
 
               <button
+                id="add-equipment-btn"
+                data-tour-target="add-equipment"
                 className="ky-tap-cta-primary w-full rounded-[16px] py-[18px] font-bold text-[16px] text-white flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98]"
                 style={{
                   background: 'var(--gradient-saffron)',
@@ -191,19 +143,39 @@ export function OwnerDashboardFirstTimeDesign() {
 
               {/* Opportunities Hint */}
               <div
-                className="mt-4 rounded-[14px] p-3 flex items-center gap-3"
-                style={{ background: 'var(--green-pale)', border: '1.5px solid var(--green)' }}
+                className="mt-4 ky-tap-card bg-white rounded-[20px] p-4"
+                style={{
+                  boxShadow: 'var(--card-shadow-sm)',
+                  borderLeft: '4px solid var(--green)'
+                }}
               >
-                <div className="text-[20px] flex-shrink-0">{'\u{1F4B0}'}</div>
-                <div className="text-[11px] font-semibold" style={{ color: 'var(--green)' }}>
-                  {strings.opportunitiesHint}
+                <div className="flex items-start gap-3">
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center text-[22px] flex-shrink-0"
+                    style={{ background: 'var(--green-pale)' }}
+                  >
+                    {'\u{1F4B0}'}
+                  </div>
+                  <div className="flex-1">
+                    <div
+                      className="font-bold text-[14px] mb-1"
+                      style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--text-primary)' }}
+                    >
+                      Farmers nearby are looking for equipment
+                    </div>
+                    <div className="text-[11px]" style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}>
+                      {strings.opportunitiesHint}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Bottom Nav */}
-          <OwnerBottomNav activeTab="home" />
+          <div id="owner-bottom-nav" data-tour-target="navigation">
+            <OwnerBottomNav activeTab="home" />
+          </div>
 
           {/* Notch */}
           <div
@@ -213,11 +185,15 @@ export function OwnerDashboardFirstTimeDesign() {
         </div>
       </div>
 
-      {/* Onboarding Tour */}
+      {/* Arrow Onboarding Tour - Only within phone */}
       {showTour && (
-        <OnboardingTour 
+        <ArrowHighlightTour 
           steps={ownerFirstTimeTour}
           onComplete={() => setShowTour(false)}
+          containerRef={phoneContainerRef}
+          userRole="owner"
+          showProgress={true}
+          allowSkip={true}
         />
       )}
     </div>

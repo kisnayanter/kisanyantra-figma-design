@@ -96,6 +96,21 @@ export function LandingHomeDesign() {
             className="px-5 pt-5 pb-8 rounded-b-[32px] relative overflow-hidden"
             style={{ background: 'linear-gradient(170deg, #FF6B00 0%, #E65100 55%, #1A7A3B 100%)' }}
           >
+            {/* Back Button - Absolutely positioned */}
+            <button
+              type="button"
+              aria-label="Back"
+              className="ky-tap-back w-8 h-8 rounded-[10px] flex items-center justify-center text-white text-base absolute top-5 left-5"
+              style={{
+                background: 'rgba(255,255,255,0.2)',
+                border: '1.5px solid rgba(255,255,255,0.4)',
+                boxShadow: '0 6px 14px rgba(0,0,0,0.18)'
+              }}
+              onClick={() => console.log('Navigate back to language selection')}
+            >
+              ←
+            </button>
+
             {/* Background decorative circles */}
             <div className="absolute w-[200px] h-[200px] rounded-full top-[-60px] right-[-60px]" style={{ background: 'rgba(255,255,255,0.06)' }} />
             <div className="absolute w-[120px] h-[120px] rounded-full bottom-[-30px] left-[-20px]" style={{ background: 'rgba(255,255,255,0.05)' }} />
@@ -105,14 +120,6 @@ export function LandingHomeDesign() {
                 {strings.greeting}
               </div>
               <div className="flex items-center justify-center gap-2 mb-2">
-                <motion.div
-                  animate={{ translateY: [0, -4, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                  className="text-[28px]"
-                  style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.3))' }}
-                >
-                  🚜
-                </motion.div>
                 <div
                   className="text-white text-[28px] font-extrabold"
                   style={{ fontFamily: "'Baloo 2', cursive", letterSpacing: '-0.5px' }}
@@ -130,10 +137,10 @@ export function LandingHomeDesign() {
           </div>
 
           {/* Action Cards */}
-          <div className="flex-1 overflow-y-auto px-5 pb-5 -mt-4">
+          <div className="flex-1 overflow-y-auto px-6 pb-6 -mt-2">
             {/* Find Equipment Card - Farmer Path */}
             <div
-              className="ky-tap-card bg-white rounded-[20px] p-5 mb-3 relative overflow-hidden"
+              className="ky-tap-card bg-white rounded-[20px] p-6 mb-6 relative overflow-hidden"
               style={{
                 boxShadow: 'var(--card-shadow)',
                 border: '2px solid var(--saffron)'
@@ -142,7 +149,7 @@ export function LandingHomeDesign() {
               {/* Accent stripe */}
               <div className="absolute top-0 left-0 right-0 h-1" style={{ background: 'linear-gradient(90deg, var(--saffron), #FF8C38)' }} />
 
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-5">
                 <div
                   className="w-14 h-14 rounded-[16px] flex items-center justify-center text-[28px] flex-shrink-0"
                   style={{ background: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)' }}
@@ -151,19 +158,19 @@ export function LandingHomeDesign() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div
-                    className="text-[18px] font-bold mb-0.5"
+                    className="text-[18px] font-bold mb-1.5"
                     style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
                   >
                     {strings.findTitle}
                   </div>
-                  <div className="text-[11px] leading-relaxed mb-3" style={{ color: 'var(--text-mid)' }}>
+                  <div className="text-[11px] leading-relaxed mb-4" style={{ color: 'var(--text-mid)' }}>
                     {strings.findDesc}
                   </div>
                 </div>
               </div>
 
               <button
-                className="ky-tap-cta-primary w-full rounded-[14px] py-[12px] font-bold text-[14px] text-white mt-1"
+                className="ky-tap-cta-primary w-full rounded-[14px] py-[14px] font-bold text-[14px] text-white mt-2"
                 style={{
                   background: 'linear-gradient(135deg, var(--saffron), #FF8C38)',
                   boxShadow: '0 4px 16px rgba(255,107,0,0.3)'
@@ -175,7 +182,7 @@ export function LandingHomeDesign() {
 
             {/* List Equipment Card - Owner Path */}
             <div
-              className="ky-tap-card bg-white rounded-[20px] p-5 mb-4 relative overflow-hidden"
+              className="ky-tap-card bg-white rounded-[20px] p-6 mb-6 relative overflow-hidden"
               style={{
                 boxShadow: 'var(--card-shadow)',
                 border: '2px solid var(--green)'
@@ -184,7 +191,7 @@ export function LandingHomeDesign() {
               {/* Accent stripe */}
               <div className="absolute top-0 left-0 right-0 h-1" style={{ background: 'linear-gradient(90deg, var(--green), var(--green-light))' }} />
 
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-5">
                 <div
                   className="w-14 h-14 rounded-[16px] flex items-center justify-center text-[28px] flex-shrink-0"
                   style={{ background: 'linear-gradient(135deg, #C8EFD4, #A4E0B5)' }}
@@ -193,19 +200,19 @@ export function LandingHomeDesign() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div
-                    className="text-[18px] font-bold mb-0.5"
+                    className="text-[18px] font-bold mb-1.5"
                     style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
                   >
                     {strings.listTitle}
                   </div>
-                  <div className="text-[11px] leading-relaxed mb-3" style={{ color: 'var(--text-mid)' }}>
+                  <div className="text-[11px] leading-relaxed mb-4" style={{ color: 'var(--text-mid)' }}>
                     {strings.listDesc}
                   </div>
                 </div>
               </div>
 
               <button
-                className="ky-tap-cta-primary w-full rounded-[14px] py-[12px] font-bold text-[14px] text-white mt-1"
+                className="ky-tap-cta-primary w-full rounded-[14px] py-[14px] font-bold text-[14px] text-white mt-2"
                 style={{
                   background: 'linear-gradient(135deg, var(--green), var(--green-light))',
                   boxShadow: '0 4px 16px rgba(26,122,59,0.3)'
@@ -215,8 +222,11 @@ export function LandingHomeDesign() {
               </button>
             </div>
 
+            {/* Divider */}
+            <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,107,0,0.1), transparent)' }} />
+            
             {/* Sign-in Link */}
-            <div className="text-center mt-3">
+            <div className="text-center mt-6">
               <button
                 className="ky-tap-link text-[11px] font-medium transition-colors hover:underline"
                 style={{ color: 'var(--saffron)' }}
@@ -226,7 +236,7 @@ export function LandingHomeDesign() {
             </div>
 
             {/* Trust Badge */}
-            <div className="text-center">
+            <div className="text-center mt-4">
               <div
                 className="inline-block rounded-full px-4 py-2 text-[11px] font-semibold"
                 style={{ background: 'var(--green-pale)', color: 'var(--green)' }}
