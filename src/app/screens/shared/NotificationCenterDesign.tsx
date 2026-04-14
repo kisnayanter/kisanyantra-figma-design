@@ -79,6 +79,53 @@ export function NotificationCenterDesign() {
               Today
             </div>
 
+            {/* Operator Invitation - Unread */}
+            <div
+              className="ky-tap-list-item bg-white rounded-[18px] p-4 mb-3 relative"
+              style={{
+                boxShadow: '0 4px 16px rgba(47, 128, 255, 0.12)',
+                border: '2px solid var(--operator-blue)'
+              }}
+            >
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: 'var(--operator-blue-pale)' }}>
+                  ⚙️
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-start justify-between mb-1">
+                    <div className="font-bold text-[13px]" style={{ color: 'var(--text-dark)' }}>
+                      Operator Invitation
+                    </div>
+                    <div className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
+                      1 min ago
+                    </div>
+                  </div>
+                  <div className="text-[12px] mb-2" style={{ color: 'var(--text-mid)' }}>
+                    <strong>Ramesh Patel</strong> invited you to operate their equipment
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      className="ky-tap-cta-primary flex-1 py-2 rounded-[10px] text-[12px] font-bold text-white"
+                      style={{ background: 'var(--gradient-operator)' }}
+                    >
+                      Accept
+                    </button>
+                    <button
+                      className="ky-tap-cta-secondary flex-1 py-2 rounded-[10px] text-[12px] font-bold"
+                      style={{ background: 'var(--cream)', color: 'var(--text-mid)' }}
+                    >
+                      Decline
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {/* Unread indicator */}
+              <div
+                className="absolute top-4 right-4 w-2.5 h-2.5 rounded-full"
+                style={{ background: 'var(--operator-blue)' }}
+              />
+            </div>
+
             {/* New Booking Request - Unread */}
             <div
               className="ky-tap-list-item bg-white rounded-[18px] p-4 mb-3 relative"

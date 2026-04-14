@@ -98,8 +98,32 @@ export function EquipmentEditDesign() {
     availabilityHint: t({
       english: 'Toggle off when equipment is being used personally',
       hindi: 'व्यक्तिगत उपयोग होने पर बंद करें',
-      tamil: 'தனிப்பட்ட பயன்பாட்டின் போது அணைக்கவும்',
+      tamil: 'தனிப்பட்ட பயன்பாட்டில் இருந்தால் மூடவும்',
       marathi: 'वैयक्तिक वापरासाठी बंद करा'
+    }),
+    operator: t({
+      english: 'Operator',
+      hindi: 'ऑपरेटर',
+      tamil: 'ஆபரேட்டர்',
+      marathi: 'ऑपरेटर'
+    }),
+    assignOperator: t({
+      english: 'Assign Operator',
+      hindi: 'ऑपरेटर असाइन करें',
+      tamil: 'ஆபரேட்டர் ஒதுக்கவும்',
+      marathi: 'ऑपरेटर नियुक्त करा'
+    }),
+    changeOperator: t({
+      english: 'Change Operator',
+      hindi: 'ऑपरेटर बदलें',
+      tamil: 'ஆபரேட்டரை மாற்றவும்',
+      marathi: 'ऑपरेटर बदला'
+    }),
+    removeOperator: t({
+      english: 'Remove Operator',
+      hindi: 'ऑपरेटर हटाएं',
+      tamil: 'ஆபரேட்டரை நீக்கவும்',
+      marathi: 'ऑपरेटर काढा'
     }),
     description: t({
       english: 'Description',
@@ -328,6 +352,43 @@ export function EquipmentEditDesign() {
               </div>
               <div className="text-[9px]" style={{ color: 'var(--text-soft)' }}>
                 {strings.availabilityHint}
+              </div>
+            </div>
+
+            {/* Operator Assignment */}
+            <div className="bg-white rounded-[18px] p-3.5 mb-2.5" style={{ boxShadow: 'var(--card-shadow-sm)' }}>
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-[10px] font-semibold" style={{ color: 'var(--text-soft)' }}>
+                  👨‍🌾 {strings.operator}
+                </div>
+                <button
+                  className="text-[9px] font-semibold px-2 py-0.5 rounded-md"
+                  style={{ color: 'var(--operator-blue)', border: '1px solid var(--operator-blue)', fontFamily: "'Inter', sans-serif" }}
+                >
+                  {strings.changeOperator}
+                </button>
+              </div>
+              <div
+                className="flex items-center gap-3 p-2.5 rounded-lg"
+                style={{ background: 'var(--operator-blue-pale)', border: '1px solid var(--operator-blue-tint)' }}
+              >
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-[20px]" style={{ background: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)' }}>
+                  👨‍🌾
+                </div>
+                <div className="flex-1">
+                  <div className="text-[13px] font-semibold" style={{ color: 'var(--text-primary)', fontFamily: "Poppins, sans-serif" }}>
+                    Ramesh Kumar
+                  </div>
+                  <div className="text-[10px]" style={{ color: 'var(--text-secondary)', fontFamily: "Inter, sans-serif" }}>
+                    +91 98765 43210
+                  </div>
+                </div>
+                <button
+                  className="text-[9px] font-semibold px-2 py-0.5 rounded-md"
+                  style={{ color: '#CC3333', border: '1px solid #FFCCCC', fontFamily: "Inter, sans-serif" }}
+                >
+                  {strings.removeOperator}
+                </button>
               </div>
             </div>
 

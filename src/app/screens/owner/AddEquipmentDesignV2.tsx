@@ -485,6 +485,42 @@ export function AddEquipmentDesignV2() {
                 </div>
               </div>
             </div>
+
+            {/* Operator Details (Optional) */}
+            <div 
+              className="bg-white rounded-[18px] p-4 mt-[10px] transition-shadow duration-300 hover:shadow-lg"
+              style={{ boxShadow: 'var(--card-shadow)' }}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-[11px] font-semibold" style={{ color: 'var(--text-soft)' }}>
+                  Assign Operator (Optional)
+                </div>
+                <div
+                  className="ky-tap-toggle w-11 h-6 rounded-full relative cursor-pointer transition-colors duration-200"
+                  style={{ background: '#E8E3DA' }}
+                >
+                  <div 
+                    className="absolute left-0.5 top-0.5 w-5 h-5 rounded-full bg-white transition-transform duration-200"
+                    style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
+                  />
+                </div>
+              </div>
+              <div className="text-[10px] mb-3" style={{ color: 'var(--text-soft)' }}>
+                Assign an operator to manage this equipment
+              </div>
+              <div className="flex items-center gap-3 p-3 rounded-xl" style={{ background: 'var(--cream)', border: '2px dashed #E8E3DA' }}>
+                <div className="text-2xl">👨‍🌾</div>
+                <div className="flex-1">
+                  <div className="text-[12px] font-semibold" style={{ color: 'var(--text-dark)' }}>
+                    Select Operator
+                  </div>
+                  <div className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
+                    Choose from your operator list
+                  </div>
+                </div>
+                <span className="text-[12px]">→</span>
+              </div>
+            </div>
           </div>
 
           {/* Bottom Button */}

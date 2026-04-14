@@ -54,6 +54,24 @@ export function LandingHomeDesign() {
       tamil: 'தொடங்குங்கள் →',
       marathi: 'सुरू करा →'
     }),
+    operatorTitle: t({
+      english: 'Operator Login',
+      hindi: 'ऑपरेटर लॉगिन',
+      tamil: 'ஆபரேட்டர் உள்நுழைவு',
+      marathi: 'ऑपरेटर लॉगिन'
+    }),
+    operatorDesc: t({
+      english: 'Manage assigned equipment, bookings & earnings as an operator',
+      hindi: 'ऑपरेटर के रूप में उपकरण, बुकिंग और कमाई प्रबंधित करें',
+      tamil: 'ஆபரேட்டராக ஒதுக்கப்பட்ட உபகரணம், முன்பதிவு மற்றும் வருமானத்தை நிர்வகிக்கவும்',
+      marathi: 'ऑपरेटर म्हणून सोपवलेली उपकरणे, बुकिंग आणि कमाई व्यवस्थापित करा'
+    }),
+    operatorCta: t({
+      english: 'Login as Operator →',
+      hindi: 'ऑपरेटर के रूप में लॉगिन →',
+      tamil: 'ஆபரேட்டராக உள்நுழையவும் →',
+      marathi: 'ऑपरेटर म्हणून लॉगिन करा →'
+    }),
     noSignup: t({
       english: '🔓 No signup required to search',
       hindi: '🔓 खोजने के लिए रजिस्ट्रेशन नहीं चाहिए',
@@ -219,6 +237,48 @@ export function LandingHomeDesign() {
                 }}
               >
                 {strings.listCta}
+              </button>
+            </div>
+
+            {/* Operator Login Card - Operator Path */}
+            <div
+              className="ky-tap-card bg-white rounded-[20px] p-6 mb-6 relative overflow-hidden"
+              style={{
+                boxShadow: 'var(--card-shadow)',
+                border: '2px solid var(--operator-blue)'
+              }}
+            >
+              {/* Accent stripe */}
+              <div className="absolute top-0 left-0 right-0 h-1" style={{ background: 'var(--gradient-operator)' }} />
+
+              <div className="flex items-start gap-5">
+                <div
+                  className="w-14 h-14 rounded-[16px] flex items-center justify-center text-[28px] flex-shrink-0"
+                  style={{ background: 'linear-gradient(135deg, var(--operator-blue-pale), var(--operator-blue-tint))' }}
+                >
+                  ⚙️
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div
+                    className="text-[18px] font-bold mb-1.5"
+                    style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
+                  >
+                    {strings.operatorTitle}
+                  </div>
+                  <div className="text-[11px] leading-relaxed mb-4" style={{ color: 'var(--text-mid)' }}>
+                    {strings.operatorDesc}
+                  </div>
+                </div>
+              </div>
+
+              <button
+                className="ky-tap-cta-primary w-full rounded-[14px] py-[14px] font-bold text-[14px] text-white mt-2"
+                style={{
+                  background: 'var(--gradient-operator)',
+                  boxShadow: '0 4px 16px rgba(47,128,255,0.3)'
+                }}
+              >
+                {strings.operatorCta}
               </button>
             </div>
 

@@ -1,6 +1,6 @@
 import { useLanguage } from '../contexts/language';
 
-type OwnerTab = 'home' | 'equipment' | 'bookings' | 'profile';
+type OwnerTab = 'home' | 'equipment' | 'bookings' | 'operators' | 'profile';
 
 interface OwnerBottomNavProps {
   activeTab: OwnerTab;
@@ -24,6 +24,11 @@ export function OwnerBottomNav({ activeTab }: OwnerBottomNavProps) {
       key: 'bookings',
       emoji: '\u{1F4CB}',
       label: selectText({ english: 'Bookings', hindi: '\u092C\u0941\u0915\u093F\u0902\u0917', tamil: '\u0BAE\u0BC1\u0BA9\u0BCD\u0BAA\u0BA4\u0BBF\u0BB5\u0BC1', marathi: '\u092C\u0941\u0915\u093F\u0902\u0917' })
+    },
+    {
+      key: 'operators',
+      emoji: '\u{1F465}',
+      label: selectText({ english: 'Operators', hindi: '\u0911\u092A\u0930\u0947\u091F\u0930', tamil: '\u0B9A\u0BC6\u0BAF\u0BA8\u0BCD\u0BA9\u0BB0\u0BCD\u0B95\u0BB3\u0BCD', marathi: '\u0D13\u0D2A\u0D30\u0D47\u0D1F\u0D30' })
     },
     {
       key: 'profile',

@@ -2,6 +2,143 @@ import { useEffect, useRef, useState } from 'react';
 import { LanguageProvider, useLanguage } from './contexts/language';
 import type { LanguageOption } from './contexts/language';
 
+/*
+ * ========================================
+ * COLOR PALETTE
+ * ========================================
+ *
+ * Primary Colors:
+ * - Deep Farm Green: #1F7A4C → #2DAA6A (gradient)
+ * - Harvest Yellow: #F4B400 (accents, progress bars)
+ * - Saffron: #FF6B00 → #FF8C38 (owner CTAs)
+ * - Operator Blue: #2F80FF → #00C6FF (operator CTAs, headers)
+ *
+ * Operator Blue Theme:
+ * - Primary: #2F80FF
+ * - Light: #5FA8FF
+ * - Dark: #256EFF
+ * - Pale: #EAF4FF
+ * - Tint: #CFE8FF
+ * - Gradient: linear-gradient(50deg, #2F80FF 0%, #00C6FF 100%)
+ * - Shadow: 0 8px 24px rgba(47, 128, 255, 0.15), 0 2px 8px rgba(0, 198, 255, 0.1)
+ *
+ * Usage:
+ * // Headers (farmer)
+ * background: 'var(--gradient-green)'
+ * boxShadow: 'var(--card-shadow-green)'
+ *
+ * // Owner CTAs
+ * background: 'var(--gradient-saffron)'
+ * boxShadow: 'var(--card-shadow-saffron)'
+ *
+ * // Farmer CTAs
+ * background: 'var(--gradient-green)'
+ * boxShadow: 'var(--card-shadow-green)'
+ *
+ * // Operator CTAs & Headers
+ * background: 'var(--gradient-operator)'
+ * boxShadow: 'var(--card-shadow-operator)'
+ *
+ * // Operator borders & accents
+ * borderColor: 'var(--operator-blue)'
+ * backgroundColor: 'var(--operator-blue-pale)'
+ */
+
+/*
+ * ========================================
+ * TYPOGRAPHY
+ * ========================================
+ *
+ * Font Families:
+ * - Poppins: Headings, buttons, price text, display text (16px-28px, w600-w800)
+ * - Inter: Body text, labels, captions, UI elements (11px-16px, w400-w600)
+ * - Noto Sans Devanagari: Hindi/Marathi text support
+ *
+ * Font Hierarchy:
+ * - Display Large: 20px, Poppins w800 (page headers)
+ * - Headings: 18px, Poppins w600-w700 (section headers, card titles)
+ * - Body: 16px, Inter w400-w500 (paragraph text, descriptions)
+ * - Labels & Buttons: 16px, Inter w400-w500 / Poppins w600 (form labels, button text)
+ * - Captions: 14px, Inter w400-w600 (secondary information, status chips)
+ * - Small Captions: 12px, Inter w400 (fine print, disclaimers)
+ */
+
+/*
+ * ========================================
+ * COMPONENT STATE & THEMING
+ * ========================================
+ *
+ * Operator Theme States:
+ * // Operator header with blue gradient
+ * <div style={{
+ *   background: 'var(--gradient-operator)',
+ *   boxShadow: 'var(--card-shadow-operator)'
+ * }}>
+ *
+ * // Operator card with blue border
+ * <div style={{
+ *   border: '2px solid var(--operator-blue)',
+ *   boxShadow: 'var(--card-shadow)'
+ * }}>
+ *
+ * // Operator accent stripe
+ * <div style={{
+ *   background: 'var(--gradient-operator)'
+ * }}>
+ *
+ * // Operator trust badge
+ * <div style={{
+ *   background: 'var(--operator-blue-pale)',
+ *   color: 'var(--operator-blue)'
+ * }}>
+ *
+ * // Operator input focus
+ * <input style={{
+ *   borderColor: 'var(--operator-blue)',
+ *   boxShadow: '0 0 0 3px rgba(47, 128, 255, 0.12)'
+ * }}>
+ *
+ * // Operator active state
+ * <button style={{
+ *   background: 'var(--gradient-operator)',
+ *   boxShadow: '0 4px 16px rgba(47, 128, 255, 0.3)'
+ * }}>
+ *
+ * // Operator text links
+ * <span style={{
+ *   color: 'var(--operator-blue)'
+ * }}>
+ *
+ * Theme Selection by Role:
+ * const theme = {
+ *   farmer: {
+ *     primary: 'var(--gradient-green)',
+ *     accent: 'var(--saffron)',
+ *     border: 'var(--saffron)',
+ *     shadow: 'var(--card-shadow-green)'
+ *   },
+ *   owner: {
+ *     primary: 'var(--gradient-saffron)',
+ *     accent: 'var(--saffron)',
+ *     border: 'var(--saffron)',
+ *     shadow: 'var(--card-shadow-saffron)'
+ *   },
+ *   operator: {
+ *     primary: 'var(--gradient-operator)',
+ *     accent: 'var(--operator-blue)',
+ *     border: 'var(--operator-blue)',
+ *     shadow: 'var(--card-shadow-operator)'
+ *   }
+ * };
+ *
+ * Dynamic Theming for shared screens:
+ * const buttonGradient = role === 'owner'
+ *   ? 'var(--gradient-saffron)'
+ *   : role === 'operator'
+ *   ? 'var(--gradient-operator)'
+ *   : 'var(--gradient-green)';
+ */
+
 // Shared screens
 import { LanguageSelectDesign } from './screens/shared/LanguageSelectDesign';
 import { LandingHomeDesign } from './screens/shared/LandingHomeDesign';
@@ -86,6 +223,29 @@ import { OwnerEquipmentListDesign } from './screens/owner/OwnerEquipmentListDesi
 import { EquipmentEditDesign } from './screens/owner/EquipmentEditDesign';
 import { OwnerEarningsDesign } from './screens/owner/OwnerEarningsDesign';
 
+// Owner Operator screens
+import { OperatorsListDesign } from './screens/owner/operators/OperatorsListDesign';
+import { InviteOperatorDesign } from './screens/owner/operators/InviteOperatorDesign';
+import { OperatorProfileDesign } from './screens/owner/operators/OperatorProfileDesign';
+import { AssignEquipmentDesign } from './screens/owner/operators/AssignEquipmentDesign';
+import { OperatorEarningsDesign } from './screens/owner/operators/OperatorEarningsDesign';
+import { RemoveOperatorDesign } from './screens/owner/operators/RemoveOperatorDesign';
+
+// Operator screens
+import { OperatorPhoneVerifyDesign } from './screens/operator/OperatorPhoneVerifyDesign';
+import { OperatorOTPVerifyDesign } from './screens/operator/OperatorOTPVerifyDesign';
+import { OperatorProfileSetupDesign } from './screens/operator/OperatorProfileSetupDesign';
+import { OperatorDashboardDesign } from './screens/operator/OperatorDashboardDesign';
+import { OperatorEquipmentListDesign } from './screens/operator/OperatorEquipmentListDesign';
+import { OperatorBookingManagementDesign } from './screens/operator/OperatorBookingManagementDesign';
+import { OperatorEarningsDesign as OperatorOwnEarningsDesign } from './screens/operator/OperatorEarningsDesign';
+import { OperatorProfileViewDesign } from './screens/operator/OperatorProfileViewDesign';
+
+// Operator Messaging screens
+import { MessageThreadListDesign } from './screens/operator/MessageThreadListDesign';
+import { ChatInterfaceDesign } from './screens/operator/ChatInterfaceDesign';
+import { MessageFromBookingDesign } from './screens/operator/MessageFromBookingDesign';
+
 // Shared screens (additional)
 import { AppSettingsDesign } from './screens/shared/AppSettingsDesign';
 import { HelpSupportDesign } from './screens/shared/HelpSupportDesign';
@@ -94,7 +254,7 @@ import { HelpSupportDesign } from './screens/shared/HelpSupportDesign';
 import { InteractivePrototype } from './prototype/InteractivePrototype';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'farmer' | 'owner'>('farmer');
+  const [activeTab, setActiveTab] = useState<'farmer' | 'owner' | 'operator'>('farmer');
 
   return (
     <LanguageProvider>
@@ -165,6 +325,19 @@ export default function App() {
                 }}
               >
                 🚜 Owner
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('operator')}
+                className="px-6 py-2 text-sm font-bold rounded-full transition-all"
+                style={{
+                  fontFamily: "'Baloo 2', cursive",
+                  background: activeTab === 'operator' ? 'linear-gradient(135deg, #8B5CF6, #A78BFA)' : 'transparent',
+                  color: activeTab === 'operator' ? 'white' : 'var(--text-mid)',
+                  boxShadow: activeTab === 'operator' ? '0 6px 14px rgba(139,92,246,0.3)' : 'none'
+                }}
+              >
+                👷 Operator
               </button>
             </div>
           </div>
@@ -732,6 +905,135 @@ export default function App() {
                 <RatingScreenDesign />
               </ScreenCard>
             </FlowSection>
+
+            {/* Owner Operator Management Flow */}
+            <FlowSection
+              badge="OPERATOR MANAGEMENT"
+              badgeColor="var(--green)"
+              title="Owner Operator Management"
+              subtitle="Invite operators, assign equipment, track earnings"
+            >
+              <ScreenCard label="OO1 · Operators List">
+                <OperatorsListDesign />
+              </ScreenCard>
+              <ScreenCard label="OO2 · Invite Operator">
+                <InviteOperatorDesign />
+              </ScreenCard>
+              <ScreenCard label="OO3 · Operator Profile">
+                <OperatorProfileDesign />
+              </ScreenCard>
+              <ScreenCard label="OO4 · Assign Equipment">
+                <AssignEquipmentDesign />
+              </ScreenCard>
+              <ScreenCard label="OO5 · Operator Earnings">
+                <OperatorEarningsDesign />
+              </ScreenCard>
+              <ScreenCard label="OO6 · Remove Operator">
+                <RemoveOperatorDesign />
+              </ScreenCard>
+            </FlowSection>
+          </>
+        )}
+
+        {/* OPERATOR FLOWS */}
+        {activeTab === 'operator' && (
+          <>
+
+            {/* Operator Onboarding */}
+            <FlowSection
+              badge="OPERATOR ONBOARDING"
+              badgeColor="#2F80FF"
+              title="Operator Onboarding"
+              subtitle="Phone verify → OTP → Profile setup"
+            >
+              <ScreenCard label="OP1 · Phone Verification">
+                <OperatorPhoneVerifyDesign />
+              </ScreenCard>
+              <ScreenCard label="OP2 · OTP Verification">
+                <OperatorOTPVerifyDesign />
+              </ScreenCard>
+              <ScreenCard label="OP3 · Profile Setup">
+                <OperatorProfileSetupDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* Operator Dashboard Flow */}
+            <FlowSection
+              badge="OPERATOR DASHBOARD"
+              badgeColor="#8B5CF6"
+              title="Operator Dashboard"
+              subtitle="Home screen with stats, equipment, and bookings"
+            >
+              <ScreenCard label="OD1 · Dashboard">
+                <OperatorDashboardDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* Operator Equipment Flow */}
+            <FlowSection
+              badge="OPERATOR EQUIPMENT"
+              badgeColor="#8B5CF6"
+              title="Operator Equipment"
+              subtitle="View assigned equipment and manage bookings"
+            >
+              <ScreenCard label="OE1 · Equipment List">
+                <OperatorEquipmentListDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* Operator Booking Management Flow */}
+            <FlowSection
+              badge="BOOKING MANAGEMENT"
+              badgeColor="#8B5CF6"
+              title="Operator Booking Management"
+              subtitle="Accept/decline bookings, complete work, communicate with farmers"
+            >
+              <ScreenCard label="OB1 · Booking Management">
+                <OperatorBookingManagementDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* Operator Earnings Flow */}
+            <FlowSection
+              badge="EARNINGS"
+              badgeColor="#8B5CF6"
+              title="Operator Earnings"
+              subtitle="Track commission and earnings history"
+            >
+              <ScreenCard label="OR1 · My Earnings">
+                <OperatorOwnEarningsDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* Operator Profile Flow */}
+            <FlowSection
+              badge="PROFILE"
+              badgeColor="#8B5CF6"
+              title="Operator Profile"
+              subtitle="View and manage operator profile"
+            >
+              <ScreenCard label="OPV1 · Profile View">
+                <OperatorProfileViewDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* Operator Messaging Flow */}
+            <FlowSection
+              badge="MESSAGING"
+              badgeColor="#8B5CF6"
+              title="Operator Messaging"
+              subtitle="Chat with farmers, quick replies, booking context"
+            >
+              <ScreenCard label="OM1 · Message Thread List">
+                <MessageThreadListDesign />
+              </ScreenCard>
+              <ScreenCard label="OM2 · Chat Interface">
+                <ChatInterfaceDesign />
+              </ScreenCard>
+              <ScreenCard label="OM3 · Message from Booking">
+                <MessageFromBookingDesign />
+              </ScreenCard>
+            </FlowSection>
           </>
         )}
 
@@ -767,6 +1069,11 @@ export default function App() {
               { color: '#FFFBEB', name: 'Yellow Pale', hex: '#FFFBEB' },
               { color: '#FF6B00', name: 'Saffron (Owner)', hex: '#FF6B00' },
               { color: '#FF8C38', name: 'Saffron Light', hex: '#FF8C38' },
+              { color: '#2F80FF', name: 'Operator Blue', hex: '#2F80FF' },
+              { color: '#5FA8FF', name: 'Operator Blue Light', hex: '#5FA8FF' },
+              { color: '#256EFF', name: 'Operator Blue Dark', hex: '#256EFF' },
+              { color: '#EAF4FF', name: 'Operator Blue Pale', hex: '#EAF4FF' },
+              { color: '#CFE8FF', name: 'Operator Blue Tint', hex: '#CFE8FF' },
               { color: '#1A1A1A', name: 'Text Primary', hex: '#1A1A1A' },
               { color: '#6B7280', name: 'Text Secondary', hex: '#6B7280' },
               { color: '#F6F8F7', name: 'Background', hex: '#F6F8F7' },

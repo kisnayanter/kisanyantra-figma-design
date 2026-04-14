@@ -116,7 +116,19 @@
   --amber: #F59E0B;
   --amber-light: #FBBF24;
   --amber-pale: #FEF3C7;
-}
+
+  /* Operator Blue Theme - Premium Look */
+--operator-blue: #2F80FF;
+--operator-blue-light: #5FA8FF;
+--operator-blue-dark: #256EFF;
+--operator-blue-pale: #EAF4FF;
+--operator-blue-tint: #CFE8FF;
+
+/* Operator Gradient Definitions */
+--gradient-operator: linear-gradient(50deg, #2F80FF 0%, #00C6FF 100%);
+
+/* Operator Shadow System */
+--card-shadow-operator: 0 8px 24px rgba(47, 128, 255, 0.15), 0 2px 8px rgba(0, 198, 255, 0.1);}
 
 .dark {
   --background: oklch(0.145 0 0);

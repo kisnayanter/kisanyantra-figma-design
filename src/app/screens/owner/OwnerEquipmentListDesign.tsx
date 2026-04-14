@@ -95,6 +95,24 @@ export function OwnerEquipmentListDesign() {
       hindi: '/घंटा',
       tamil: '/மணி',
       marathi: '/तास'
+    }),
+    operator: t({
+      english: 'Operator',
+      hindi: 'ऑपरेटर',
+      tamil: 'ஆபரேட்டர்',
+      marathi: 'ऑपरेटर'
+    }),
+    noOperator: t({
+      english: 'No operator assigned',
+      hindi: 'कोई ऑपरेटर नहीं',
+      tamil: 'ஆபரேட்டர் இல்லை',
+      marathi: 'ऑपरेटर नाही'
+    }),
+    assignOperator: t({
+      english: 'Assign Operator',
+      hindi: 'ऑपरेटर असाइन करें',
+      tamil: 'ஆபரேட்டர் ஒதுக்கவும்',
+      marathi: 'ऑपरेटर नियुक्त करा'
     })
   };
 
@@ -113,7 +131,8 @@ export function OwnerEquipmentListDesign() {
       bookingCount: 12,
       totalEarned: '₹28,800',
       bg: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)',
-      actions: ['edit', 'pause', 'delete'] as const
+      actions: ['edit', 'pause', 'delete'] as const,
+      operator: { name: 'Ramesh Kumar', phone: '+91 98765 43210', photo: '👨‍🌾' }
     },
     {
       name: 'Combine Harvester',
@@ -129,7 +148,8 @@ export function OwnerEquipmentListDesign() {
       bookingCount: 8,
       totalEarned: '₹40,000',
       bg: 'linear-gradient(135deg, #C8EFD4, #A4E0B5)',
-      actions: ['edit', 'resume', 'delete'] as const
+      actions: ['edit', 'resume', 'delete'] as const,
+      operator: null
     },
     {
       name: 'Rotavator',
@@ -145,7 +165,8 @@ export function OwnerEquipmentListDesign() {
       bookingCount: 5,
       totalEarned: '₹4,000',
       bg: 'linear-gradient(135deg, #E8D5F5, #D4B8E8)',
-      actions: ['edit', 'pause', 'delete'] as const
+      actions: ['edit', 'pause', 'delete'] as const,
+      operator: { name: 'Suresh Patil', phone: '+91 87654 32109', photo: '👨‍🌾' }
     }
   ];
 
@@ -270,6 +291,38 @@ export function OwnerEquipmentListDesign() {
                   >
                     {item.bookingCount} {strings.bookings} · {item.totalEarned} {strings.earned}
                   </div>
+
+                  {/* Operator Info */}
+                  {item.operator ? (
+                    <div
+                      className="flex items-center gap-2 mb-2.5 px-2 py-1.5 rounded-lg"
+                      style={{ background: 'var(--operator-blue-pale)', border: '1px solid var(--operator-blue-tint)' }}
+                    >
+                      <span className="text-[14px]">{item.operator.photo}</span>
+                      <div className="flex-1">
+                        <div className="text-[10px] font-semibold" style={{ color: 'var(--operator-blue)', fontFamily: "'Inter', sans-serif" }}>
+                          {strings.operator}
+                        </div>
+                        <div className="text-[11px]" style={{ color: 'var(--text-primary)', fontFamily: "'Poppins', sans-serif" }}>
+                          {item.operator.name}
+                        </div>
+                      </div>
+                      <button
+                        className="text-[10px] font-semibold px-2 py-0.5 rounded-md"
+                        style={{ color: 'var(--operator-blue)', border: '1px solid var(--operator-blue)', fontFamily: "'Inter', sans-serif" }}
+                      >
+                        Change
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      className="w-full mb-2.5 py-1.5 rounded-lg text-[10px] font-semibold flex items-center justify-center gap-1"
+                      style={{ background: 'var(--cream)', color: 'var(--text-secondary)', border: '1.5px dashed #E0E0E0', fontFamily: "'Inter', sans-serif" }}
+                    >
+                      <span>👨‍🌾</span>
+                      {strings.assignOperator}
+                    </button>
+                  )}
 
                   {/* Action Buttons */}
                   <div className="flex gap-2">
