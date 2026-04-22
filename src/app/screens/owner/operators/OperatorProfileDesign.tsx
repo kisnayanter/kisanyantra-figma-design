@@ -42,10 +42,10 @@ export function OperatorProfileDesign() {
       marathi: 'सोपवलेली उपकरणे'
     }),
     commission: t({
-      english: 'Commission',
-      hindi: 'कमीशन',
-      tamil: 'கமிஷன்',
-      marathi: 'कमिशन'
+      english: 'Earnings & Compensation',
+      hindi: 'कमाई और मुआवजा',
+      tamil: 'வருமானம் & இழப்பீடு',
+      marathi: 'कमाई आणि नुकसान भरपाई'
     }),
     totalEarned: t({
       english: 'Total Earned',
@@ -59,11 +59,23 @@ export function OperatorProfileDesign() {
       tamil: 'இந்த மாதம்',
       marathi: 'या महिन्यात'
     }),
-    commissionRate: t({
-      english: 'Commission Rate',
-      hindi: 'कमीशन दर',
-      tamil: 'கமிஷன் விகிதம்',
-      marathi: 'कमिशन दर'
+    compensationModel: t({
+      english: 'Compensation Model',
+      hindi: 'मुआवजा मॉडल',
+      tamil: 'இழப்பீட்டு மாதிரி',
+      marathi: 'नुकसान भरपाई मॉडेल'
+    }),
+    editCompensation: t({
+      english: 'Edit Compensation',
+      hindi: 'मुआवजा संपादित करें',
+      tamil: 'இழப்பீட்டை திருத்து',
+      marathi: 'नुकसान भरपाई संपादित करा'
+    }),
+    earnings: t({
+      english: 'Earnings',
+      hindi: 'कमाई',
+      tamil: 'வருமானம்',
+      marathi: 'कमाई'
     }),
     assignMore: t({
       english: 'Assign More',
@@ -125,7 +137,9 @@ export function OperatorProfileDesign() {
     status: 'active',
     commissionEarned: '₹12,500',
     thisMonthCommission: '₹3,200',
-    commissionRate: '10%'
+    compensationModel: 'commission',
+    compensationRate: '10%',
+    compensationLabel: '📊 Commission % per Booking'
   };
 
   const assignedEquipment = [
@@ -204,34 +218,34 @@ export function OperatorProfileDesign() {
           {/* Body */}
           <div className="flex-1 overflow-y-auto px-4 py-4">
             {/* Profile Details */}
-            <div className="bg-white rounded-[16px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow-sm)' }}>
+            <div className="bg-white rounded-[20px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="space-y-3">
                 <div>
-                  <div className="text-[14px] mb-1" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                  <div className="text-[10px] mb-1" style={{ color: 'var(--text-soft)' }}>
                     {strings.phoneNumber}
                   </div>
-                  <div className="text-[16px] font-medium" style={{ color: 'var(--text-primary)', ...interFont }}>
+                  <div className="text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>
                     {operator.phone}
                   </div>
                 </div>
                 <div>
-                  <div className="text-[14px] mb-1" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                  <div className="text-[10px] mb-1" style={{ color: 'var(--text-soft)' }}>
                     {strings.location}
                   </div>
-                  <div className="text-[16px] font-medium" style={{ color: 'var(--text-primary)', ...interFont }}>
+                  <div className="text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>
                     {operator.location}
                   </div>
                 </div>
                 <div>
-                  <div className="text-[14px] mb-1" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                  <div className="text-[10px] mb-1" style={{ color: 'var(--text-soft)' }}>
                     {strings.skills}
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {operator.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-1 rounded-full text-[14px] font-medium"
-                        style={{ background: 'var(--green-pale)', color: 'var(--green)', ...interFont }}
+                        className="px-3 py-1 rounded-full text-[10px] font-medium"
+                        style={{ background: 'var(--green-pale)', color: 'var(--green)' }}
                       >
                         {skill}
                       </span>
@@ -239,10 +253,10 @@ export function OperatorProfileDesign() {
                   </div>
                 </div>
                 <div>
-                  <div className="text-[14px] mb-1" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                  <div className="text-[10px] mb-1" style={{ color: 'var(--text-soft)' }}>
                     {strings.joinDate}
                   </div>
-                  <div className="text-[16px] font-medium" style={{ color: 'var(--text-primary)', ...interFont }}>
+                  <div className="text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>
                     {operator.joinDate}
                   </div>
                 </div>
@@ -259,8 +273,8 @@ export function OperatorProfileDesign() {
                   {strings.assignedEquipment}
                 </div>
                 <button
-                  className="text-[14px] font-medium"
-                  style={{ color: 'var(--green)', ...interFont }}
+                  className="ky-tap-link text-[11px] font-medium"
+                  style={{ color: 'var(--green)' }}
                 >
                   {strings.assignMore}
                 </button>
@@ -269,20 +283,20 @@ export function OperatorProfileDesign() {
                 {assignedEquipment.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-white rounded-[12px] p-3 flex items-center gap-3"
-                    style={{ boxShadow: 'var(--card-shadow-sm)' }}
+                    className="bg-white rounded-[20px] p-4 flex items-center gap-3"
+                    style={{ boxShadow: 'var(--card-shadow)' }}
                   >
                     <div
-                      className="w-12 h-12 rounded-lg flex items-center justify-center text-[24px] flex-shrink-0"
+                      className="w-11 h-11 rounded-xl flex items-center justify-center text-[22px] flex-shrink-0"
                       style={{ background: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)' }}
                     >
                       {item.icon}
                     </div>
                     <div className="flex-1">
-                      <div className="text-[16px] font-bold" style={{ ...poppinsFont, color: 'var(--text-primary)' }}>
+                      <div className="font-bold text-[13px]" style={{ color: 'var(--text-dark)' }}>
                         {item.name}
                       </div>
-                      <div className="text-[14px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                      <div className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
                         {item.status} · {item.bookings} {strings.bookings}
                       </div>
                     </div>
@@ -291,45 +305,54 @@ export function OperatorProfileDesign() {
               </div>
             </div>
 
-            {/* Commission/Earnings */}
-            <div className="bg-white rounded-[16px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow-sm)' }}>
-              <div
-                className="text-[16px] font-bold mb-3"
-                style={{ ...poppinsFont, color: 'var(--text-primary)' }}
-              >
+            {/* Earnings & Compensation */}
+            <div className="bg-white rounded-[20px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow)' }}>
+              <div className="font-bold text-[13px] mb-3" style={{ color: 'var(--text-dark)', ...poppinsFont }}>
                 {strings.commission}
               </div>
               <div className="grid grid-cols-2 gap-3 mb-3">
                 <div className="text-center p-3 rounded-lg" style={{ background: 'var(--green-pale)' }}>
-                  <div
-                    className="text-[18px] font-extrabold"
-                    style={{ color: 'var(--green)', ...poppinsFont }}
-                  >
+                  <div className="text-[18px] font-extrabold" style={{ color: 'var(--green)', ...poppinsFont }}>
                     {operator.commissionEarned}
                   </div>
-                  <div className="text-[14px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                  <div className="text-[10px]" style={{ color: 'var(--text-soft)', ...interFont }}>
                     {strings.totalEarned}
                   </div>
                 </div>
                 <div className="text-center p-3 rounded-lg" style={{ background: 'var(--saffron-pale)' }}>
-                  <div
-                    className="text-[18px] font-extrabold"
-                    style={{ color: 'var(--saffron)', ...poppinsFont }}
-                  >
+                  <div className="text-[18px] font-extrabold" style={{ color: 'var(--saffron)', ...poppinsFont }}>
                     {operator.thisMonthCommission}
                   </div>
-                  <div className="text-[14px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                  <div className="text-[10px]" style={{ color: 'var(--text-soft)', ...interFont }}>
                     {strings.thisMonth}
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between items-center pt-3" style={{ borderTop: '1px solid #E0E0E0' }}>
-                <span className="text-[14px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
-                  {strings.commissionRate}
-                </span>
-                <span className="text-[16px] font-bold" style={{ color: 'var(--text-primary)', ...poppinsFont }}>
-                  {operator.commissionRate}
-                </span>
+
+              {/* Compensation model card */}
+              <div className="rounded-[12px] p-3" style={{ background: '#F0FDF4', border: '1.5px solid rgba(26,122,59,0.25)' }}>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="text-[10px] font-bold" style={{ color: 'var(--text-soft)', ...interFont }}>
+                    {strings.compensationModel}
+                  </div>
+                  <div
+                    className="ky-tap-link text-[9px] font-bold px-2 py-0.5 rounded-lg"
+                    style={{ background: 'var(--green-pale)', color: 'var(--green)', ...interFont }}
+                  >
+                    ✏️ {strings.editCompensation}
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center text-[14px]" style={{ background: '#DCFCE7' }}>📊</div>
+                  <div>
+                    <div className="text-[12px] font-bold" style={{ color: 'var(--green)', ...poppinsFont }}>
+                      {operator.compensationLabel}
+                    </div>
+                    <div className="text-[10px]" style={{ color: 'var(--green)', opacity: 0.8, ...interFont }}>
+                      {operator.compensationRate} of each booking
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 

@@ -38,10 +38,10 @@ export function OperatorsListDesign() {
       marathi: 'प्रलंबित'
     }),
     inviteOperator: t({
-      english: '＋ Invite Operator',
-      hindi: '＋ ऑपरेटर आमंत्रित करें',
-      tamil: '＋ செயல்படுத்தியை அழைக்கவும்',
-      marathi: '＋ ऑपरेटर आमंत्रित करा'
+      english: 'Invite Operator',
+      hindi: 'ऑपरेटर आमंत्रित करें',
+      tamil: 'செயல்படுத்தியை அழைக்கவும்',
+      marathi: 'ऑपरेटर आमंत्रित करा'
     }),
     assignedEquipment: t({
       english: 'Assigned Equipment',
@@ -78,6 +78,18 @@ export function OperatorsListDesign() {
       hindi: 'निष्क्रिय',
       tamil: 'செயலற்ற',
       marathi: 'निष्क्रिय'
+    }),
+    earningsLabel: t({
+      english: 'Earnings',
+      hindi: 'कमाई',
+      tamil: 'வருமானம்',
+      marathi: 'उत्पन्न'
+    }),
+    setupComp: t({
+      english: 'Setup Compensation',
+      hindi: 'मुआवजा सेटअप करें',
+      tamil: 'ஈடு அமைப்பு',
+      marathi: 'मोबदला सेटअप करा'
     })
   };
 
@@ -106,11 +118,12 @@ export function OperatorsListDesign() {
       id: 3,
       name: 'Vijay Singh',
       photo: '👨‍🌾',
-      assignedEquipment: 0,
+      assignedEquipment: 1,
       commissionEarned: '₹0',
-      status: 'pending',
-      statusColor: 'var(--amber)',
-      statusBg: 'var(--amber-pale)'
+      status: 'active',
+      statusColor: 'var(--green)',
+      statusBg: 'var(--green-pale)',
+      pendingCompensation: true
     },
     {
       id: 4,
@@ -174,58 +187,71 @@ export function OperatorsListDesign() {
             {operators.map((operator) => (
               <div
                 key={operator.id}
-                className="bg-white rounded-[18px] overflow-hidden mb-3"
-                style={{ boxShadow: 'var(--card-shadow-sm)' }}
+                className="ky-tap-card bg-white rounded-[20px] overflow-hidden mb-3"
+                style={{ 
+                  boxShadow: 'var(--card-shadow)',
+                  borderLeft: operator.status === 'active' ? '4px solid var(--green)' : operator.status === 'pending' ? '4px solid var(--amber)' : 'none'
+                }}
               >
-                <div className="p-3">
+                <div className="p-4">
                   {/* Header */}
                   <div className="flex items-center gap-3 mb-2">
                     <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center text-[24px]"
+                      className="w-11 h-11 rounded-xl flex items-center justify-center text-[22px] flex-shrink-0"
                       style={{ background: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)' }}
                     >
                       {operator.photo}
                     </div>
                     <div className="flex-1">
-                      <div className="text-[16px] font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--text-primary)' }}>
+                      <div className="font-bold text-[13px] mb-0.5" style={{ color: 'var(--text-dark)', fontFamily: 'Poppins, sans-serif' }}>
                         {operator.name}
                       </div>
-                      <div
-                        className="text-[14px] font-medium px-2 py-0.5 rounded-lg inline-block mt-1"
-                        style={{ background: operator.statusBg, color: operator.statusColor, fontFamily: "'Inter', sans-serif" }}
-                      >
-                        {operator.status === 'active' ? strings.active : operator.status === 'pending' ? strings.pending : strings.inactive}
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <div
+                          className="rounded-[8px] px-2 py-0.5 text-[9px] font-bold inline-block"
+                          style={{ background: operator.statusBg, color: operator.statusColor, fontFamily: 'Inter, sans-serif' }}
+                        >
+                          {operator.status === 'active' ? strings.active : operator.status === 'pending' ? strings.pending : strings.inactive}
+                        </div>
+                        {(operator as { pendingCompensation?: boolean }).pendingCompensation && (
+                          <div
+                            className="ky-tap-link rounded-[8px] px-2 py-0.5 text-[9px] font-bold inline-flex items-center gap-0.5"
+                            style={{ background: '#FEF3C7', color: '#D97706', border: '1px solid #FCD34D', fontFamily: 'Poppins, sans-serif' }}
+                          >
+                            ⚡ {strings.setupComp} →
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
 
                   {/* Stats */}
                   <div className="grid grid-cols-2 gap-2 mb-2">
-                    <div className="text-[14px]" style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}>
+                    <div className="text-[10px]" style={{ color: 'var(--text-soft)', fontFamily: 'Inter, sans-serif' }}>
                       {strings.assignedEquipment}: <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{operator.assignedEquipment}</span>
                     </div>
-                    <div className="text-[14px]" style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}>
-                      {strings.commissionEarned}: <span style={{ color: 'var(--harvest-yellow)', fontWeight: 700, fontFamily: "'Poppins', sans-serif" }}>{operator.commissionEarned}</span>
+                    <div className="text-[10px]" style={{ color: 'var(--text-soft)', fontFamily: 'Inter, sans-serif' }}>
+                      {strings.earningsLabel}: <span style={{ color: 'var(--harvest-yellow)', fontWeight: 700 }}>{operator.commissionEarned}</span>
                     </div>
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 justify-end">
                     <button
-                      className="ky-tap-cta-secondary flex-1 rounded-[10px] py-2 text-[18px] font-bold text-center"
-                      style={{ border: '1.5px solid #E0E0E0', color: 'var(--text-primary)', fontFamily: "'Poppins', sans-serif" }}
+                      className="ky-tap-action-secondary rounded-[10px] px-3 py-2 text-[11px] font-bold"
+                      style={{ background: 'var(--green-pale)', border: '1.5px solid var(--green)', color: 'var(--green)' }}
                     >
                       {strings.view}
                     </button>
                     <button
-                      className="ky-tap-cta-secondary flex-1 rounded-[10px] py-2 text-[18px] font-bold text-center"
-                      style={{ border: '1.5px solid #E0E0E0', color: 'var(--text-primary)', fontFamily: "'Poppins', sans-serif" }}
+                      className="ky-tap-action-secondary rounded-[10px] px-3 py-2 text-[11px] font-bold"
+                      style={{ background: 'var(--green-pale)', border: '1.5px solid var(--green)', color: 'var(--green)' }}
                     >
                       {strings.edit}
                     </button>
                     <button
-                      className="ky-tap-action-destructive flex-1 rounded-[10px] py-2 text-[18px] font-bold text-center"
-                      style={{ color: '#CC3333', fontFamily: "'Poppins', sans-serif" }}
+                      className="ky-tap-action-destructive rounded-[10px] px-3 py-2 text-[11px] font-bold"
+                      style={{ background: '#FFF0F0', border: '1.5px solid #FFCCCC', color: '#CC3333' }}
                     >
                       {strings.remove}
                     </button>

@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { useLanguage } from '../../contexts/language';
 import { OwnerBottomNav } from '../../components/OwnerBottomNav';
 
 export function OwnerFabMenuDesign() {
   const { selectText } = useLanguage();
   const t = (options: Parameters<typeof selectText>[0]) => selectText(options);
+  // Toggle to preview both FAB states in the prototype
+  const [hasPaymentMethods, setHasPaymentMethods] = useState(false);
 
   const strings = {
     addEquipment: t({ english: 'Add Equipment', hindi: 'उपकरण जोड़ें', tamil: 'உபகரணம் சேர்', marathi: 'उपकरण जोडा' }),
@@ -12,7 +15,13 @@ export function OwnerFabMenuDesign() {
     viewOpportunitiesSub: t({ english: 'Farmers looking for equipment', hindi: 'उपकरण ढूंढ रहे किसान', tamil: 'உபகரணம் தேடும் விவசாயிகள்', marathi: 'उपकरण शोधणारे शेतकरी' }),
     manageBookings: t({ english: 'Manage Bookings', hindi: 'बुकिंग प्रबंधित करें', tamil: 'முன்பதிவுகளை நிர்வகி', marathi: 'बुकिंग व्यवस्थापित करा' }),
     manageBookingsSub: t({ english: 'View incoming requests', hindi: 'आने वाले अनुरोध देखें', tamil: 'வரும் கோரிக்கைகளை பார்', marathi: 'येणारे अनुरोध पहा' }),
+    paymentProfile: t({ english: 'Payment Profile', hindi: 'भुगतान प्रोफ़ाइल', tamil: 'கட்டண சுயவிவரம்', marathi: 'पेमेंट प्रोफाइल' }),
+    paymentProfileSub: t({ english: 'Manage UPI, Bank & QR', hindi: 'UPI, बैंक और QR प्रबंधित करें', tamil: 'UPI, வங்கி & QR நிர்வகி', marathi: 'UPI, बँक आणि QR व्यवस्थापित करा' }),
+    paymentProfileSubActive: t({ english: '📱 UPI · 🏦 Bank  ·  Active', hindi: '📱 UPI · 🏦 बैंक  ·  सक्रिय', tamil: '📱 UPI · 🏦 வங்கி  ·  செயலில்', marathi: '📱 UPI · 🏦 बँक  ·  सक्रिय' }),
     quickActions: t({ english: 'Quick Actions', hindi: 'त्वरित कार्य', tamil: 'விரைவு செயல்கள்', marathi: 'जलद कृती' }),
+    setupRequired: t({ english: '⚠ SETUP', hindi: '⚠ सेटअप', tamil: '⚠ அமை', marathi: '⚠ सेटअप' }),
+    activeStatus: t({ english: '✓ ACTIVE', hindi: '✓ सक्रिय', tamil: '✓ செயலில்', marathi: '✓ सक्रिय' }),
+    toggleLabel: t({ english: 'Toggle payment state →', hindi: 'पेमेंट स्थिति बदलें →', tamil: 'கட்டண நிலை மாற்று →', marathi: 'पेमेंट स्थिती बदला →' }),
   };
 
   const menuItems = [
@@ -39,6 +48,15 @@ export function OwnerFabMenuDesign() {
       gradient: 'linear-gradient(135deg, #0088CC, #00AAFF)',
       shadow: '0 4px 16px rgba(0,136,204,0.3)',
       badge: '3',
+    },
+    {
+      icon: '💳',
+      label: strings.paymentProfile,
+      sub: hasPaymentMethods ? strings.paymentProfileSubActive : strings.paymentProfileSub,
+      gradient: 'linear-gradient(135deg, var(--green), var(--green-light))',
+      shadow: '0 4px 16px rgba(26,122,59,0.3)',
+      badge: hasPaymentMethods ? strings.activeStatus : strings.setupRequired,
+      isPayment: true,
     },
   ];
 
@@ -109,7 +127,13 @@ export function OwnerFabMenuDesign() {
                           {item.badge && (
                             <span
                               className="px-1.5 py-0.5 rounded-md text-[8px] font-bold text-white"
-                              style={{ background: 'var(--saffron)' }}
+                              style={{
+                                background: typeof item.badge === 'string' && item.badge.startsWith('⚠')
+                                  ? '#D97706'
+                                  : typeof item.badge === 'string' && item.badge.startsWith('✓')
+                                  ? 'var(--green)'
+                                  : 'var(--saffron)'
+                              }}
                             >
                               {item.badge}
                             </span>
@@ -123,6 +147,15 @@ export function OwnerFabMenuDesign() {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* Prototype toggle: switch payment state */}
+              <div
+                className="ky-tap-link w-full text-center text-[9px] py-1 rounded-[10px]"
+                style={{ background: 'rgba(26,122,59,0.08)', color: 'var(--green)', fontFamily: 'Inter, sans-serif' }}
+                onClick={() => setHasPaymentMethods(v => !v)}
+              >
+                {strings.toggleLabel} {hasPaymentMethods ? '(has methods)' : '(no methods)'}
               </div>
 
               {/* Close FAB (X icon replacing +) */}

@@ -1,4 +1,7 @@
 export function BookingStatusTrackingDesign() {
+  type PayPhase = 'none' | 'awaiting' | 'submitted' | 'verified';
+  const paymentPhase = ('awaiting' as unknown) as PayPhase;
+
   const timeline = [
     {
       status: 'Booked',
@@ -34,7 +37,7 @@ export function BookingStatusTrackingDesign() {
     },
     {
       status: 'Arrived',
-      time: 'In Progress',
+      time: 'Jul 10, 9:00 AM',
       description: 'Equipment has arrived at your farm',
       completed: true,
       icon: '📍',
@@ -42,21 +45,50 @@ export function BookingStatusTrackingDesign() {
     },
     {
       status: 'In Use',
-      time: 'Active Now',
-      description: 'Equipment is currently being used',
+      time: 'Jul 10 – 12',
+      description: 'Equipment was used for 3 days',
       completed: true,
       icon: '🚜',
-      color: 'var(--saffron)',
-      current: true
+      color: 'var(--green)'
     },
     {
       status: 'Completed',
-      time: 'Pending',
-      description: 'Rental period will end on Jul 12, 6:00 PM',
-      completed: false,
+      time: 'Jul 12, 6:00 PM',
+      description: 'Rental period ended. Equipment returned.',
+      completed: true,
       icon: '🏁',
-      color: 'var(--text-soft)'
-    }
+      color: 'var(--green)'
+    },
+    {
+      status: 'Awaiting Payment',
+      time: paymentPhase === 'awaiting' ? 'Now' : 'Jul 12, 6:05 PM',
+      description: paymentPhase === 'awaiting'
+        ? '⏳ Please pay ₹7,200 to Harpreet Singh'
+        : 'Payment request sent to you',
+      completed: paymentPhase !== 'awaiting',
+      icon: '�',
+      color: paymentPhase === 'awaiting' ? 'var(--saffron)' : 'var(--green)',
+      current: paymentPhase === 'awaiting',
+    },
+    {
+      status: (() => {
+        if (paymentPhase === 'verified') return 'Payment Verified ✓';
+        return 'Payment Submitted';
+      })(),
+      time: (() => {
+        if (paymentPhase === 'submitted' || paymentPhase === 'verified') return 'Jul 12, 4:35 PM';
+        return 'Pending';
+      })(),
+      description: (() => {
+        if (paymentPhase === 'verified') return '✅ Owner confirmed. Booking fully complete!';
+        if (paymentPhase === 'submitted') return '🔄 Proof uploaded · awaiting owner verification';
+        return 'Upload payment proof once paid';
+      })(),
+      completed: paymentPhase === 'verified',
+      icon: paymentPhase === 'verified' ? '✅' : '📤',
+      color: paymentPhase === 'verified' ? 'var(--green)' : '#E0E0E0',
+      current: paymentPhase === 'submitted',
+    },
   ];
 
   return (
@@ -253,28 +285,51 @@ export function BookingStatusTrackingDesign() {
 
           {/* Action Buttons */}
           <div className="px-4 pb-4 flex flex-col gap-2">
-            <div className="ky-tap-share w-full bg-[#25D366] text-white rounded-[14px] py-3 text-[13px] font-bold flex items-center justify-center gap-1.5">
-              📲 Contact Owner
-            </div>
+            {paymentPhase === 'awaiting' && (
+              <div
+                className="ky-tap-cta-primary w-full rounded-[14px] py-3 text-[13px] font-bold text-center text-white animate-pulse"
+                style={{ background: 'linear-gradient(135deg, var(--saffron), #FF8C38)', boxShadow: '0 4px 16px rgba(255,107,0,0.4)' }}
+              >
+                � Pay Now · ₹7,200 — भुगतान करें
+              </div>
+            )}
+            {paymentPhase === 'submitted' && (
+              <div
+                className="w-full rounded-[14px] py-3 text-[13px] font-bold text-center"
+                style={{ background: '#EFF6FF', color: '#2563EB', border: '1.5px solid #BFDBFE' }}
+              >
+                � Awaiting Owner Verification
+              </div>
+            )}
+            {paymentPhase === 'verified' && (
+              <div
+                className="ky-tap-cta-primary w-full rounded-[14px] py-3 text-[13px] font-bold text-center text-white"
+                style={{ background: 'linear-gradient(135deg, var(--green), var(--green-light))' }}
+              >
+                � Download Receipt
+              </div>
+            )}
+            {paymentPhase === 'none' && (
+              <div
+                className="ky-tap-cta-primary w-full rounded-[14px] py-3 text-sm font-bold text-center"
+                style={{ background: 'linear-gradient(135deg, var(--saffron), #FF8C38)', color: 'white', boxShadow: '0 4px 16px rgba(255,107,0,0.35)' }}
+              >
+                ✅ Mark as Complete · पूर्ण करें
+              </div>
+            )}
             <div className="flex gap-2">
               <div
-                className="ky-tap-cta-secondary flex-1 rounded-[14px] py-3 text-xs font-bold text-center"
+                className="ky-tap-cta-secondary flex-1 rounded-[14px] py-2.5 text-[11px] font-bold text-center"
                 style={{ background: 'var(--green-pale)', color: 'var(--green)', border: '1.5px solid var(--green)' }}
               >
                 📞 Call Support
               </div>
               <div
-                className="ky-tap-cta-secondary flex-1 rounded-[14px] py-3 text-xs font-bold text-center"
-                style={{ background: 'var(--saffron-pale)', color: 'var(--saffron)', border: '1.5px solid var(--saffron)' }}
+                className="ky-tap-share flex-1 rounded-[14px] py-2.5 text-[11px] font-bold text-center"
+                style={{ background: '#25D366', color: 'white' }}
               >
-                📍 Track Location
+                💬 Contact Owner
               </div>
-            </div>
-            <div
-              className="ky-tap-cta-primary w-full rounded-[14px] py-3 text-sm font-bold text-center"
-              style={{ background: 'linear-gradient(135deg, var(--saffron), #FF8C38)', color: 'white', boxShadow: '0 4px 16px rgba(255,107,0,0.35)' }}
-            >
-              ✅ Mark as Complete · पूर्ण करें
             </div>
           </div>
 

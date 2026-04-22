@@ -213,23 +213,23 @@ export function OperatorBookingManagementDesign() {
               {bookings.map((booking) => (
                 <div
                   key={booking.id}
-                  className="bg-white rounded-[18px] overflow-hidden"
-                  style={{ boxShadow: 'var(--card-shadow-sm)' }}
+                  className="ky-tap-card bg-white rounded-[20px] overflow-hidden"
+                  style={{ boxShadow: 'var(--card-shadow)' }}
                 >
-                  <div className="p-3">
+                  <div className="p-4">
                     {/* Header */}
                     <div className="flex items-start gap-3 mb-3">
                       <div
-                        className="w-12 h-12 rounded-full flex items-center justify-center text-[24px] flex-shrink-0"
+                        className="w-11 h-11 rounded-xl flex items-center justify-center text-[22px] flex-shrink-0"
                         style={{ background: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)' }}
                       >
                         {booking.farmerPhoto}
                       </div>
                       <div className="flex-1">
-                        <div className="text-[16px] font-bold" style={{ ...poppinsFont, color: 'var(--text-primary)' }}>
+                        <div className="font-bold text-[13px] mb-0.5" style={{ color: 'var(--text-dark)' }}>
                           {booking.farmer}
                         </div>
-                        <div className="text-[12px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                        <div className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
                           {strings.farmer} · {booking.location}
                         </div>
                       </div>
@@ -246,24 +246,36 @@ export function OperatorBookingManagementDesign() {
                     </div>
 
                     {/* Details */}
-                    <div className="mb-3">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[14px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
-                          {booking.equipmentIcon}
-                        </span>
-                        <span className="text-[14px]" style={{ color: 'var(--text-primary)', ...interFont }}>
-                          {booking.equipment}
-                        </span>
+                    <div 
+                      className="rounded-xl p-2.5 mb-3 flex items-center gap-2.5"
+                      style={{ background: 'var(--cream)' }}
+                    >
+                      <div 
+                        className="w-9 h-9 rounded-lg flex items-center justify-center text-[20px] flex-shrink-0"
+                        style={{ background: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)' }}
+                      >
+                        {booking.equipmentIcon}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[14px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
-                          🕐
-                        </span>
-                        <span className="text-[14px]" style={{ color: 'var(--text-primary)', ...interFont }}>
-                          {booking.time} · {booking.date}
-                        </span>
+                      <div className="flex-1">
+                        <div className="text-[11px] font-bold" style={{ color: 'var(--text-dark)' }}>
+                          {booking.equipment}
+                        </div>
+                        <div className="text-[9px]" style={{ color: 'var(--text-soft)' }}>
+                          {strings.equipment}
+                        </div>
                       </div>
                     </div>
+                    <div className="flex gap-2 mb-3">
+                      <div 
+                        className="rounded-lg px-2.5 py-1 text-[10px] font-semibold"
+                        style={{ background: 'var(--cream)', color: 'var(--text-mid)' }}
+                      >
+                        🕐 {booking.time} · {booking.date}
+                      </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="mb-3" style={{ borderTop: '1px solid #F5F2ED' }}></div>
 
                     {/* Actions */}
                     {booking.status === 'pending' ? (

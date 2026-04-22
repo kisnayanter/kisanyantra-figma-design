@@ -201,6 +201,10 @@ import { RequestManageDesign } from './screens/farmer/RequestManageDesign';
 import { RequestFulfilledDesign } from './screens/farmer/RequestFulfilledDesign';
 import { RequestExpiredDesign } from './screens/farmer/RequestExpiredDesign';
 import { CancelBookingConfirmDesign } from './screens/farmer/CancelBookingConfirmDesign';
+import { PaymentInstructionsDesign } from './screens/farmer/PaymentInstructionsDesign';
+import { UploadPaymentProofDesign } from './screens/farmer/UploadPaymentProofDesign';
+import { PaymentStatusTrackerDesign } from './screens/farmer/PaymentStatusTrackerDesign';
+import { PaymentDisputeDesign } from './screens/farmer/PaymentDisputeDesign';
 
 // Owner screens
 import { OwnerPhoneVerifyDesign } from './screens/owner/OwnerPhoneVerifyDesign';
@@ -219,9 +223,14 @@ import { OwnerBookingStatusTrackingDesign } from './screens/owner/BookingStatusT
 import { OfferSentConfirmDesign } from './screens/owner/OfferSentConfirmDesign';
 import { OwnerFabMenuDesign } from './screens/owner/OwnerFabMenuDesign';
 import { OwnerNearbyRequestAlertDesign } from './screens/owner/OwnerNearbyRequestAlertDesign';
+import { OwnerNoOpportunitiesDesign } from './screens/owner/OwnerNoOpportunitiesDesign';
 import { OwnerEquipmentListDesign } from './screens/owner/OwnerEquipmentListDesign';
 import { EquipmentEditDesign } from './screens/owner/EquipmentEditDesign';
 import { OwnerEarningsDesign } from './screens/owner/OwnerEarningsDesign';
+import { PaymentProfileSetupDesign } from './screens/owner/PaymentProfileSetupDesign';
+import { AddPaymentMethodDesign } from './screens/owner/AddPaymentMethodDesign';
+import { ManagePaymentMethodsDesign } from './screens/owner/ManagePaymentMethodsDesign';
+import { PaymentReviewDesign } from './screens/owner/PaymentReviewDesign';
 
 // Owner Operator screens
 import { OperatorsListDesign } from './screens/owner/operators/OperatorsListDesign';
@@ -230,6 +239,16 @@ import { OperatorProfileDesign } from './screens/owner/operators/OperatorProfile
 import { AssignEquipmentDesign } from './screens/owner/operators/AssignEquipmentDesign';
 import { OperatorEarningsDesign } from './screens/owner/operators/OperatorEarningsDesign';
 import { RemoveOperatorDesign } from './screens/owner/operators/RemoveOperatorDesign';
+import { OperatorCompensationSetupDesign } from './screens/owner/operators/OperatorCompensationSetupDesign';
+import { CompensationModelSelectSheetDesign } from './screens/owner/operators/CompensationModelSelectSheetDesign';
+import { OperatorEarningsCommissionDesign } from './screens/owner/operators/OperatorEarningsCommissionDesign';
+import { OperatorEarningsFixedBookingDesign } from './screens/owner/operators/OperatorEarningsFixedBookingDesign';
+import { OperatorEarningsMonthlySalaryDesign } from './screens/owner/operators/OperatorEarningsMonthlySalaryDesign';
+import { OperatorEarningsDailyWageDesign } from './screens/owner/operators/OperatorEarningsDailyWageDesign';
+import { OperatorCompensationSetupFixedDesign } from './screens/owner/operators/OperatorCompensationSetupFixedDesign';
+import { OperatorCompensationSetupMonthlyDesign } from './screens/owner/operators/OperatorCompensationSetupMonthlyDesign';
+import { OperatorCompensationSetupDailyDesign } from './screens/owner/operators/OperatorCompensationSetupDailyDesign';
+import { CompensationModelLandingPageDesign } from './screens/owner/operators/CompensationModelLandingPageDesign';
 
 // Operator screens
 import { OperatorPhoneVerifyDesign } from './screens/operator/OperatorPhoneVerifyDesign';
@@ -238,8 +257,14 @@ import { OperatorProfileSetupDesign } from './screens/operator/OperatorProfileSe
 import { OperatorDashboardDesign } from './screens/operator/OperatorDashboardDesign';
 import { OperatorEquipmentListDesign } from './screens/operator/OperatorEquipmentListDesign';
 import { OperatorBookingManagementDesign } from './screens/operator/OperatorBookingManagementDesign';
+import { OperatorBookingDetailDesign } from './screens/operator/OperatorBookingDetailDesign';
+import { OperatorStatusUpdateSheetDesign } from './screens/operator/OperatorStatusUpdateSheetDesign';
+import { OperatorStatusUpdatedDesign } from './screens/operator/OperatorStatusUpdatedDesign';
+import { OperatorBookingAllCompleteDesign } from './screens/operator/OperatorBookingAllCompleteDesign';
 import { OperatorEarningsDesign as OperatorOwnEarningsDesign } from './screens/operator/OperatorEarningsDesign';
 import { OperatorProfileViewDesign } from './screens/operator/OperatorProfileViewDesign';
+import { OperatorPaymentNotificationDesign } from './screens/operator/OperatorPaymentNotificationDesign';
+import { OperatorBookingPaymentStatusDesign } from './screens/operator/OperatorBookingPaymentStatusDesign';
 
 // Operator Messaging screens
 import { MessageThreadListDesign } from './screens/operator/MessageThreadListDesign';
@@ -616,6 +641,18 @@ export default function App() {
               <ScreenCard label="B7b · Booking Cancelled">
                 <CancelBookingConfirmDesign />
               </ScreenCard>
+              <ScreenCard label="B11 · Payment Instructions">
+                <PaymentInstructionsDesign />
+              </ScreenCard>
+              <ScreenCard label="B12 · Upload Payment Proof">
+                <UploadPaymentProofDesign />
+              </ScreenCard>
+              <ScreenCard label="B13 · Payment Status Tracker">
+                <PaymentStatusTrackerDesign />
+              </ScreenCard>
+              <ScreenCard label="B14 · Raise Payment Dispute">
+                <PaymentDisputeDesign />
+              </ScreenCard>
               <ScreenCard label="B8 · Share Booking">
                 <ShareBookingDetailsDesign />
               </ScreenCard>
@@ -802,6 +839,9 @@ export default function App() {
               <ScreenCard label="N1 · Push Notification + Alert Center">
                 <OwnerNearbyRequestAlertDesign />
               </ScreenCard>
+              <ScreenCard label="N2 · No Requests Nearby + Expand Search">
+                <OwnerNoOpportunitiesDesign />
+              </ScreenCard>
             </FlowSection>
 
             {/* PROTOTYPE: Owner Opportunities Flow */}
@@ -812,6 +852,7 @@ export default function App() {
                 subtitle="Notification received → Browse requests → Send offer → Confirmed"
                 screens={[
                   { id: 'alert', label: 'Nearby Request Alert', component: <OwnerNearbyRequestAlertDesign />, tapHint: 'View Request' },
+                  { id: 'empty', label: 'No Opportunities (Empty)', component: <OwnerNoOpportunitiesDesign />, tapHint: 'Expand Search' },
                   { id: 'opps', label: 'Nearby Opportunities', component: <EquipmentOpportunitiesDesign />, tapHint: 'Send Offer' },
                   { id: 'offer', label: 'Send Offer to Farmer', component: <SendOfferDesign />, tapHint: 'Send Offer' },
                   { id: 'sent', label: 'Offer Sent!', component: <OfferSentConfirmDesign />, tapHint: 'Done' },
@@ -826,6 +867,9 @@ export default function App() {
               title="Equipment Opportunities"
               subtitle="Browse farmer requests nearby, send offers, and grow your rental business"
             >
+              <ScreenCard label="OP0 · No Opportunities + Expand Search">
+                <OwnerNoOpportunitiesDesign />
+              </ScreenCard>
               <ScreenCard label="OP1 · Nearby Opportunities">
                 <EquipmentOpportunitiesDesign />
               </ScreenCard>
@@ -871,6 +915,27 @@ export default function App() {
               <ScreenCard label="B4 · Booking Status">
                 <OwnerBookingStatusTrackingDesign />
               </ScreenCard>
+              <ScreenCard label="B5 · Payment Review">
+                <PaymentReviewDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* Payment Profile Flow */}
+            <FlowSection
+              badge="PAYMENT PROFILE"
+              badgeColor="var(--green)"
+              title="Owner Payment Profile"
+              subtitle="Configure how you receive payments from renters"
+            >
+              <ScreenCard label="PP1 · Payment Profile Setup">
+                <PaymentProfileSetupDesign />
+              </ScreenCard>
+              <ScreenCard label="PP2 · Add Payment Method">
+                <AddPaymentMethodDesign />
+              </ScreenCard>
+              <ScreenCard label="PP3 · Manage Payment Methods">
+                <ManagePaymentMethodsDesign />
+              </ScreenCard>
             </FlowSection>
 
             {/* Communication & Support Flow */}
@@ -906,12 +971,27 @@ export default function App() {
               </ScreenCard>
             </FlowSection>
 
+            {/* PROTOTYPE: Operator Compensation Setup Flow */}
+            <div className="px-10 pb-[60px] flex justify-center">
+              <InteractivePrototype
+                accentColor="var(--green)"
+                title="Operator Compensation Setup Flow"
+                subtitle="Operator accepts invite → Setup Compensation → Pick model → Configure rate → Save"
+                screens={[
+                  { id: 'list',    label: 'Operators List',         component: <OperatorsListDesign />,                    tapHint: 'Tap ⚡ Setup Compensation badge' },
+                  { id: 'landing', label: 'Choose Model (Landing)',  component: <CompensationModelLandingPageDesign />,     tapHint: 'Tap a model card to configure' },
+                  { id: 'setup',   label: 'Commission % Config',    component: <OperatorCompensationSetupDesign />,        tapHint: 'Set rate → Save' },
+                  { id: 'profile', label: 'Operator Profile',       component: <OperatorProfileDesign />,                 tapHint: 'View updated compensation card' },
+                ]}
+              />
+            </div>
+
             {/* Owner Operator Management Flow */}
             <FlowSection
               badge="OPERATOR MANAGEMENT"
               badgeColor="var(--green)"
               title="Owner Operator Management"
-              subtitle="Invite operators, assign equipment, track earnings"
+              subtitle="Invite operators, assign equipment, configure compensation, track earnings"
             >
               <ScreenCard label="OO1 · Operators List">
                 <OperatorsListDesign />
@@ -919,16 +999,46 @@ export default function App() {
               <ScreenCard label="OO2 · Invite Operator">
                 <InviteOperatorDesign />
               </ScreenCard>
-              <ScreenCard label="OO3 · Operator Profile">
+              <ScreenCard label="OO3 · Operator Profile (with Comp)">
                 <OperatorProfileDesign />
               </ScreenCard>
               <ScreenCard label="OO4 · Assign Equipment">
                 <AssignEquipmentDesign />
               </ScreenCard>
-              <ScreenCard label="OO5 · Operator Earnings">
+              <ScreenCard label="OO5 · Comp Model Landing (Choose)">
+                <CompensationModelLandingPageDesign />
+              </ScreenCard>
+              <ScreenCard label="OO5a · Comp Setup · Commission %">
+                <OperatorCompensationSetupDesign />
+              </ScreenCard>
+              <ScreenCard label="OO5b · Comp Setup · Fixed/Booking">
+                <OperatorCompensationSetupFixedDesign />
+              </ScreenCard>
+              <ScreenCard label="OO5c · Comp Setup · Monthly Salary">
+                <OperatorCompensationSetupMonthlyDesign />
+              </ScreenCard>
+              <ScreenCard label="OO5d · Comp Setup · Daily Wage">
+                <OperatorCompensationSetupDailyDesign />
+              </ScreenCard>
+              <ScreenCard label="OO6 · Model Selection Sheet">
+                <CompensationModelSelectSheetDesign />
+              </ScreenCard>
+              <ScreenCard label="OO7 · Earnings · Commission %">
+                <OperatorEarningsCommissionDesign />
+              </ScreenCard>
+              <ScreenCard label="OO8 · Earnings · Fixed/Booking">
+                <OperatorEarningsFixedBookingDesign />
+              </ScreenCard>
+              <ScreenCard label="OO9 · Earnings · Monthly Salary">
+                <OperatorEarningsMonthlySalaryDesign />
+              </ScreenCard>
+              <ScreenCard label="OO10 · Earnings · Daily Wage">
+                <OperatorEarningsDailyWageDesign />
+              </ScreenCard>
+              <ScreenCard label="OO11 · Existing Earnings (Owner)">
                 <OperatorEarningsDesign />
               </ScreenCard>
-              <ScreenCard label="OO6 · Remove Operator">
+              <ScreenCard label="OO12 · Remove Operator">
                 <RemoveOperatorDesign />
               </ScreenCard>
             </FlowSection>
@@ -981,15 +1091,43 @@ export default function App() {
               </ScreenCard>
             </FlowSection>
 
+            {/* PROTOTYPE: Operator Booking Status Update Flow */}
+            <div className="px-10 pb-[60px] flex justify-center">
+              <InteractivePrototype
+                accentColor="var(--operator-blue)"
+                title="Operator Booking Status Update Flow"
+                subtitle="Tap a booking → View full timeline → Push status update → Confirm → All complete"
+                screens={[
+                  { id: 'list',     label: 'Booking List',              component: <OperatorBookingManagementDesign />,    tapHint: 'Tap a booking card' },
+                  { id: 'detail',   label: 'Booking Detail & Timeline', component: <OperatorBookingDetailDesign />,         tapHint: '⬆️ Update Status or ⚡ Mark All' },
+                  { id: 'sheet',    label: 'Status Update Sheet',       component: <OperatorStatusUpdateSheetDesign />,    tapHint: 'Confirm Update' },
+                  { id: 'confirm',  label: 'Status Updated!',           component: <OperatorStatusUpdatedDesign />,        tapHint: 'View Updated Booking Detail' },
+                  { id: 'complete', label: 'All Steps Complete',        component: <OperatorBookingAllCompleteDesign />,   tapHint: 'Back to Bookings' },
+                ]}
+              />
+            </div>
+
             {/* Operator Booking Management Flow */}
             <FlowSection
               badge="BOOKING MANAGEMENT"
               badgeColor="#8B5CF6"
               title="Operator Booking Management"
-              subtitle="Accept/decline bookings, complete work, communicate with farmers"
+              subtitle="Accept/decline bookings, track status, push updates, mark all complete"
             >
-              <ScreenCard label="OB1 · Booking Management">
+              <ScreenCard label="OB1 · Booking List">
                 <OperatorBookingManagementDesign />
+              </ScreenCard>
+              <ScreenCard label="OB2 · Booking Detail & Timeline">
+                <OperatorBookingDetailDesign />
+              </ScreenCard>
+              <ScreenCard label="OB3 · Status Update Sheet">
+                <OperatorStatusUpdateSheetDesign />
+              </ScreenCard>
+              <ScreenCard label="OB4 · Status Updated Confirmation">
+                <OperatorStatusUpdatedDesign />
+              </ScreenCard>
+              <ScreenCard label="OB5 · All Steps Complete">
+                <OperatorBookingAllCompleteDesign />
               </ScreenCard>
             </FlowSection>
 
@@ -1002,6 +1140,21 @@ export default function App() {
             >
               <ScreenCard label="OR1 · My Earnings">
                 <OperatorOwnEarningsDesign />
+              </ScreenCard>
+            </FlowSection>
+
+            {/* Operator Payment Notifications */}
+            <FlowSection
+              badge="PAYMENT NOTIFICATIONS"
+              badgeColor="#2F80FF"
+              title="Operator Payment Views"
+              subtitle="Payment alerts and booking payment status for operators"
+            >
+              <ScreenCard label="OP-P1 · Payment Notification Center">
+                <OperatorPaymentNotificationDesign />
+              </ScreenCard>
+              <ScreenCard label="OP-P2 · Booking Payment Status">
+                <OperatorBookingPaymentStatusDesign />
               </ScreenCard>
             </FlowSection>
 

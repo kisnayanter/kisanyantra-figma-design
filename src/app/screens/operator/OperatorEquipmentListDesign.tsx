@@ -146,26 +146,26 @@ export function OperatorEquipmentListDesign() {
               {equipment.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white rounded-[18px] overflow-hidden"
-                  style={{ boxShadow: 'var(--card-shadow-sm)' }}
+                  className="ky-tap-card bg-white rounded-[20px] overflow-hidden"
+                  style={{ boxShadow: 'var(--card-shadow)' }}
                 >
-                  <div className="p-3">
+                  <div className="p-4">
                     {/* Header */}
                     <div className="flex items-start gap-3 mb-3">
                       <div
-                        className="w-14 h-14 rounded-xl flex items-center justify-center text-[28px] flex-shrink-0"
+                        className="w-11 h-11 rounded-xl flex items-center justify-center text-[22px] flex-shrink-0"
                         style={{ background: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)' }}
                       >
                         {item.icon}
                       </div>
                       <div className="flex-1">
-                        <div className="text-[16px] font-bold" style={{ ...poppinsFont, color: 'var(--text-primary)' }}>
+                        <div className="font-bold text-[13px] mb-0.5" style={{ color: 'var(--text-dark)' }}>
                           {item.name}
                         </div>
-                        <div className="text-[12px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                        <div className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
                           {item.hp}
                         </div>
-                        <div className="text-[12px] mt-1" style={{ color: 'var(--text-soft)', ...interFont }}>
+                        <div className="text-[10px] mt-1" style={{ color: 'var(--text-soft)' }}>
                           {strings.assignedBy} {item.owner}
                         </div>
                       </div>
@@ -173,7 +173,7 @@ export function OperatorEquipmentListDesign() {
 
                     {/* Status */}
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-[14px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                      <span className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
                         {strings.status}
                       </span>
                       <div
@@ -189,13 +189,13 @@ export function OperatorEquipmentListDesign() {
                     </div>
 
                     {/* Bookings */}
-                    <div className="flex justify-between items-center pt-2" style={{ borderTop: '1px solid #E0E0E0' }}>
-                      <span className="text-[12px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                    <div className="flex justify-between items-center pt-3" style={{ borderTop: '1px solid #F5F2ED' }}>
+                      <span className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
                         {item.bookingsToday} {strings.bookingsToday}
                       </span>
                       <button
-                        className="text-[12px] font-medium"
-                        style={{ color: 'var(--operator-blue)', ...interFont }}
+                        className="ky-tap-link text-[11px] font-medium"
+                        style={{ color: 'var(--operator-blue)' }}
                       >
                         {strings.viewBookings}
                       </button>

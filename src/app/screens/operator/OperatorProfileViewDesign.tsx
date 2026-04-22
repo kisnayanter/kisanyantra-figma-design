@@ -149,37 +149,37 @@ export function OperatorProfileViewDesign() {
           {/* Body */}
           <div className="flex-1 overflow-y-auto px-4 py-4">
             {/* Profile Details */}
-            <div className="bg-white rounded-[16px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow-sm)' }}>
+            <div className="bg-white rounded-[20px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow)' }}>
               <div className="space-y-3">
                 <div>
-                  <div className="text-[14px] mb-1" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                  <div className="text-[10px] mb-1" style={{ color: 'var(--text-soft)' }}>
                     {strings.phoneNumber}
                   </div>
-                  <div className="text-[16px] font-medium" style={{ color: 'var(--text-primary)', ...interFont }}>
+                  <div className="text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>
                     {operator.phone}
                   </div>
                 </div>
                 <div>
-                  <div className="text-[14px] mb-1" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                  <div className="text-[10px] mb-1" style={{ color: 'var(--text-soft)' }}>
                     {strings.location}
                   </div>
-                  <div className="text-[16px] font-medium" style={{ color: 'var(--text-primary)', ...interFont }}>
+                  <div className="text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>
                     {operator.location}
                   </div>
                 </div>
                 <div>
-                  <div className="text-[14px] mb-1" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                  <div className="text-[10px] mb-1" style={{ color: 'var(--text-soft)' }}>
                     {strings.joined}
                   </div>
-                  <div className="text-[16px] font-medium" style={{ color: 'var(--text-primary)', ...interFont }}>
+                  <div className="text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>
                     {operator.joined}
                   </div>
                 </div>
                 <div>
-                  <div className="text-[14px] mb-1" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                  <div className="text-[10px] mb-1" style={{ color: 'var(--text-soft)' }}>
                     {strings.commissionRate}
                   </div>
-                  <div className="text-[16px] font-bold" style={{ color: 'var(--harvest-yellow)', ...poppinsFont }}>
+                  <div className="text-[13px] font-bold" style={{ color: 'var(--harvest-yellow)' }}>
                     {operator.commissionRate}
                   </div>
                 </div>

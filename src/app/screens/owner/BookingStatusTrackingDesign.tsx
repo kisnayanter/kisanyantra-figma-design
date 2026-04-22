@@ -1,4 +1,7 @@
 export function OwnerBookingStatusTrackingDesign() {
+  type PayPhase = 'none' | 'awaiting' | 'submitted' | 'verified';
+  const paymentPhase = ('submitted' as unknown) as PayPhase;
+
   const timeline = [
     {
       status: 'Booked',
@@ -42,21 +45,55 @@ export function OwnerBookingStatusTrackingDesign() {
     },
     {
       status: 'In Use',
-      time: 'Active Now',
-      description: 'Equipment is currently being used by farmer',
+      time: 'Jul 10–12',
+      description: 'Equipment used by farmer for 3 days',
       completed: true,
       icon: '\u{1F69C}',
-      color: 'var(--saffron)',
-      current: true
+      color: 'var(--green)'
     },
     {
       status: 'Completed',
-      time: 'Pending',
-      description: 'Rental period will end on Jul 12, 6:00 PM',
-      completed: false,
+      time: 'Jul 12, 6:00 PM',
+      description: 'Rental period ended. Equipment returned.',
+      completed: true,
       icon: '\u{1F3C1}',
-      color: 'var(--text-soft)'
-    }
+      color: 'var(--green)'
+    },
+    {
+      status: 'Awaiting Payment',
+      time: (() => {
+        if (paymentPhase === 'none') return 'Pending';
+        return 'Jul 12, 6:05 PM';
+      })(),
+      description: (() => {
+        if (paymentPhase === 'none') return 'Waiting for farmer to pay \u20B97,200';
+        return 'Payment request sent to Ramu Kisan';
+      })(),
+      completed: paymentPhase !== 'none',
+      icon: '\u{1F4B3}',
+      color: paymentPhase === 'none' ? 'var(--text-soft)' : 'var(--green)',
+      current: paymentPhase === 'none',
+    },
+    {
+      status: (() => {
+        if (paymentPhase === 'verified') return 'Payment Verified \u2713';
+        if (paymentPhase === 'submitted') return 'Payment Submitted';
+        return 'Payment Pending';
+      })(),
+      time: (() => {
+        if (paymentPhase === 'submitted' || paymentPhase === 'verified') return 'Jul 12, 4:35 PM';
+        return 'Pending';
+      })(),
+      description: (() => {
+        if (paymentPhase === 'verified') return '\u2705 Payment confirmed. Booking fully complete!';
+        if (paymentPhase === 'submitted') return '\uD83D\uDD04 Proof received \u00B7 Awaiting your review';
+        return 'Farmer has not submitted payment yet';
+      })(),
+      completed: paymentPhase === 'verified',
+      icon: paymentPhase === 'verified' ? '\u2705' : paymentPhase === 'submitted' ? '\uD83D\uDCE4' : '\u23F3',
+      color: paymentPhase === 'verified' ? 'var(--green)' : paymentPhase === 'submitted' ? 'var(--saffron)' : '#E0E0E0',
+      current: paymentPhase === 'submitted',
+    },
   ];
 
   return (
@@ -94,7 +131,7 @@ export function OwnerBookingStatusTrackingDesign() {
                 </div>
                 <div
                   className="text-white text-[20px] font-bold"
-                  style={{ fontFamily: "'Baloo 2', cursive" }}
+                  style={{ fontFamily: 'Poppins, sans-serif' }}
                 >
                   Track Booking
                 </div>
@@ -136,7 +173,7 @@ export function OwnerBookingStatusTrackingDesign() {
           <div className="flex-1 overflow-y-auto px-4 py-4">
             <div
               className="text-[12px] font-bold mb-3"
-              style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
+              style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--text-dark)' }}
             >
               {'\u{1F4CB}'} Booking Timeline
             </div>
@@ -171,7 +208,7 @@ export function OwnerBookingStatusTrackingDesign() {
                         className="text-[12px] font-bold"
                         style={{
                           color: event.completed ? 'var(--text-dark)' : 'var(--text-soft)',
-                          fontFamily: "'Baloo 2', cursive"
+                          fontFamily: 'Poppins, sans-serif'
                         }}
                       >
                         {event.status}
@@ -191,19 +228,73 @@ export function OwnerBookingStatusTrackingDesign() {
                     <div className="text-[10px] mt-1" style={{ color: 'var(--text-mid)' }}>
                       {event.description}
                     </div>
+                    {index === 1 && (
+                      <div className="text-[9px] mt-0.5 font-semibold" style={{ color: 'var(--green)', opacity: 0.75, fontFamily: 'Inter, sans-serif' }}>
+                        by you
+                      </div>
+                    )}
+                    {index >= 2 && index <= 5 && event.completed && (
+                      <div className="text-[9px] mt-0.5" style={{ color: 'var(--text-soft)', fontFamily: 'Inter, sans-serif' }}>
+                        by Ramesh Kumar (Operator)
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Farmer Info */}
+            {/* Operator Info */}
             <div
-              className="bg-white rounded-[18px] p-4 mt-4 mb-4"
+              className="bg-white rounded-[18px] p-4 mt-4 mb-3"
               style={{ boxShadow: 'var(--card-shadow)' }}
             >
               <div
                 className="text-[12px] font-bold mb-3"
-                style={{ fontFamily: "'Baloo 2', cursive", color: 'var(--text-dark)' }}
+                style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--text-dark)' }}
+              >
+                {'\u{1F6E0}\uFE0F'} Operator Handling This Booking
+              </div>
+              <div className="flex items-center gap-3 mb-3">
+                <div
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-[18px] flex-shrink-0"
+                  style={{ background: 'linear-gradient(135deg, #EAF4FF, #CFE8FF)' }}
+                >
+                  {'\u{1F477}'}
+                </div>
+                <div className="flex-1">
+                  <div className="text-[11px] font-bold" style={{ color: 'var(--text-dark)', fontFamily: 'Poppins, sans-serif' }}>
+                    Ramesh Kumar
+                  </div>
+                  <div className="text-[9px]" style={{ color: 'var(--text-soft)', fontFamily: 'Inter, sans-serif' }}>
+                    {'\u2B50'} 4.8 rating {'\u00B7'} Updated status 4 times
+                  </div>
+                </div>
+                <div
+                  className="ky-tap-link rounded-lg px-2 py-1 text-[9px] font-bold"
+                  style={{ background: '#EAF4FF', color: '#2F80FF', fontFamily: 'Poppins, sans-serif' }}
+                >
+                  {'\u{1F4DE}'} Call
+                </div>
+              </div>
+              <div
+                className="rounded-[10px] px-3 py-2 flex items-center gap-2"
+                style={{ background: '#EAF4FF' }}
+              >
+                <div className="text-[14px]">{'ℹ\uFE0F'}</div>
+                <div className="text-[9px]" style={{ color: '#2F80FF', fontFamily: 'Inter, sans-serif' }}>
+                  Operator marks each delivery step. You confirm final completion.
+                </div>
+              </div>
+            </div>
+
+            {/* Farmer Info */}
+            <div
+              className="bg-white rounded-[18px] p-4 mt-0 mb-4"
+              style={{ boxShadow: 'var(--card-shadow)' }}
+            >
+              <div
+                className="text-[12px] font-bold mb-3"
+                style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--text-dark)' }}
               >
                 {'\u{1F468}\u200D\u{1F33E}'} Farmer Details
               </div>
@@ -229,14 +320,40 @@ export function OwnerBookingStatusTrackingDesign() {
 
           {/* Action Buttons */}
           <div className="px-4 pb-4 flex flex-col gap-2">
-            <div className="ky-tap-share w-full bg-[#25D366] text-white rounded-[14px] py-3 text-[13px] font-bold flex items-center justify-center gap-1.5">
+            {paymentPhase === 'submitted' && (
+              <div
+                className="ky-tap-cta-primary w-full rounded-[14px] py-3 text-[13px] font-bold text-center text-white animate-pulse"
+                style={{ background: 'linear-gradient(135deg, var(--green), var(--green-light))', boxShadow: '0 4px 16px rgba(26,122,59,0.4)' }}
+              >
+                {'👀'} Review Payment Proof
+              </div>
+            )}
+            {paymentPhase === 'awaiting' && (
+              <div
+                className="w-full rounded-[14px] py-3 text-[13px] font-bold text-center"
+                style={{ background: '#FFFBEB', color: '#D97706', border: '1.5px solid #FCD34D' }}
+              >
+                {'⏳'} Waiting for Farmer Payment
+              </div>
+            )}
+            {paymentPhase === 'verified' && (
+              <div
+                className="w-full rounded-[14px] py-3 text-[13px] font-bold text-center"
+                style={{ background: '#F0FDF4', color: '#166534', border: '1.5px solid #BBF7D0' }}
+              >
+                {'✅'} Booking Complete · Payment Received
+              </div>
+            )}
+            {paymentPhase === 'none' && (
+              <div
+                className="ky-tap-cta-primary w-full rounded-[14px] py-3 text-sm font-bold text-center"
+                style={{ background: 'linear-gradient(135deg, var(--green), var(--green-light))', color: 'white', boxShadow: '0 4px 16px rgba(26,122,59,0.35)' }}
+              >
+                {'✅'} Mark as Complete
+              </div>
+            )}
+            <div className="ky-tap-share w-full bg-[#25D366] text-white rounded-[14px] py-2.5 text-[12px] font-bold flex items-center justify-center gap-1.5">
               {'\u{1F4F2}'} Contact Farmer
-            </div>
-            <div
-              className="ky-tap-cta-primary w-full rounded-[14px] py-3 text-sm font-bold text-center"
-              style={{ background: 'linear-gradient(135deg, var(--green), var(--green-light))', color: 'white', boxShadow: '0 4px 16px rgba(26,122,59,0.35)' }}
-            >
-              {'\u2705'} Mark as Complete
             </div>
           </div>
 

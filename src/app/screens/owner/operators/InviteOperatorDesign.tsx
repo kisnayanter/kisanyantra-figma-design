@@ -201,10 +201,9 @@ export function InviteOperatorDesign() {
                 {skills.map((skill) => (
                   <button
                     key={skill.id}
-                    className="px-3 py-1.5 rounded-full text-[14px] font-medium"
+                    className="ky-tap-chip px-3 py-1.5 rounded-full text-[11px] font-medium"
                     style={{
                       border: '1.5px solid #E0E0E0',
-                      fontFamily: "'Inter', sans-serif",
                       color: 'var(--text-primary)'
                     }}
                   >
@@ -231,18 +230,17 @@ export function InviteOperatorDesign() {
                   }}
                 />
                 <button
-                  className="px-3 py-3 rounded-[12px] text-[14px] font-medium"
+                  className="ky-tap-action-secondary rounded-[10px] px-3 py-2 text-[11px] font-medium"
                   style={{
                     background: 'var(--green-pale)',
                     color: 'var(--green)',
-                    border: '1.5px solid var(--green)',
-                    fontFamily: "'Inter', sans-serif"
+                    border: '1.5px solid var(--green)'
                   }}
                 >
                   📍
                 </button>
               </div>
-              <button className="text-[14px] mt-2 font-medium" style={{ color: 'var(--green)', fontFamily: "'Inter', sans-serif" }}>
+              <button className="ky-tap-link text-[11px] mt-2 font-medium" style={{ color: 'var(--green)' }}>
                 {strings.useCurrentLocation}
               </button>
             </div>
@@ -271,7 +269,7 @@ export function InviteOperatorDesign() {
                 <label className="text-[16px] font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--text-primary)' }}>
                   {strings.assignEquipment}
                 </label>
-                <button className="text-[14px] font-medium" style={{ color: 'var(--green)', fontFamily: "'Inter', sans-serif" }}>
+                <button className="ky-tap-link text-[11px] font-medium" style={{ color: 'var(--green)' }}>
                   {strings.selectAll}
                 </button>
               </div>
@@ -279,21 +277,21 @@ export function InviteOperatorDesign() {
                 {equipment.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-white rounded-[12px] p-3 flex items-center gap-3"
-                    style={{ boxShadow: 'var(--card-shadow-sm)' }}
+                    className="bg-white rounded-[20px] p-4 flex items-center gap-3"
+                    style={{ boxShadow: 'var(--card-shadow)' }}
                   >
-                    <input type="checkbox" className="w-5 h-5" />
+                    <input type="checkbox" className="w-4 h-4" />
                     <div
-                      className="w-12 h-12 rounded-lg flex items-center justify-center text-[24px] flex-shrink-0"
+                      className="w-11 h-11 rounded-xl flex items-center justify-center text-[22px] flex-shrink-0"
                       style={{ background: 'linear-gradient(135deg, #FFE0C8, #FFCBA4)' }}
                     >
                       {item.icon}
                     </div>
                     <div className="flex-1">
-                      <div className="text-[16px] font-bold" style={{ fontFamily: "'Poppins', sans-serif", color: 'var(--text-primary)' }}>
+                      <div className="font-bold text-[13px]" style={{ color: 'var(--text-dark)' }}>
                         {item.name}
                       </div>
-                      <div className="text-[14px]" style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}>
+                      <div className="text-[10px]" style={{ color: 'var(--text-soft)' }}>
                         {item.status}
                       </div>
                     </div>

@@ -160,24 +160,42 @@ export function OperatorEarningsDesign() {
 
           {/* Body */}
           <div className="flex-1 overflow-y-auto px-4 py-4">
-            {/* Commission Rate */}
-            <div className="bg-white rounded-[16px] p-4 mb-4" style={{ boxShadow: 'var(--card-shadow-sm)' }}>
+            {/* Read-only Compensation Model card */}
+            <div className="rounded-[14px] p-3 mb-4" style={{ background: 'var(--operator-blue-pale)', border: '1.5px solid var(--operator-blue-tint)' }}>
+              <div className="text-[10px] font-bold mb-2" style={{ color: 'var(--operator-blue)', ...interFont }}>
+                📊 {selectText({ english: 'Your Compensation Model', hindi: 'आपका मुआवजा मॉडल', tamil: 'உங்கள் இழப்பீட்டு மாதிரி', marathi: 'तुमचे नुकसान भरपाई मॉडेल' })}
+              </div>
+              <div className="flex items-center gap-2.5 mb-2">
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center text-[18px]" style={{ background: '#DBEAFE' }}>📊</div>
+                <div className="flex-1">
+                  <div className="text-[13px] font-bold" style={{ color: 'var(--operator-blue)', ...poppinsFont }}>
+                    {selectText({ english: 'Commission % per Booking', hindi: 'बुकिंग पर कमीशन %', tamil: 'முன்பதிவுக்கு கமிஷன் %', marathi: 'बुकिंगवर कमिशन %' })}
+                  </div>
+                  <div className="text-[10px]" style={{ color: 'var(--operator-blue)', opacity: 0.8, ...interFont }}>
+                    {earnings.commissionRate} {selectText({ english: 'of each booking amount', hindi: 'प्रत्येक बुकिंग राशि का', tamil: 'ஒவ்வொரு முன்பதிவு தொகையில்', marathi: 'प्रत्येक बुकिंग रकमेपैकी' })}
+                  </div>
+                </div>
+              </div>
               <div className="flex justify-between items-center">
-                <span className="text-[14px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
-                  {strings.commissionRate}
-                </span>
-                <span className="text-[24px] font-extrabold" style={{ color: 'var(--harvest-yellow)', ...poppinsFont }}>
-                  {earnings.commissionRate}
-                </span>
+                <div className="text-[9px]" style={{ color: 'var(--operator-blue)', opacity: 0.7, ...interFont }}>
+                  🔒 {selectText({ english: 'Set by Harpreet Singh (Owner) · Contact owner to change', hindi: 'हरप्रीत सिंह (मालिक) द्वारा सेट · बदलने के लिए मालिक से संपर्क करें', tamil: 'ஹர்பீட் சிங் (உரிமையாளர்) அமைத்தார் · மாற்ற உரிமையாளரை தொடர்பு கொள்ளவும்', marathi: 'हरप्रीत सिंग (मालक) द्वारे सेट · बदलण्यासाठी मालकाशी संपर्क करा' })}
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-[14px] font-bold" style={{ color: 'var(--operator-blue)', ...poppinsFont }}>
+                    {earnings.commissionRate}
+                  </span>
+                </div>
               </div>
-              <div className="flex justify-between items-center mt-2 pt-2" style={{ borderTop: '1px solid #E0E0E0' }}>
-                <span className="text-[14px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
-                  {strings.bookingsHandled}
-                </span>
-                <span className="text-[18px] font-bold" style={{ color: 'var(--text-primary)', ...poppinsFont }}>
-                  {earnings.bookingsHandled}
-                </span>
-              </div>
+            </div>
+
+            {/* Bookings handled */}
+            <div className="bg-white rounded-[16px] p-3 mb-4 flex justify-between items-center" style={{ boxShadow: 'var(--card-shadow-sm)' }}>
+              <span className="text-[13px]" style={{ color: 'var(--text-secondary)', ...interFont }}>
+                {strings.bookingsHandled}
+              </span>
+              <span className="text-[18px] font-bold" style={{ color: 'var(--text-primary)', ...poppinsFont }}>
+                {earnings.bookingsHandled}
+              </span>
             </div>
 
             {/* Earnings History */}
